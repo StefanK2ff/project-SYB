@@ -14,11 +14,6 @@ const adressSchema = new Schema (
 
 const listingSchema = new Schema(
   {
-    ownerId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true
-    },
     name: {
       type: String,
       required: true
@@ -61,13 +56,13 @@ const listingSchema = new Schema(
     brand: {
       type: String,
     }
-  }, 
+},
   {
     timestamps: {
       createdAt: "created_at",
       updatedAt: "updated_at"
-    }
   }
+}
 );
 
 const Listing = mongoose.model("Listing", listingSchema);
