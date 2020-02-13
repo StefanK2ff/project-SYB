@@ -1,2 +1,19 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h1>WELCOME TO SYB</h1>
+
+{{#if isLoggedIn}}
+  <a href="/logout">Logout</a>
+{{else}}
+  <a href="/login">Login</a>
+{{/if}}
+
+<ul>
+{{#each data}}
+    <li>{{this.name}}</li>
+    <li>{{this.type}}</li>
+    <li>{{this.description}}</li>
+    <li>{{this.brand}}</li>
+    <li><img src="{{this.imageURL}}" alt="image of item"></li>
+{{/each}}
+</ul>
+
+<p>test</p>

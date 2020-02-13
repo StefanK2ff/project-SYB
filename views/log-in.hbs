@@ -1,0 +1,24 @@
+<div
+    <form action="/log-in" method="POST" id="form">
+
+  <div class="form-group">
+    <label for="exampleInput">Username</label>
+    <input type="text" name="username" required>
+  </div>
+
+
+  <div class="form-group">
+    <label for="exampleInputPassword">Password</label>
+    <input type="password" name="password" required minlength="8" maxlength="20">
+  </div>
+  <button type="submit" class="btn-primary">Login</button>
+</form>
+</div>
+
+ <div>Don't have an account? <a href="/sign-up">Sign up</a>.
+ </div>
+
+
+{{#if errorMessage}}
+  <div class="alert alert-danger" role="alert">{{{errorMessage}}}</div>
+{{/if}}
