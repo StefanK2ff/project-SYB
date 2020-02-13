@@ -19,11 +19,11 @@ const listingSchema = new Schema(
       required: true
     },
     type: {
-      type: Array,
+      type: String,
       required: true,
       enum: ["canoe", "kayak", "rowing", "inflatable", "paddle", "boat"]
     },
-    locationAdress: {
+    locationAddress: {
       
       street: { type: String, required: true },
       streetNumber: { type: String, required: true },
