@@ -60,7 +60,8 @@ const listingSchema = new Schema(
     },
     brand: {
       type: String,
-  },
+    }
+  }, 
   {
     timestamps: {
       createdAt: "created_at",
@@ -68,7 +69,6 @@ const listingSchema = new Schema(
     }
   }
 );
-
 
 const Listing = mongoose.model("Listing", listingSchema);
 
