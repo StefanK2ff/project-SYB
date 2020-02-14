@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var authRouter = require('./auth')
+var listingRouter = require("./myboats")
 
 //Model paths
 const Listing = require("./../models/ListingModel");
@@ -10,6 +11,7 @@ const loginRouter = require("./auth");
 
 router.use(["/log-in", "/login"], authRouter);
 router.use(["/sign-up", "/signup"], loginRouter);
+router.use(["/myboats"], listingRouter);
 
 //Get homepage with all listings 
 router.get('/', function(req, res, next) {
