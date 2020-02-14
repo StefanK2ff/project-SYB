@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const loginRouter = require("./login");
 var authRouter = require('./auth')
 var listingRouter = require("./myboats")
 
@@ -7,23 +8,12 @@ var listingRouter = require("./myboats")
 const Listing = require("./../models/ListingModel");
 
 //Set up routers here
-const loginRouter = require("./login");
 
-router.use(["/log-in", "/login"], authRouter);
-router.use(["/sign-up", "/signup"], loginRouter);
+router.use(["/sign-up", "/signup"], authRouter);
+router.use(["/log-in", "/login"], loginRouter);
 router.use(["/myboats"], listingRouter);
 
-// Get route directing to /bookings, if user is logged in
-router.get("/bookings", isLoggedIn, (req, res, next) => {
-   res.render("bookings");
-});
-
-//Get route to /log-in page 
-router.get("/log-in", (req, res, next) => {
-  res.render("log-in");
-});
-
-//Get route displaying all listings
+//Get homepage with all listings 
 router.get('/', function(req, res, next) {
   const {type} = req.query;
 
@@ -48,5 +38,6 @@ function isLoggedIn(req, res, next) {
   if (req.session.currentUser) next();
   else res.redirect("/login");
 }
+
 
 module.exports = router;

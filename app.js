@@ -8,8 +8,12 @@ const bodyParser = require('body-parser')
 const hbs = require('hbs');
 const logger = require('morgan');
 const mongoose = require(`mongoose`);
-const indexRouter = require('./routes/index');
-const app = express();
+var indexRouter = require('./routes/index');
+var session = require ('express-session');
+var app = express();
+const MongoStore = require ('connect-mongo')(session);
+
+// ++++++++++++++++++++
 
 // MONGOOSE CONNECTION
 mongoose
@@ -26,7 +30,23 @@ mongoose
     console.error(error);
 });
 
-// view engine setup
+
+// SESSION MIDDLEWARE
+app.use(session({
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  }),
+  secret: process.env.SECRET_SESSION,
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000
+  }
+}));
+
+
+    // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(logger('dev'));

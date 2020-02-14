@@ -8,7 +8,12 @@ const saltRounds = 10;
 
 //  GET    /login
 loginRouter.get("/", (req, res) => {
-  res.render("log-in");
+  if(req.session.currentUser) {
+    res.redirect('/')
+  }
+  else {
+    res.render("log-in");
+  }
 });
 
 // POST /login
