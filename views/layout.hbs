@@ -11,6 +11,19 @@
     <title>{{title}}</title>
   </head>
   <body>
+    <header>
+      {{#if loggedIn}}
+        <nav>
+          <a href="/logout">Logout</a>
+          <a href="/bookings">Bookings</a>
+          <a href="/listings">Listings</a>
+         </nav>
+      {{else}}
+        <nav>
+          <a href="/log-in">Login</a>
+        </nav>
+      {{/if}}
+    </header>
   
     {{{body}}}
 
