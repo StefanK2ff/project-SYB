@@ -14,20 +14,27 @@ router.use(["/sign-up", "/signup"], authRouter);
 router.use(["/log-in", "/login"], loginRouter);
 
 
-
 //Get homepage with all listings 
 router.get('/', function(req, res, next) {
-  Listing.find() // Method to render all listings available
+  const {type} = req.query;
+
+  if(type){
+    Listing.find({type})
     .then( (data) => {
       res.render('index', {data});
     })
     .catch( (err) => console.log(err));
-});
+  } 
+  else {
+    Listing.find()
+    .then( (data) => {
+      res.render('index', {data})
+    })
+    .catch( (err) => console.log(err));
+  }
+  });
 
-router.get("/bookings", isLoggedIn, (req, res, next) => {
-   res.render("bookings");
-})
-
+//helper function to check if user is logged in
 function isLoggedIn(req, res, next) {
   if (req.session.currentUser) next();
   else res.redirect("/login");
