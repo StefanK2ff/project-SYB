@@ -9,8 +9,9 @@ const hbs = require('hbs');
 var logger = require('morgan');
 const mongoose = require(`mongoose`);
 var indexRouter = require('./routes/index');
-
+var session = require ('express-session');
 var app = express();
+const MongoStore = require ('connect-mongo')(session);
 
 // ++++++++++++++++++++
 
@@ -28,6 +29,21 @@ mongoose
 }).catch((error) => {
     console.error(error);
 });
+
+
+// SESSION MIDDLEWARE
+app.use(session({
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  }),
+  secret: process.env.SECRET_SESSION,
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000
+  }
+}));
 
 
     // view engine setup

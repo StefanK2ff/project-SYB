@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const loginRouter = require("./login");
 var authRouter = require('./auth')
 var listingRouter = require("./myboats")
 
@@ -7,11 +8,11 @@ var listingRouter = require("./myboats")
 const Listing = require("./../models/ListingModel");
 
 //Set up routers here
-const loginRouter = require("./auth");
 
-router.use(["/log-in", "/login"], authRouter);
-router.use(["/sign-up", "/signup"], loginRouter);
+router.use(["/sign-up", "/signup"], authRouter);
+router.use(["/log-in", "/login"], loginRouter);
 router.use(["/myboats"], listingRouter);
+
 
 //Get homepage with all listings 
 router.get('/', function(req, res, next) {
@@ -30,5 +31,6 @@ function isLoggedIn(req, res, next) {
   if (req.session.currentUser) next();
   else res.redirect("/login");
 }
+
 
 module.exports = router;

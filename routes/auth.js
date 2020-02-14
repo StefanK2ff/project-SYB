@@ -19,7 +19,8 @@ authRouter.post("/", (req, res) => {
   const hashedPw = bcrypt.hashSync(password, salt);
   User.create({email, password: hashedPw})
   .then(createdUser => {
-    res.redirect("/login")
+    req.session.currentUser = createdUser;
+    res.redirect("/")
   })
   .catch(err => {
     console.log(err)
@@ -39,5 +40,6 @@ authRouter.post("/", (req, res) => {
 authRouter.get("/", (req, res) => {
   res.render("sign-up");
 });
+
 
 module.exports = authRouter;
