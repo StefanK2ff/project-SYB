@@ -6,6 +6,7 @@ const Listing = require("./../models/ListingModel");
 
 //Set up routers here
 const loginRouter = require("./auth");
+
 router.use("/log-in", loginRouter);
 
 //Get route displaying all listings
