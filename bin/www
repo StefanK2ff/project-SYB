@@ -8,12 +8,12 @@ var app = require('../app');
 var debug = require('debug')('project-syb-code:server');
 var http = require('http');
 
-/**
+/*
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
-console.log("Let's go guys, we are rolling on the PORRRRT");
+console.log(`Let's go guys, we are rolling on the ${port}`);
 app.set('port', port);
 
 /**

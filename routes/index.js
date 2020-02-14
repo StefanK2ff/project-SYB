@@ -6,7 +6,7 @@ const Listing = require("./../models/ListingModel");
 
 //Set up routers here
 const loginRouter = require("./auth");
-router.use("/login", loginRouter);
+router.use("/log-in", loginRouter);
 
 //Get homepage with all listings 
 router.get('/', function(req, res, next) {

@@ -1,7 +1,7 @@
 var express = require("express");
 var signupRouter = express.Router();
 var loginRouter = express.Router();
-const User = require("./../models/User");
+
 
 
 // BCRYPT
