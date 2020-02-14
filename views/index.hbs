@@ -1,4 +1,19 @@
 <h1>WELCOME TO SYB</h1>
+<hr>
+
+{{#if isLoggedIn}}
+  <nav>
+    <a href="/logout">Logout</a>
+    <a href="/bookings">Bookings</a>
+    <a href="/listings">Listings</a>
+  </nav>
+    {{else}}
+  <nav>
+    <a href="/login">Login</a>
+  </nav>
+{{/if}}
+
+<hr>
   
 <ul>
 {{#each data}}
@@ -6,14 +21,11 @@
     <li>{{this.type}}</li>
     <li>{{this.description}}</li>
     <li>{{this.locationAddress}}</li>
+    <a href="/bookings"> BOOK IT! </a>  
     <hr>
 {{/each}}
 </ul>
 
-<p>test</p>
 
- {{#if isLoggedIn}}
-      <a href="/logout">Logout</a>
-    {{else}}
-      <a href="/login">Login</a>
-  {{/if}}
+
+ 

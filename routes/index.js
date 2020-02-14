@@ -12,16 +12,18 @@ router.use("/log-in", loginRouter);
 router.get('/', function(req, res, next) {
   Listing.find() // Method to render all listings available
     .then( (data) => {
-      console.log('data found', data);
       res.render('index', {data});
     })
     .catch( (err) => console.log(err));
 });
 
-//Helper function to check if user is logged in
+router.get("/bookings", isLoggedIn, (req, res, next) => {
+   res.render("bookings");
+})
+
 function isLoggedIn(req, res, next) {
   if (req.session.currentUser) next();
-  else res.render('index');
+  else res.redirect("/login");
 }
 
 module.exports = router;
