@@ -1,97 +1,43 @@
 var express = require("express");
-var signupRouter = express.Router();
-var loginRouter = express.Router();
+var authRouter = express.Router();
 const User = require("./../models/UserModel");
-
 
 // BCRYPT
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
+// POST   /signup
+authRouter.post("/", (req, res) => {
+  const { email, password } = req.body;
+  if (email === "" || password === "") {
+    res.render("sign-up", {
+      errorMessage: "Username and Password are required"
+    });
+    return;
+  }
+  const salt = bcrypt.genSaltSync(saltRounds);
+  const hashedPw = bcrypt.hashSync(password, salt);
+  User.create({email, password: hashedPw})
+  .then(createdUser => {
+    res.redirect("/login")
+  })
+  .catch(err => {
+    console.log(err)
+    if(err.code === 11000) {
+      res.render("sign-up", {
+        errorMessage: `E-mail already exists. Please <a href="/log-in">login</a>`
+    })
+  } else {
+    res.render("sign-up", {
+      errorMessage: `Some error occured`
+  }
+  )};
+  });
+});
+
 //  GET    /signup
-signupRouter.get("/sign-up", (req, res) => {
+authRouter.get("/", (req, res) => {
   res.render("sign-up");
 });
 
-// POST   /signup
-signupRouter.post("/sign-up", (req, res) => {
-  const { password, username } = req.body;
-
-  if (username === "" || password === "") {
-    res.render("sign-up", {
-      errorMessage: "Username and password are required"
-    });
-    return;
-  }
-
-
-  User.findOne({ username })
-    .then(userFound => {
-      if (userFound) {
-        res.render("sign-up", { errorMessage: "Username is already in use." });
-        return;
-      }
-
-      const salt = bcrypt.genSaltSync(saltRounds);
-      const hashedPassword = bcrypt.hashSync(password, salt);
-
-      const pr = User.create({ username, password: hashedPassword });
-      return pr;
-    })
-    .then(createdUser => {
-      req.session.currentUser = createdUser;
-      res.redirect("/");
-    })
-    .catch(() => {
-      res.render("sign-up", {
-        errorMessage: "Error during sign up. Try again."
-      });
-    });
-});
-
-
-//
-// LOGIN
-//
-
-//  GET    /login
-loginRouter.get("/log-in", (req, res) => {
-  res.render("log-in");
-});
-
-// POST /login
-loginRouter.post("/log-in", (req, res) => {
-  const { password, username } = req.body;
-
-  if (username === "" || password === "") {
-    res.render("log-in", {
-      errorMessage: "Username and password are required"
-    });
-    return;
-  }
-
-  User.findOne({ username })
-    .then(foundUser => {
-      if (!foundUser) {
-        res.render("log-in", {
-          errorMessage: "Username doesn't exist"
-        });
-        return;
-      }
-
-      const passwordCorrect = bcrypt.compareSync(password, foundUser.password);
-
-      if (passwordCorrect) {
-        req.session.currentUser = foundUser;
-        res.redirect("/");
-      } else {
-        res.render("log-in", {
-          errorMessage: "Password incorrect. Try again."
-        });
-      }
-    })
-    .catch(err => console.log(err));
-});
-
-module.exports = loginRouter;
-module.exports = signupRouter;
+module.exports = authRouter;
