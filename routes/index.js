@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var authRouter = require('./auth')
+var listingRouter = require("./myboats")
 
 //Model paths
 const Listing = require("./../models/ListingModel");
@@ -7,7 +9,13 @@ const Listing = require("./../models/ListingModel");
 //Set up routers here
 const loginRouter = require("./auth");
 
+<<<<<<< HEAD
 router.use("/log-in", loginRouter);
+=======
+router.use(["/log-in", "/login"], authRouter);
+router.use(["/sign-up", "/signup"], loginRouter);
+router.use(["/myboats"], listingRouter);
+>>>>>>> 29457b5bf89d64952ec1df775b91de446c40b168
 
 //Get route displaying all listings
 router.get('/', function(req, res, next) {
