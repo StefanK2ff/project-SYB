@@ -1,6 +1,21 @@
 <h1>WELCOME TO SYB</h1>
 <hr>
-  
+
+<form action="/" method="GET">
+    <select name="type" id="type-select">
+        <option value=""> -  ALL  - </option>
+        <option value="canoe">Canoe</option>
+        <option value="kayak">Kayak</option>
+        <option value="rowing">Rowing</option>
+        <option value="inflatable">Inflatable</option>
+        <option value="paddle">Paddle</option>
+        <option value="boat">Boat</option>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+
+<hr>
+
 <ul>
 {{#each data}}
     <li>Owner: {{this.name}}</li>

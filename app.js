@@ -11,8 +11,6 @@ const mongoose = require(`mongoose`);
 const indexRouter = require('./routes/index');
 const app = express();
 
-// ++++++++++++++++++++
-
 // MONGOOSE CONNECTION
 mongoose
   .connect(`${process.env.MONGODB_URI}${process.env.DB_NAME}`, {

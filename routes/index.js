@@ -7,24 +7,11 @@ var listingRouter = require("./myboats")
 const Listing = require("./../models/ListingModel");
 
 //Set up routers here
-const loginRouter = require("./auth");
+const loginRouter = require("./login");
 
-<<<<<<< HEAD
-router.use("/log-in", loginRouter);
-=======
 router.use(["/log-in", "/login"], authRouter);
 router.use(["/sign-up", "/signup"], loginRouter);
 router.use(["/myboats"], listingRouter);
->>>>>>> 29457b5bf89d64952ec1df775b91de446c40b168
-
-//Get route displaying all listings
-router.get('/', function(req, res, next) {
-  Listing.find() // Method to render all listings available
-    .then( (data) => {
-      res.render('index', {data});
-    })
-    .catch( (err) => console.log(err));
-});
 
 // Get route directing to /bookings, if user is logged in
 router.get("/bookings", isLoggedIn, (req, res, next) => {
@@ -35,6 +22,26 @@ router.get("/bookings", isLoggedIn, (req, res, next) => {
 router.get("/log-in", (req, res, next) => {
   res.render("log-in");
 });
+
+//Get route displaying all listings
+router.get('/', function(req, res, next) {
+  const {type} = req.query;
+
+  if(type){
+    Listing.find({type})
+    .then( (data) => {
+      res.render('index', {data});
+    })
+    .catch( (err) => console.log(err));
+  } 
+  else {
+    Listing.find()
+    .then( (data) => {
+      res.render('index', {data})
+    })
+    .catch( (err) => console.log(err));
+  }
+  });
 
 //helper function to check if user is logged in
 function isLoggedIn(req, res, next) {
