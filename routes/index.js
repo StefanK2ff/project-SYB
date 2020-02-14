@@ -10,15 +10,13 @@ router.use("/log-in", loginRouter);
 
 //Get homepage with all listings 
 router.get('/', function(req, res, next) {
-
   Listing.find() // Method to render all listings available
     .then( (data) => {
-      console.log('data found');
-      res.render('index', {data});
+      console.log('data found', data);
+      // res.render('index', {data});
     })
     .catch( (err) => console.log(err));
 });
-
 
 //Helper function to check if user is logged in
 function isLoggedIn(req, res, next) {

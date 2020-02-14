@@ -2,8 +2,6 @@ var express = require("express");
 var signupRouter = express.Router();
 var loginRouter = express.Router();
 
-
-
 // BCRYPT
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
