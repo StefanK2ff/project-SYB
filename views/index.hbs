@@ -1,11 +1,5 @@
 <h1>WELCOME TO SYB</h1>
-
-{{#if isLoggedIn}}
-  <a href="/logout">Logout</a>
-{{else}}
-  <a href="/login">Login</a>
-{{/if}}
-
+  
 <ul>
 {{#each data}}
     <li>{{this.name}}</li>
@@ -17,3 +11,9 @@
 </ul>
 
 <p>test</p>
+
+ {{#if isLoggedIn}}
+      <a href="/logout">Logout</a>
+    {{else}}
+      <a href="/login">Login</a>
+  {{/if}}
