@@ -63,6 +63,8 @@ router.get("/add", (req, res) => {
 // GET listens to /myboats and shows overview
 router.get("/", (req, res) => {
     Listing.find() // filter for "current user ID"
+    // find me all listing ID in the "listings Array" of the current user
+    //find many for these IDs in the boat collection
         .then((result) => res.render("../views/myboats.hbs", {
             result: result
         }))
