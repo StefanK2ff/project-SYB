@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
   Listing.find() // Method to render all listings available
     .then( (data) => {
       console.log('data found', data);
-      // res.render('index', {data});
+      res.render('index', {data});
     })
     .catch( (err) => console.log(err));
 });
