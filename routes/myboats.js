@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Listing = require("../models/ListingModel");
+var User = require("../models/UserModel");
 
 //GET to edit a listing
 
@@ -38,8 +39,14 @@ router.post("/add", (req, res) => {
       brand
     }) //passing it over the model --> returns a promise
         .then((listing) => {
-            console.log(listing)
-            res.redirect("/myboats")
+            return User.updateOne({_id: req.session.currentUser._id},{$addToSet: {listings: listing._id} })
+            .then((User) => {
+              console.log("User updated! ", User)
+              console.log("new listing ", listing)
+              res.redirect("/myboats")
+            })
+            .catch((err) => console.log("Err while updating the user! ", err));
+            
         })
         .catch((err) => console.log(err));
 })

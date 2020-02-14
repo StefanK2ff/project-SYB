@@ -9,9 +9,10 @@ const Listing = require("./../models/ListingModel");
 
 //Set up routers here
 
+router.use(["/myboats"], listingRouter);
 router.use(["/sign-up", "/signup"], authRouter);
 router.use(["/log-in", "/login"], loginRouter);
-router.use(["/myboats"], listingRouter);
+
 
 
 //Get homepage with all listings 
