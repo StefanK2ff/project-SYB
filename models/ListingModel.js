@@ -5,7 +5,8 @@ const listingSchema = new Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     },
     type: {
       type: String,

@@ -14,25 +14,25 @@ var User = require("../models/UserModel");
 
 // POST from new Movie Form
 router.post("/add", (req, res) => {
-    let {
-      name,
-      type,
-      street,
-      streetNumber,
-      city,
-      imageURL,
-      province,
-      description,
-      forMaxNumOfUsers,
-      notAvailableDates,
-      brand    //things from the form
-    } = req.body; //deconstructing the object right away
-    if (notAvailableDates.length > 0) {
-      notAvailableDates = notAvailableDates.split(",")
-    }
-    console.log(city)
-    console.log(province)
-    Listing.create({
+  let {
+    name,
+    type,
+    street,
+    streetNumber,
+    city,
+    imageURL,
+    province,
+    description,
+    forMaxNumOfUsers,
+    notAvailableDates,
+    brand //things from the form
+  } = req.body; //deconstructing the object right away
+  if (notAvailableDates.length > 0) {
+    notAvailableDates = notAvailableDates.split(",")
+  }
+  console.log(city)
+  console.log(province)
+  Listing.create({
       name,
       type,
       locationAddress: {
@@ -47,38 +47,53 @@ router.post("/add", (req, res) => {
       notAvailableDates,
       brand
     }) //passing it over the model --> returns a promise
-        .then((listing) => {
-            return User.updateOne({_id: req.session.currentUser._id},{$addToSet: {listings: listing._id} })
-            .then((User) => {
-              console.log("User updated! ", User)
-              console.log("new listing ", listing)
-              res.redirect("/myboats")
-            })
-            .catch((err) => console.log("Err while updating the user! ", err));
-            
+    .then((listing) => {
+      return User.updateOne({
+          _id: req.session.currentUser._id
+        }, {
+          $addToSet: {
+            listings: listing._id
+          }
         })
-        .catch((err) => console.log(err));
+        .then((User) => {
+          console.log("User updated! ", User)
+          console.log("new listing ", listing)
+          res.redirect("/myboats")
+        })
+        .catch((err) => console.log("Err while updating the user! ", err));
+
+    })
+    .catch((err) => {
+      console.log(err)
+      if (err.code === 11000) {
+        res.render("../views/addboat.hbs",{
+          errorMessage: `Boats are unique. This name is already taken. Try a new one!`
+        })
+      } else {
+        res.render("../views/addboat.hbs", {
+          errorMessage: `Some error occured`
+        });
+      }
+    })
 })
 
 //GET add form
 router.get("/add", (req, res) => {
-    res.render("../views/addboat.hbs")
+  res.render("../views/addboat.hbs")
 })
-
 
 // GET listensto /listing/ID and show detail
 
 
 // GET listens to /myboats and shows overview
 router.get("/", (req, res) => {
-    Listing.find() // filter for "current user ID"
+  Listing.find() // filter for "current user ID"
     // find me all listing ID in the "listings Array" of the current user
     //find many for these IDs in the boat collection
-        .then((result) => res.render("../views/myboats.hbs", {
-            result: result
-        }))
-        .catch((err) => console.log(err));
+    .then((result) => res.render("../views/myboats.hbs", {
+      result: result
+    }))
+    .catch((err) => console.log(err));
 })
 
 module.exports = router;
-
