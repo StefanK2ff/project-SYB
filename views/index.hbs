@@ -26,10 +26,10 @@
                                    {{this.locationAddress.city}}
     </li>
 
-    <form action="/" method="Post">
-        <button type="submit">Book IT</button>  
+    <form action="/bookings/request?_id={{this._id}}" method="Post">
+        <button type="submit">Book It</button>  
     </form>
-    
+
     <hr>
 {{/each}}
 </ul>

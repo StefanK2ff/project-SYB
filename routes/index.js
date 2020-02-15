@@ -34,13 +34,16 @@ router.get('/', (req, res, next) => {
   }
   });
 
-  router.post('/', (req, res, next) => {
-    res.render('bookings')
-  })
+  router.post('/bookings', (req, res, next) => {
+    const {id} = req.query._id;
+    console.log("IDDDDDDDDD:", id)
+    res.render('bookings', id)
+  });
+
+
 
 
 // router.post - create booking, with listing info, user info, and redirect to booking page https://trello.com/c/65IG1jrO/37-post-route-booking-request
-
 
 //helper function to check if user is logged in
 // function isLoggedIn(req, res, next) {
