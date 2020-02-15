@@ -25,7 +25,11 @@
                                    {{this.locationAddress.streetNumber}}, 
                                    {{this.locationAddress.city}}
     </li>
-    <a href="/log-in"> BOOK IT! </a>  
+
+    <form action="/{{this._id}}" method="POST">
+        <button type="submit">Book It</button>  
+    </form>
+
     <hr>
 {{/each}}
 </ul>
