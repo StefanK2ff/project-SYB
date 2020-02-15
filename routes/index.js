@@ -20,7 +20,7 @@ router.get("/logout", (req, res) => {
       // If unable to logout the user
       res.redirect("/");
     } else {
-      res.redirect("/login");
+      res.redirect("/log-in");
     }
   });
 });
@@ -28,37 +28,37 @@ router.get("/logout", (req, res) => {
 //Get homepage with all listings 
 router.get('/', (req, res, next) => {
   const {type} = req.query;
+  const user = req.session.currentUser;
 
   if(type){ // lists all listings according to filter selection
     Listing.find({type})
     .then( (data) => {
-      res.render('index', {data});
+      res.render('index', {data, user});
     })
     .catch( (err) => console.log(err));
   } 
   else {
     Listing.find() // lists all available listings without filter
     .then( (data) => {
-      res.render('index', {data})
+      res.render('index', {data, user})
     })
     .catch( (err) => console.log(err));
   }
-  });
+});
 
 router.post('/:id', (req, res, next) => {  // route to bookings page including listing details
   const data = {
       listingId: req.params,
       userId: req.session.currentUser._id
     }
-    console.log(data)
     res.render('bookings', data)
   });
 
-
-//helper function to check if user is logged in
-// function isLoggedIn(req, res, next) {
-//   if (req.session.currentUser) next();
-//   else res.redirect("/login");
-// }
+function isLoggedIn(req, res, next) {
+  if (req.session.currentUser) next();
+  else res.redirect("/login");
+}
 
 module.exports = router;
+
+

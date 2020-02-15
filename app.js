@@ -13,8 +13,6 @@ var session = require ('express-session');
 var app = express();
 const MongoStore = require ('connect-mongo')(session);
 
-// ++++++++++++++++++++
-
 // MONGOOSE CONNECTION
 mongoose
   .connect(`${process.env.MONGODB_URI}${process.env.DB_NAME}`, {
@@ -30,7 +28,6 @@ mongoose
     console.error(error);
 });
 
-
 // SESSION MIDDLEWARE
 app.use(session({
   store: new MongoStore({
@@ -44,7 +41,6 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000
   }
 }));
-
 
     // view engine setup
 app.set('views', path.join(__dirname, 'views'));
