@@ -25,7 +25,6 @@ router.get("/logout", (req, res) => {
   });
 });
 
-
 //Get homepage with all listings 
 router.get('/', (req, res, next) => {
   const {type} = req.query;
@@ -46,11 +45,12 @@ router.get('/', (req, res, next) => {
   }
   });
 
-  router.post('/:id', (req, res, next) => {  // route to bookings page including listing details
-    const data = {
+router.post('/:id', (req, res, next) => {  // route to bookings page including listing details
+  const data = {
       listingId: req.params,
       userId: req.session.currentUser._id
     }
+    console.log(data)
     res.render('bookings', data)
   });
 
