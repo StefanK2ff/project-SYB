@@ -8,7 +8,6 @@ var listingRouter = require("./myboats")
 const Listing = require("./../models/ListingModel");
 
 //Set up routers here
-
 router.use(["/myboats"], listingRouter);
 router.use(["/sign-up", "/signup"], authRouter);
 router.use(["/log-in", "/login"], loginRouter);
@@ -54,10 +53,10 @@ router.post('/:id', (req, res, next) => {  // route to bookings page including l
     res.render('bookings', data)
   });
 
-function isLoggedIn(req, res, next) {
-  if (req.session.currentUser) next();
-  else res.redirect("/login");
-}
+// function isLoggedIn(req, res, next) {
+//   if (req.session.currentUser) next();
+//   else res.redirect("/login");
+// }
 
 module.exports = router;
 
