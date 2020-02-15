@@ -3,16 +3,45 @@ var router = express.Router();
 var Listing = require("../models/ListingModel");
 var User = require("../models/UserModel");
 
-//GET to edit a listing
+//GET  edits a listing
+router.get("/:id/edit", (req, res) => {
+  const { id } = req.params;
 
+  Listing.findById(id)
+    .then(oneListing => {
+      res.render("/addboat", { oneListing });
+    })
+    .catch(err => console.log(err));
+});
 
 //POST to update a listing
+router.post("/:id/update", (req, res, next) => {
+  const listingID = req.params.id;
+
+  Listing.findByIdAndDelete(listingID)
+    .then(result => {
+      res.redirect("/myboats");
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+// POST deletes a listing. Then goest to myboats.hbs
+router.post("/:id/delete", (req, res, next) => {
+  const listingID = req.params.id;
+
+  Listing.findByIdAndDelete(listingID)
+    .then(result => {
+      res.redirect("/myboats");
+    })
+    .catch(err => {
+      next(err);
+    });
+});
 
 
-// POST to delete listing
-
-
-// POST from new Movie Form
+// POST from new Movie Form //=>adds Boat
 router.post("/add", (req, res) => {
   let {
     name,
@@ -32,6 +61,7 @@ router.post("/add", (req, res) => {
   }
   console.log(city)
   console.log(province)
+
   Listing.create({
       name,
       type,
