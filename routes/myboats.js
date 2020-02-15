@@ -14,28 +14,37 @@ var User = require("../models/UserModel");
 
 // POST from new Movie Form
 router.post("/add", (req, res) => {
-    const {
+    let {
       name,
       type,
       street,
       streetNumber,
       city,
       imageURL,
+      province,
       description,
       forMaxNumOfUsers,
+      notAvailableDates,
       brand    //things from the form
     } = req.body; //deconstructing the object right away
+    if (notAvailableDates.length > 0) {
+      notAvailableDates = notAvailableDates.split(",")
+    }
+    console.log(city)
+    console.log(province)
     Listing.create({
       name,
       type,
       locationAddress: {
         street,
         streetNumber,
-        city
+        city,
+        province,
       },
       imageURL,
       description,
       forMaxNumOfUsers,
+      notAvailableDates,
       brand
     }) //passing it over the model --> returns a promise
         .then((listing) => {

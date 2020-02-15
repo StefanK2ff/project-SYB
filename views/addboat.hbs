@@ -1,25 +1,29 @@
 <form action="/myboats/add" method="post">
     <label for="">Name:</label>
-    <input type="text" name="name">
+    <input type="text" name="name" required>
     <br>
     <label for="">Type:</label>
-    <input list="type_options" name="type">
+    <input list="type_options" name="type" required>
     <datalist id="type_options">
-        <option value="canoe">
-        <option value="kayak">
-        <option value="rowing">
-        <option value="inflatable">
-        <option value="paddle">
+        <option value="canoe">Canoe</option>
+        <option value="kayak">Kayak</option>
+        <option value="rowing">Rowing</option>
+        <option value="inflatable">Inflatable</option>
+        <option value="paddle">Paddle</option>
+        <option value="boat">Boat</option>
     </datalist>
     <br>
     <label for="">Street:</label>
-    <input type="text" name="street">
+    <input type="text" name="street" required>
     <br>
     <label for="">Street Number:</label>
-    <input type="text" name="streetNumber">
+    <input type="text" name="streetNumber" required>
     <br>
     <label for="">City:</label>
-    <input type="text" name="city">
+    <input type="text" name="city" required>
+    <br>
+    <label for="">Province:</label>
+    <input type="text" name="province">
     <br>
     <label for="">Image:</label>
     <input type="text" name="imageURL">
@@ -27,8 +31,11 @@
     <label for="">Description:</label>
     <input type="text" name="description">
     <br>
+    <label for="">Not available at:</label>
+    <input type="text" name="notAvailableDates" placeholder="DD/MM/YYYY,DD/MM/YYYY">
+    <br>
     <label for="">Max number of users:</label>
-    <input type="number" name="forMaxNumOfUsers" defaul=1>
+    <input type="number" name="forMaxNumOfUsers" defaul=1 required>
     <br>
     <label for="">Brand:</label>
     <input type="text" name="brand">
