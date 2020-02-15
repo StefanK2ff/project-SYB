@@ -15,7 +15,7 @@ router.use(["/log-in", "/login"], loginRouter);
 
 
 //Get homepage with all listings 
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   const {type} = req.query;
 
   if(type){ // lists all listings according to filter selection
@@ -34,13 +34,18 @@ router.get('/', function(req, res, next) {
   }
   });
 
+  router.post('/', (req, res, next) => {
+    res.render('bookings')
+  })
+
+
+// router.post - create booking, with listing info, user info, and redirect to booking page https://trello.com/c/65IG1jrO/37-post-route-booking-request
+
+
 //helper function to check if user is logged in
 // function isLoggedIn(req, res, next) {
 //   if (req.session.currentUser) next();
 //   else res.redirect("/login");
 // }
-
-// router.post - create booking, with listing info, user info, and redirect to booking page https://trello.com/c/65IG1jrO/37-post-route-booking-request
-
 
 module.exports = router;
