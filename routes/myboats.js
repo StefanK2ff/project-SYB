@@ -3,7 +3,6 @@ var router = express.Router();
 var Listing = require("../models/ListingModel");
 var User = require("../models/UserModel");
 
-
 //GET  edits a listing
 router.get("/:id/edit", (req, res) => {
   const { id } = req.params;
@@ -19,7 +18,7 @@ router.get("/:id/edit", (req, res) => {
 router.post("/:id/update", (req, res, next) => {
   const listingID = req.params.id;
 
-  Listing.findByIdAndUpdate(listingID)
+  Listing.findByIdAndDelete(listingID)
     .then(result => {
       res.redirect("/myboats");
     })
@@ -27,7 +26,6 @@ router.post("/:id/update", (req, res, next) => {
       next(err);
     });
 });
-
 
 // POST deletes a listing. Then goest to myboats.hbs
 router.post("/:id/delete", (req, res, next) => {
