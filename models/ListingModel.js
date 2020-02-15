@@ -1,22 +1,12 @@
-
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
-const adressSchema = new Schema (
-{ street: String,
-  streetNumber: String,
-  zipCode: String,
-  city: String,
-  province: String,
-  country: String
-}  
-);
 
 const listingSchema = new Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     },
     type: {
       type: String,
@@ -24,14 +14,12 @@ const listingSchema = new Schema(
       enum: ["canoe", "kayak", "rowing", "inflatable", "paddle", "boat"]
     },
     locationAddress: {
-      
       street: { type: String, required: true },
       streetNumber: { type: String, required: true },
       city: { type: String, required: true },
       province: { type: String },
       country: {type: String }
     },
-
     locationGeoCoord: {
       type: { type: String },
       coordinates: [] 
