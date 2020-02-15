@@ -13,6 +13,18 @@ router.use(["/myboats"], listingRouter);
 router.use(["/sign-up", "/signup"], authRouter);
 router.use(["/log-in", "/login"], loginRouter);
 
+//Log out
+router.get("/logout", (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      // If unable to logout the user
+      res.redirect("/");
+    } else {
+      res.redirect("/login");
+    }
+  });
+});
+
 
 //Get homepage with all listings 
 router.get('/', (req, res, next) => {
@@ -34,14 +46,14 @@ router.get('/', (req, res, next) => {
   }
   });
 
-  router.post('/', (req, res, next) => {
-    res.render('bookings')
+  router.post('/:id', (req, res, next) => {  // route to bookings page including listing details
+    const data = {
+      listingId: req.params,
+      userId: req.session.currentUser._id
+    }
+    res.render('bookings', data)
   });
 
-
-
-
-// router.post - create booking, with listing info, user info, and redirect to booking page https://trello.com/c/65IG1jrO/37-post-route-booking-request
 
 //helper function to check if user is logged in
 // function isLoggedIn(req, res, next) {
