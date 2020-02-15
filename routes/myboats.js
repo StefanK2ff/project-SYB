@@ -8,24 +8,12 @@ router.get("/:id/edit", (req, res) => {
   const { id } = req.params;
 
   Listing.findById(id)
-    .then(oneListing => {
-      res.render("/addboat", { oneListing });
+    .then(listing => {
+      res.render("/myboats", { listing }); //=> we need an hbs view here
     })
     .catch(err => console.log(err));
 });
 
-//POST to update a listing
-router.post("/:id/update", (req, res, next) => {
-  const listingID = req.params.id;
-
-  Listing.findByIdAndDelete(listingID)
-    .then(result => {
-      res.redirect("/myboats");
-    })
-    .catch(err => {
-      next(err);
-    });
-});
 
 // POST deletes a listing. Then goest to myboats.hbs
 router.post("/:id/delete", (req, res, next) => {
