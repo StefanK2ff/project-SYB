@@ -1,0 +1,47 @@
+<form action="/myboats/edit?_id"={{listing._id}} method="POST">
+    <label for="">Name:</label>
+    <input type="text" name="name" required value="{{listing.name}}">
+    <br>
+    <label for="">Type:</label>
+    <input list="type_options" name="type" required>
+    <datalist id="type_options">
+        <option value="canoe">Canoe</option>
+        <option value="kayak">Kayak</option>
+        <option value="rowing">Rowing</option>
+        <option value="inflatable">Inflatable</option>
+        <option value="paddle">Paddle</option>
+        <option value="boat">Boat</option>
+    </datalist>
+    <br>
+    <label for="">Street:</label>
+    <input type="text" name="street" required value="{{listing.street}}">
+    <br>
+    <label for="">Street Number:</label>
+    <input type="text" name="streetNumber" required value="{{listing.street
+    number}}">
+    <br>
+    <label for="">City:</label>
+    <input type="text" name="city" required value="{{listing.city}}">
+    <br>
+    <label for="">Province:</label>
+    <input type="text" name="province" value="{{listing.province}}">
+    <br>
+    <label for="">Image:</label>
+    <input type="text" name="imageURL" value="{{listing.imageURL}}">
+    <br>
+    <label for="">Description:</label>
+    <input type="text" name="description" value="{{listing.description}}">
+    <br>
+    <label for="">Not available at:</label>
+    <input type="text" name="notAvailableDates" placeholder="DD/MM/YYYY,DD/MM/YYYY" value="{{listing.notAvailableDates}}">
+    <br>
+    <label for="">Max number of users:</label>
+    <input type="number" name="forMaxNumOfUsers" defaul=1 required value="{{listing.forMaxNumOfUsers}}">
+    <br>
+    <label for="">Brand:</label>
+    <input type="text" name="brand" value="{{listing.brand}}">
+    <br>
+    <button type="submit">EDIT this boat</button>
+</form>
+
+<a href="/books/delete/{{boat._id}}"> DELETE BOAT</a>
