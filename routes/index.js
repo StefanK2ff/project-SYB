@@ -34,10 +34,8 @@ router.get('/', (req, res, next) => {
   }
   });
 
-  router.post('/bookings', (req, res, next) => {
-    const {id} = req.query._id;
-    console.log("IDDDDDDDDD:", id)
-    res.render('bookings', id)
+  router.post('/', (req, res, next) => {
+    res.render('bookings')
   });
 
 
