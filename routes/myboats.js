@@ -12,7 +12,7 @@ var User = require("../models/UserModel");
 // POST to delete listing
 
 
-// POST from new Movie Form
+// POST from new boat add Form
 router.post("/add", (req, res) => {
   let {
     name,
