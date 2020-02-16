@@ -12,11 +12,13 @@
   </head>
   <body>
     <header>
-      {{#if loggedIn}}
+      
+      {{#if user}}
         <nav>
           <a href="/logout">Logout</a>
           <a href="/bookings">Bookings</a>
           <a href="/myboats">Listings</a>
+          <a href="/">Homepage</a>
          </nav>
       {{else}}
         <nav>

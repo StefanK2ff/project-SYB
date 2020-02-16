@@ -3,16 +3,38 @@ var router = express.Router();
 var Listing = require("../models/ListingModel");
 var User = require("../models/UserModel");
 
-//GET to edit a listing
+//GET  edits a listing
+router.get("/:id/edit", (req, res) => {
+  const { id } = req.params;
+  const user = req.session.currentUser;
+
+  Listing.findById(id)
+    .then(listing => {
+      res.render("/myboats", { listing, user }); //=> we need an hbs view here
+    })
+    .catch(err => console.log(err));
+});
 
 
-//POST to update a listing
+// POST deletes a listing. Then goest to myboats.hbs
+router.post("/:id/delete", (req, res, next) => {
+  const listingID = req.params.id;
+
+  Listing.findByIdAndDelete(listingID)
+    .then(result => {
+      res.redirect("/myboats");
+    })
+    .catch(err => {
+      next(err);
+    });
+});
 
 
-// POST to delete listing
-
-
+<<<<<<< HEAD
 // POST from new boat add Form
+=======
+// POST from new Movie Form //=>adds Boat
+>>>>>>> 8a195d5caf537752ed0ed836ef7709bbc351559a
 router.post("/add", (req, res) => {
   let {
     name,
@@ -32,6 +54,7 @@ router.post("/add", (req, res) => {
   }
   console.log(city)
   console.log(province)
+
   Listing.create({
       name,
       type,
@@ -79,7 +102,8 @@ router.post("/add", (req, res) => {
 
 //GET add form
 router.get("/add", (req, res) => {
-  res.render("../views/addboat.hbs")
+  const user = req.session.currentUser; 
+  res.render("../views/addboat.hbs", {user})
 })
 
 // GET listensto /listing/ID and show detail
@@ -87,11 +111,12 @@ router.get("/add", (req, res) => {
 
 // GET listens to /myboats and shows overview
 router.get("/", (req, res) => {
+  const user = req.session.currentUser;
   Listing.find() // filter for "current user ID"
     // find me all listing ID in the "listings Array" of the current user
     //find many for these IDs in the boat collection
     .then((result) => res.render("../views/myboats.hbs", {
-      result: result
+      result: result, user
     }))
     .catch((err) => console.log(err));
 })

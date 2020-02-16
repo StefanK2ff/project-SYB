@@ -41,5 +41,4 @@ authRouter.get("/", (req, res) => {
   res.render("sign-up");
 });
 
-
 module.exports = authRouter;

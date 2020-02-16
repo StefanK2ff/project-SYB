@@ -23,9 +23,11 @@
     <li>Decription: {{this.description}}</li>
     <li>Available to pick up from: {{this.locationAddress.street}}, 
                                    {{this.locationAddress.streetNumber}}, 
-                                   {{this.locationAddress.city}}
-    </li>
-    <a href="/log-in"> BOOK IT! </a>  
+                                   {{this.locationAddress.city}}</li>
+    <form action="/{this._id}}" method="POST">
+        <button type="submit">Book It</button>  
+    </form>
+
     <hr>
 {{/each}}
 </ul>
