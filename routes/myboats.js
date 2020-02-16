@@ -6,10 +6,11 @@ var User = require("../models/UserModel");
 //GET  edits a listing
 router.get("/:id/edit", (req, res) => {
   const { id } = req.params;
+  const user = req.session.currentUser;
 
   Listing.findById(id)
     .then(listing => {
-      res.render("/myboats", { listing }); //=> we need an hbs view here
+      res.render("/myboats", { listing, user }); //=> we need an hbs view here
     })
     .catch(err => console.log(err));
 });
@@ -97,7 +98,8 @@ router.post("/add", (req, res) => {
 
 //GET add form
 router.get("/add", (req, res) => {
-  res.render("../views/addboat.hbs")
+  const user = req.session.currentUser; 
+  res.render("../views/addboat.hbs", {user})
 })
 
 // GET listensto /listing/ID and show detail
@@ -105,11 +107,12 @@ router.get("/add", (req, res) => {
 
 // GET listens to /myboats and shows overview
 router.get("/", (req, res) => {
+  const user = req.session.currentUser;
   Listing.find() // filter for "current user ID"
     // find me all listing ID in the "listings Array" of the current user
     //find many for these IDs in the boat collection
     .then((result) => res.render("../views/myboats.hbs", {
-      result: result
+      result: result, user
     }))
     .catch((err) => console.log(err));
 })

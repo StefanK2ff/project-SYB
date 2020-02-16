@@ -24,6 +24,8 @@ router.get("/logout", (req, res) => {
   });
 });
 
+
+
 //Get homepage with all listings 
 router.get('/', (req, res, next) => {
   const {type} = req.query;
