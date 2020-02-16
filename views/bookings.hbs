@@ -20,7 +20,7 @@
 <h2>Bookings have reveived for my boats</h2>
 
 <ul>
-{{#each data.0.mreceivedBookings}}
+{{#each data.1.incomingBookings}}
     <li>Booking from: {{this.created_at}}</li>
     <li>Status: {{this.status}}</li>
     <li>Day of Booking: {{this.bookingStart}}</li>

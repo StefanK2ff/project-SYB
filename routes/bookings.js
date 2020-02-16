@@ -42,13 +42,16 @@ router.get("/", (req, res) => {
             borrowerId: req.session.currentUser._id
         })
         .then((madeBookings) => { 
-            return {madeBookings}})
+            return {madeBookings}
+        })
         .catch((err) => console.log(err));
+
     const prom2 = Bookings.find({
-            ownerId: req.session.currentUser._id
+        ownerid: req.session.currentUser._id
         })
         .then((incomingBookings) => {
-            return {incomingBookings} })
+            return {incomingBookings}
+        })
         .catch((err) => console.log(err));
 
     Promise.all([prom1, prom2])
@@ -58,7 +61,6 @@ router.get("/", (req, res) => {
             res.render("../views/bookings.hbs", {data, message} )
         })
         .catch((err) => console.log(err));
-
 })
 
 module.exports = router;
