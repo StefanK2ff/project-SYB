@@ -4,7 +4,7 @@ const User = require("./../models/UserModel");
 
 // BCRYPT
 const bcrypt = require("bcrypt");
-const saltRounds = 10;
+
 
 //  GET    /login
 loginRouter.get("/", (req, res) => {
@@ -36,9 +36,7 @@ loginRouter.post("/", (req, res) => {
         return;
       }
 
-      const passwordCorrect = bcrypt.compareSync(password, foundUser.password);
-
-      if (passwordCorrect) {
+      if (bcrypt.compare(password, foundUser.password)) {
         req.session.currentUser = foundUser;
         res.redirect("/");
       } else {

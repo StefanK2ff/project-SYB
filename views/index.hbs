@@ -11,27 +11,26 @@
         <option value="paddle">Paddle</option>
         <option value="boat">Boat</option>
     </select>
+        <label for="start">Start date:</label>
+        <input type="date" name="bookingStart">
     <button type="submit">Submit</button>
 </form>
 
 <hr>
-
 <ul>
-{{#each data}}
-    <li>Owner: {{this.name}}</li>
-    <li>Type: {{this.type}}</li>
-    <li>Decription: {{this.description}}</li>
-    <li>Available to pick up from: {{this.locationAddress.street}}, 
-                                   {{this.locationAddress.streetNumber}}, 
-                                   {{this.locationAddress.city}}</li>
-    <form action="/{this._id}}" method="POST">
-        <button type="submit">Book It</button>  
-    </form>
+    {{#each data}}
+        <li>Owner: {{this.name}}</li>
+        <li>Type: {{this.type}}</li>
+        <li>Decription: {{this.description}}</li>
+        <li>Available to pick up from: {{this.locationAddress.street}}, 
+                                    {{this.locationAddress.streetNumber}}, 
+                                    {{this.locationAddress.city}}</li>
+        <form action="/bookings/request/{{this._id}}" method="POST">
+            {{!-- <label for="start">Start date:</label>
+            <input type="date" name="bookingStart"> --}}
+            <button type="submit">Request booking</button>  
+        </form>
 
-    <hr>
-{{/each}}
+
+    {{/each}}
 </ul>
-
-
-
- 

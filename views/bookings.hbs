@@ -1,2 +1,29 @@
 <h1>WELCOME TO THE BOOKING PAGE</h1>
 <p>here you can view listings you lent to others and what you booked for yourself</p>
+
+
+{{#if message}}
+  <div class="alert alert-danger" role="alert">{{{message}}}</div>
+{{/if}}
+
+<hr>
+<h2>Bookings I made</h2>
+<ul>
+{{#each data.0.madeBookings}}
+    <li>Booking from: {{this.created_at}}</li>
+    <li>Status: {{this.status}}</li>
+    <li>Day of Booking: {{this.bookingStart}}</li>
+    <hr>
+{{/each}}
+</ul>
+
+<h2>Bookings have reveived for my boats</h2>
+
+<ul>
+{{#each data.1.incomingBookings}}
+    <li>Booking from: {{this.created_at}}</li>
+    <li>Status: {{this.status}}</li>
+    <li>Day of Booking: {{this.bookingStart}}</li>
+    <hr>
+{{/each}}
+</ul>
