@@ -30,11 +30,7 @@ router.post("/:id/delete", (req, res, next) => {
 });
 
 
-<<<<<<< HEAD
-// POST from new boat add Form
-=======
 // POST from new Movie Form //=>adds Boat
->>>>>>> 8a195d5caf537752ed0ed836ef7709bbc351559a
 router.post("/add", (req, res) => {
   let {
     name,
