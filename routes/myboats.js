@@ -26,8 +26,7 @@ router.get("/edit/:id", (req, res) => {
 });
 
 //POST     EDIT BOAT and update
-
-router.post('/edit', (req, res, next) => {
+router.post('/edit/:listingId', (req, res, next) => {
   const { 
     name,
     type,
@@ -41,8 +40,11 @@ router.post('/edit', (req, res, next) => {
     notAvailableDates,
     brand //things from the form 
   } = req.body;
+console.log('anything blablabla');
 
-  ListingModel.update({_id: req.query.listing_id}, 
+console.log(req.params.listingId);
+
+  Listing.updateOne({_id: req.params.listingId}, 
     { $set: {
       name,
       type,
@@ -55,8 +57,11 @@ router.post('/edit', (req, res, next) => {
       forMaxNumOfUsers,
       notAvailableDates,
       brand //things from the form
-    }})
+    }}, {new:true})
   .then((listing) => {
+    console.log(listing);
+   
+    
     res.redirect('/myboats');
   })
   .catch((error) => {
@@ -172,5 +177,6 @@ router.get("/", (req, res) => {
     }))
     .catch((err) => console.log(err));
 })
+
 
 module.exports = router;
