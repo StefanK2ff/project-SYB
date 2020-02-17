@@ -27,43 +27,44 @@ router.get("/edit/:id", (req, res) => {
 
 //POST     EDIT BOAT and update
 
-// router.post('/edit', (req, res, next) => {
+router.post('/edit', (req, res, next) => {
+  const imageURL = req.file.secure_url; // <-- for claudinary
 
-//   let { 
-//     name,
-//     type,
-//     street,
-//     streetNumber,
-//     city,
-//     imageURL,
-//     province,
-//     description,
-//     forMaxNumOfUsers,
-//     notAvailableDates,
-//     brand //things from the form 
-//   } = req.body;
+  let { 
+    name,
+    type,
+    street,
+    streetNumber,
+    city,
+    // imageURL <-- for claudinary
+    province,
+    description,
+    forMaxNumOfUsers,
+    notAvailableDates,
+    brand //things from the form 
+  } = req.body;
 
-//   ListingModel.update({_id: req.query.listing_id}, 
-//     { $set: {
-//       name,
-//       type,
-//       street,
-//       streetNumber,
-//       city,
-//       imageURL,
-//       province,
-//       description,
-//       forMaxNumOfUsers,
-//       notAvailableDates,
-//       brand //things from the form
-//     }})
-//   .then((listing) => {
-//     res.redirect('/');
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   })
-// });
+  ListingModel.update({_id: req.query.listing_id}, 
+    { $set: {
+      name,
+      type,
+      street,
+      streetNumber,
+      city,
+      imageURL,
+      province,
+      description,
+      forMaxNumOfUsers,
+      notAvailableDates,
+      brand //things from the form
+    }})
+  .then((listing) => {
+    res.redirect('/');
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+});
 
 // POST deletes a listing. Then goest to myboats.hbs
 router.post("/:id/delete", (req, res, next) => {
