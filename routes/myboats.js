@@ -9,8 +9,11 @@ var User = require("../models/UserModel");
 // retreive data from listing from database
 router.get("/edit/:id", (req, res) => {
   const { id } = req.params;
-  const user = req.session.currentUser;
-console.log(id);
+
+  let user = false; // 
+  if(req.session.currentUser){ // checker if user is logged in to display correct navbar
+    user = req.session.currentUser //
+  }
 
   Listing.findById(id)
     .then(listing => {
@@ -59,8 +62,6 @@ router.post('/edit', (req, res, next) => {
     console.log(error);
   })
 });
-
-
 
 // POST deletes a listing. Then goest to myboats.hbs
 router.post("/:id/delete", (req, res, next) => {
@@ -126,7 +127,6 @@ router.post("/add", (req, res) => {
           res.redirect("/myboats")
         })
         .catch((err) => console.log("Err while updating the user! ", err));
-
     })
     .catch((err) => {
       console.log(err)
@@ -144,8 +144,12 @@ router.post("/add", (req, res) => {
 
 //GET add form
 router.get("/add", (req, res) => {
-  const user = req.session.currentUser; 
-  res.render("../views/addboat.hbs", {user})
+  let user = false; // 
+  if(req.session.currentUser){ // checker if user is logged in to display correct navbar
+    user = req.session.currentUser //
+  }
+  
+  res.render("../views/addboat.hbs", {user}) 
 })
 
 // GET listensto /listing/ID and show detail
@@ -153,7 +157,12 @@ router.get("/add", (req, res) => {
 
 // GET listens to /myboats and shows overview
 router.get("/", (req, res) => {
-  const user = req.session.currentUser;
+  
+  let user = false; // 
+  if(req.session.currentUser){ // checker if user is logged in to display correct navbar
+    user = req.session.currentUser //
+  }
+
   Listing.find() // filter for "current user ID"
     // find me all listing ID in the "listings Array" of the current user
     //find many for these IDs in the boat collection

@@ -1,3 +1,19 @@
+<header>
+    {{#if user}}
+        <nav>
+          <a href="/">Homepage</a>
+          <a href="/bookings">Bookings</a>
+          <a href="/myboats">Listings</a>
+          <a href="/logout">Logout</a>
+         </nav>
+      {{else}}
+        <nav>
+          <a href="/">Homepage</a>
+          <a href="/log-in">Login</a>
+        </nav>
+    {{/if}}
+</header>
+
 <form action="/myboats/add" method="post">
     <label for="">Name:</label>
     <input type="text" name="name" required>
