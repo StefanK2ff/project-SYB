@@ -56,12 +56,13 @@ router.post('/edit', (req, res, next) => {
       brand //things from the form
     }})
   .then((listing) => {
-    res.redirect('/');
+    res.redirect('/myboats');
   })
   .catch((error) => {
     console.log(error);
   })
 });
+
 
 // POST deletes a listing. Then goest to myboats.hbs
 router.post("/:id/delete", (req, res, next) => {
