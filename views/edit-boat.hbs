@@ -14,17 +14,16 @@
     </datalist>
     <br>
     <label for="">Street:</label>
-    <input type="text" name="street" required value="{{listing.street}}">
+    <input type="text" name="street" required value="{{listing.locationAddress.street}}">
     <br>
     <label for="">Street Number:</label>
-    <input type="text" name="streetNumber" required value="{{listing.street
-    number}}">
+    <input type="text" name="streetNumber" required value="{{listing.locationAddress.streetNumber}}">
     <br>
     <label for="">City:</label>
-    <input type="text" name="city" required value="{{listing.city}}">
+    <input type="text" name="city" required value="{{listing.locationAddress.city}}">
     <br>
     <label for="">Province:</label>
-    <input type="text" name="province" value="{{listing.province}}">
+    <input type="text" name="province" value="{{listing.locationAddress.province}}">
     <br>
     <label for="">Image:</label>
     <input type="text" name="imageURL" value="{{listing.imageURL}}">

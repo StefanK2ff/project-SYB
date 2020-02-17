@@ -3,17 +3,63 @@ var router = express.Router();
 var Listing = require("../models/ListingModel");
 var User = require("../models/UserModel");
 
+
 //GET  edits a listing
-router.get("/:id/edit", (req, res) => {
+//router to get user request and render view
+// retreive data from listing from database
+router.get("/edit/:id", (req, res) => {
   const { id } = req.params;
   const user = req.session.currentUser;
+console.log(id);
 
   Listing.findById(id)
     .then(listing => {
-      res.render("/myboats", { listing, user }); //=> we need an hbs view here
+      console.log(listing);
+      
+      res.render("edit-boat.hbs", { listing, user }); //=> we need an hbs view here
     })
     .catch(err => console.log(err));
 });
+
+//POST     EDIT BOAT and update
+
+router.post('/edit', (req, res, next) => {
+  const { 
+    name,
+    type,
+    street,
+    streetNumber,
+    city,
+    imageURL,
+    province,
+    description,
+    forMaxNumOfUsers,
+    notAvailableDates,
+    brand //things from the form 
+  } = req.body;
+
+  ListingModel.update({_id: req.query.listing_id}, 
+    { $set: {
+      name,
+      type,
+      street,
+      streetNumber,
+      city,
+      imageURL,
+      province,
+      description,
+      forMaxNumOfUsers,
+      notAvailableDates,
+      brand //things from the form
+    }})
+  .then((listing) => {
+    res.redirect('/');
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+});
+
 
 
 // POST deletes a listing. Then goest to myboats.hbs
