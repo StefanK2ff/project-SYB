@@ -28,7 +28,7 @@
         <option value="boat">Boat</option>
     </select>
         <label for="start">Start date:</label>
-        <input type="date" name="bookingStart" default="2020-08-01">
+        <input type="date" name="bookingStart" id="bookingStart">
     <button type="submit">Submit</button>
 </form>
 
@@ -44,8 +44,10 @@
         <form action="/bookings/request/{{this._id}}" method="POST">
             {{!-- <label for="start">Start date:</label>
             <input type="date" name="bookingStart"> --}}
-            <button type="submit">Request booking</button>  
+            <button type="submit" name="request">Request booking</button>  
             <hr>
         </form>
     {{/each}}
 </ul>
+
+<script src="/javascripts/helper.js"></script>

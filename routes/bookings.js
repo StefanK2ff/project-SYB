@@ -25,6 +25,7 @@ router.post("/:id", (req,res) => {
 router.post("/request/:id", (req, res) => {
     listingID = req.params.id
     borrowerID = req.session.currentUser._id
+    console.log("LID ",listingID," BID ",borrowerID)
     User.findOne({
             listings: listingID
         })
