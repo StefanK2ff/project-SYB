@@ -33,13 +33,21 @@
 {{/each}}
 </ul>
 
-<h2>Bookings have reveived for my boats</h2>
+<h2>Bookings have reveived for my boats and need action:</h2>
 
 <ul>
 {{#each data.1.incomingBookings}}
     <li>Booking from: {{this.created_at}}</li>
     <li>Status: {{this.status}}</li>
     <li>Day of Booking: {{this.bookingStart}}</li>
+    <!-- <li><a href="/bookings/{{this._id}}/deny">Deny request</a></li>
+    <li><a href="/bookings/{{this._id}}/accept">Deny request</a></li> -->
+    <form action="/bookings/{{this._id}}" method="POST">
+        <input type="submit" name="action" value="Accept" />
+        <input type="submit" name="action" value="Decline" />
+    </form>
     <hr>
+
+
 {{/each}}
 </ul>
