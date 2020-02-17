@@ -47,7 +47,7 @@ router.get("/", (req, res) => {
         .catch((err) => console.log(err));
 
     const prom2 = Bookings.find({
-        ownerid: req.session.currentUser._id
+            ownerId: req.session.currentUser._id
         })
         .then((incomingBookings) => {
             return {incomingBookings}
@@ -56,9 +56,11 @@ router.get("/", (req, res) => {
 
     Promise.all([prom1, prom2])
         .then((data) => {
-            console.log(data)
-            if (req.query.status="success") var message ="Your booking request was sent to the owner!"
-            res.render("../views/bookings.hbs", {data, message} )
+            if (req.query.status==="success") {
+                var message ="Your booking request was sent to the owner!";
+                res.render("../views/bookings.hbs", {data, message});
+            }
+            else res.render("../views/bookings.hbs", {data});
         })
         .catch((err) => console.log(err));
 })

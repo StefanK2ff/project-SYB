@@ -36,7 +36,7 @@ loginRouter.post("/", (req, res) => {
         return;
       }
 
-      if (bcrypt.compare(password, foundUser.password)) {
+      if (bcrypt.compareSync(password, foundUser.password)) {
         req.session.currentUser = foundUser;
         res.redirect("/");
       } else {
