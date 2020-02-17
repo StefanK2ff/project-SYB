@@ -13,9 +13,11 @@ var session = require ('express-session');
 var app = express();
 const MongoStore = require ('connect-mongo')(session);
 
+require.('dotenv').config();
+
 // MONGOOSE CONNECTION
 mongoose
-  .connect(`${process.env.MONGODB_URI}${process.env.DB_NAME}`, {
+  .connect(process.env.MONGODB_URI, {
     keepAlive: true,
     useNewUrlParser: true,
   // reconnectTries: Number.MAX_VALUE,
@@ -34,7 +36,7 @@ app.use(session({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60 // 1 day
   }),
-  secret: process.env.SECRET_SESSION,
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true,
   cookie: {
