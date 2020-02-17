@@ -39,8 +39,9 @@
         <li>Type: {{this.type}}</li>
         <li>Decription: {{this.description}}</li>
         <li>Available to pick up from: {{this.locationAddress.street}}, 
-                                    {{this.locationAddress.streetNumber}}, 
-                                    {{this.locationAddress.city}}</li>
+                                       {{this.locationAddress.streetNumber}}, 
+                                       {{this.locationAddress.city}}</li>
+        <li><img src="{{this.imageURL}}" alt="image of boat"></li>
         <form action="/bookings/request/{{this._id}}" method="POST">
             {{!-- <label for="start">Start date:</label>
             <input type="date" name="bookingStart"> --}}
