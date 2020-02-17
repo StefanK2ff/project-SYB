@@ -28,15 +28,19 @@ router.get("/logout", (req, res) => {
 
 //Get homepage with all listings 
 router.get('/', (req, res, next) => {
-  const {type} = req.query;
+  let {type, bookingStart} = req.query;
 
   let user = false; // 
   if(req.session.currentUser){ // checker if user is logged in to display correct navbar
     user = req.session.currentUser //
   }
  
-  if(type){ // lists all listings according to filter selection
-    Listing.find({type})
+  if(bookingStart || type){ // lists all listings according to filter selection
+    
+    //transform date format of form date picker to DB format
+    bookingStartTurn = bookingStart.split("-")
+    bookingStart = `${bookingStartTurn[2]}/${bookingStartTurn[1]}/${bookingStartTurn[0]}`
+    Listing.find({notAvailableDates: {$nin: [bookingStart]}})//{type}
     .then( (data) => {
       res.render('index', {data, user}); 
     })
