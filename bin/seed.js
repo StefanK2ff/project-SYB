@@ -8,7 +8,7 @@ const userSeeds = require("./seeddata/userseeds.js");
 require('dotenv').config();
 
 // Connect DB
-mongoose.connect(`mongodb://localhost/${process.env.DB_NAME}`, {
+mongoose.connect(process.env.MONGODB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
