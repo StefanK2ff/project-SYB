@@ -15,7 +15,7 @@ const MongoStore = require ('connect-mongo')(session);
 
 // MONGOOSE CONNECTION
 mongoose
-  .connect(`${process.env.MONGODB_URI}${process.env.DB_NAME}`, {
+  .connect(process.env.MONGODB_URI, {
     keepAlive: true,
     useNewUrlParser: true,
   // reconnectTries: Number.MAX_VALUE,
