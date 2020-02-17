@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Listing = require("../models/ListingModel");
 var User = require("../models/UserModel");
+const parser = require('../config/cloudinary');
 
 
 //GET  edits a listing
