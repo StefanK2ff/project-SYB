@@ -26,13 +26,11 @@ router.get("/logout", (req, res) => {
   });
 });
 
-
-
 //Get homepage with all listings 
 router.get('/', (req, res, next) => {
   const {type} = req.query;
-  console.log(type)
-  //const user = req.session.currentUser._id
+  const user = req.session.currentUser._id
+  
 
   if(type){ // lists all listings according to filter selection
     Listing.find({type})

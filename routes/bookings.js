@@ -4,9 +4,6 @@ var Bookings = require("../models/BookingModel");
 var User = require("../models/UserModel");
 var Listing = require("../models/ListingModel");
 
-
-
-
 // POST to update a Booking
 
 
