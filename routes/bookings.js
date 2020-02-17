@@ -35,6 +35,12 @@ router.post("/request/:id", (req, res) => {
 
 // //GET bookings overview with where current user is Borrower
 router.get("/", (req, res) => {
+
+    let user = false; // 
+    if(req.session.currentUser){ // checker if user is logged in to display correct navbar
+        user = req.session.currentUser //
+    }
+
     const prom1 = Bookings.find({
             borrowerId: req.session.currentUser._id
         })
@@ -55,9 +61,9 @@ router.get("/", (req, res) => {
         .then((data) => {
             if (req.query.status==="success") {
                 var message ="Your booking request was sent to the owner!";
-                res.render("../views/bookings.hbs", {data, message});
+                res.render("../views/bookings.hbs", {data, message, user});
             }
-            else res.render("../views/bookings.hbs", {data});
+            else res.render("../views/bookings.hbs", {data, user});
         })
         .catch((err) => console.log(err));
 })
