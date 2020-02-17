@@ -1,9 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var Listing = require("../models/ListingModel");
-var User = require("../models/UserModel");
+const express = require('express');
+const router = express.Router();
+const Listing = require("../models/ListingModel");
+const User = require("../models/UserModel");
 const parser = require('../config/cloudinary');
-
 
 //GET  edits a listing
 //router to get user request and render view
@@ -20,20 +19,23 @@ router.get("/edit/:id", (req, res) => {
     .then(listing => {
       console.log(listing);
       
-      res.render("edit-boat.hbs", { listing, user }); //=> we need an hbs view here
+      res.render("edit-boat.hbs", { listing, user }); 
     })
     .catch(err => console.log(err));
 });
 
 //POST     EDIT BOAT and update
-router.post('/edit/:listingId', (req, res, next) => {
-  const { 
+
+router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
+  const imageURL = req.file.secure_url; // <-- for claudinary
+
+  let { 
     name,
     type,
     street,
     streetNumber,
     city,
-    imageURL,
+    // imageURL <-- for claudinary
     province,
     description,
     forMaxNumOfUsers,
@@ -72,7 +74,6 @@ console.log(req.params.listingId);
 
 // POST deletes a listing. Then goest to myboats.hbs
 router.post("/:id/delete", (req, res, next) => {
-  const listingID = req.params.id;
 
   Listing.findByIdAndDelete(listingID)
     .then(result => {
@@ -85,14 +86,16 @@ router.post("/:id/delete", (req, res, next) => {
 
 
 // POST from new Movie Form //=>adds Boat
-router.post("/add", (req, res) => {
+router.post("/add", parser.single('photo'), (req, res) => {
+  const imageURL = req.file.secure_url; // <-- for claudinary
+
   let {
     name,
     type,
     street,
     streetNumber,
     city,
-    imageURL,
+    //imageURL, <-- for claudinary
     province,
     description,
     forMaxNumOfUsers,

@@ -14,7 +14,7 @@
     {{/if}}
 </header>
 
-<form action="/myboats/add" method="post">
+<form action="/myboats/add" method="post" enctype="multipart/form-data">
     <label for="">Name:</label>
     <input type="text" name="name" required>
     <br>
@@ -42,7 +42,7 @@
     <input type="text" name="province">
     <br>
     <label for="photo">Upload Photo:</label>
-    <input type="file" name="photo" accept="image/png, image/jpeg">
+    <input type="file" name="photo">
     <br>
     <label for="">Description:</label>
     <input type="text" name="description">
