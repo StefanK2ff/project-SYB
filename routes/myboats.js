@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var Listing = require("../models/ListingModel");
-var User = require("../models/UserModel");
+const express = require('express');
+const router = express.Router();
+const Listing = require("../models/ListingModel");
+const User = require("../models/UserModel");
 const parser = require('../config/cloudinary');
 
 
@@ -27,46 +27,46 @@ router.get("/edit/:id", (req, res) => {
 
 //POST     EDIT BOAT and update
 
-router.post('/edit', (req, res, next) => {
-  const { 
-    name,
-    type,
-    street,
-    streetNumber,
-    city,
-    imageURL,
-    province,
-    description,
-    forMaxNumOfUsers,
-    notAvailableDates,
-    brand //things from the form 
-  } = req.body;
+// router.post('/edit', (req, res, next) => {
 
-  ListingModel.update({_id: req.query.listing_id}, 
-    { $set: {
-      name,
-      type,
-      street,
-      streetNumber,
-      city,
-      imageURL,
-      province,
-      description,
-      forMaxNumOfUsers,
-      notAvailableDates,
-      brand //things from the form
-    }})
-  .then((listing) => {
-    res.redirect('/');
-  })
-  .catch((error) => {
-    console.log(error);
-  })
-});
+//   let { 
+//     name,
+//     type,
+//     street,
+//     streetNumber,
+//     city,
+//     imageURL,
+//     province,
+//     description,
+//     forMaxNumOfUsers,
+//     notAvailableDates,
+//     brand //things from the form 
+//   } = req.body;
+
+//   ListingModel.update({_id: req.query.listing_id}, 
+//     { $set: {
+//       name,
+//       type,
+//       street,
+//       streetNumber,
+//       city,
+//       imageURL,
+//       province,
+//       description,
+//       forMaxNumOfUsers,
+//       notAvailableDates,
+//       brand //things from the form
+//     }})
+//   .then((listing) => {
+//     res.redirect('/');
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   })
+// });
 
 // POST deletes a listing. Then goest to myboats.hbs
 router.post("/:id/delete", (req, res, next) => {
-  const listingID = req.params.id;
 
   Listing.findByIdAndDelete(listingID)
     .then(result => {
@@ -79,14 +79,16 @@ router.post("/:id/delete", (req, res, next) => {
 
 
 // POST from new Movie Form //=>adds Boat
-router.post("/add", (req, res) => {
+router.post("/add", parser.single('photo'), (req, res) => {
+  const imageURL = req.file.secure_url; // <-- for claudinary
+
   let {
     name,
     type,
     street,
     streetNumber,
     city,
-    imageURL,
+    //imageURL, <-- for claudinary
     province,
     description,
     forMaxNumOfUsers,
