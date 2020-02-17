@@ -8,7 +8,13 @@ var Listing = require("../models/ListingModel");
 
 
 // POST to update a Booking
-
+router.post("/:id", (req,res) => {
+    const {action} = req.body;
+    if (action === "Deny") console.log("denied!")
+    if (action === "Accept") console.log("accepted!!")
+    //console.log("the body ", req.body);
+    res.redirect("/bookings")
+})
 
 // POST from index to place a booking request
 router.post("/request/:id", (req, res) => {
