@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var Listing = require("../models/ListingModel");
-var User = require("../models/UserModel");
-
+const express = require('express');
+const router = express.Router();
+const Listing = require("../models/ListingModel");
+const User = require("../models/UserModel");
+const parser = require('../config/cloudinary');
 
 //GET  edits a listing
 //router to get user request and render view
@@ -19,29 +19,34 @@ router.get("/edit/:id", (req, res) => {
     .then(listing => {
       console.log(listing);
       
-      res.render("edit-boat.hbs", { listing, user }); //=> we need an hbs view here
+      res.render("edit-boat.hbs", { listing, user }); 
     })
     .catch(err => console.log(err));
 });
 
 //POST     EDIT BOAT and update
 
-router.post('/edit', (req, res, next) => {
-  const { 
+router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
+  const imageURL = req.file.secure_url; // <-- for claudinary
+
+  let { 
     name,
     type,
     street,
     streetNumber,
     city,
-    imageURL,
+    // imageURL <-- for claudinary
     province,
     description,
     forMaxNumOfUsers,
     notAvailableDates,
     brand //things from the form 
   } = req.body;
+console.log('anything blablabla');
 
-  ListingModel.update({_id: req.query.listing_id}, 
+console.log(req.params.listingId);
+
+  Listing.updateOne({_id: req.params.listingId}, 
     { $set: {
       name,
       type,
@@ -54,18 +59,21 @@ router.post('/edit', (req, res, next) => {
       forMaxNumOfUsers,
       notAvailableDates,
       brand //things from the form
-    }})
+    }}, {new:true})
   .then((listing) => {
-    res.redirect('/');
+    console.log(listing);
+   
+    
+    res.redirect('/myboats');
   })
   .catch((error) => {
     console.log(error);
   })
 });
 
+
 // POST deletes a listing. Then goest to myboats.hbs
 router.post("/:id/delete", (req, res, next) => {
-  const listingID = req.params.id;
 
   Listing.findByIdAndDelete(listingID)
     .then(result => {
@@ -78,14 +86,16 @@ router.post("/:id/delete", (req, res, next) => {
 
 
 // POST from new Movie Form //=>adds Boat
-router.post("/add", (req, res) => {
+router.post("/add", parser.single('photo'), (req, res) => {
+  const imageURL = req.file.secure_url; // <-- for claudinary
+
   let {
     name,
     type,
     street,
     streetNumber,
     city,
-    imageURL,
+    //imageURL, <-- for claudinary
     province,
     description,
     forMaxNumOfUsers,
@@ -143,13 +153,12 @@ router.post("/add", (req, res) => {
 })
 
 //GET add form
-router.get("/add", (req, res) => {
+router.get("/addboat", (req, res) => {
   let user = false; // 
   if(req.session.currentUser){ // checker if user is logged in to display correct navbar
     user = req.session.currentUser //
   }
-  
-  res.render("../views/addboat.hbs", {user}) 
+  res.render("addboat", {user}) 
 })
 
 // GET listensto /listing/ID and show detail
@@ -171,5 +180,6 @@ router.get("/", (req, res) => {
     }))
     .catch((err) => console.log(err));
 })
+
 
 module.exports = router;

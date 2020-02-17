@@ -14,7 +14,7 @@
     {{/if}}
 </header>
 
-<form action="/myboats/add" method="post">
+<form action="/myboats/add" method="post" enctype="multipart/form-data">
     <label for="">Name:</label>
     <input type="text" name="name" required>
     <br>
@@ -41,8 +41,8 @@
     <label for="">Province:</label>
     <input type="text" name="province">
     <br>
-    <label for="">Image:</label>
-    <input type="text" name="imageURL">
+    <label for="photo">Upload Photo:</label>
+    <input type="file" name="photo">
     <br>
     <label for="">Description:</label>
     <input type="text" name="description">
@@ -56,7 +56,7 @@
     <label for="">Brand:</label>
     <input type="text" name="brand">
     <br>
-    <button type="submit">ADD a boat</button>
+    <button type="submit">ADD THIS BOAT</button>
 </form>
 
 {{#if errorMessage}}
