@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Listing = require("../models/ListingModel");
 var User = require("../models/UserModel");
+const parser = require('../config/cloudinary');
 
 
 //GET  edits a listing
@@ -144,13 +145,12 @@ router.post("/add", (req, res) => {
 })
 
 //GET add form
-router.get("/add", (req, res) => {
+router.get("/addboat", (req, res) => {
   let user = false; // 
   if(req.session.currentUser){ // checker if user is logged in to display correct navbar
     user = req.session.currentUser //
   }
-  
-  res.render("../views/addboat.hbs", {user}) 
+  res.render("addboat", {user}) 
 })
 
 // GET listensto /listing/ID and show detail
