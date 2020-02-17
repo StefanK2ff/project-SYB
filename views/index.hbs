@@ -1,3 +1,19 @@
+<header>
+      {{#if user}}
+        <nav>
+          <a href="/">Homepage</a>
+          <a href="/bookings">Bookings</a>
+          <a href="/myboats">Listings</a>
+          <a href="/logout">Logout</a>
+         </nav>
+      {{else}}
+        <nav>
+          <a href="/">Homepage</a>
+          <a href="/log-in">Login</a>
+        </nav>
+      {{/if}}
+</header>
+
 <h1>WELCOME TO SYB</h1>
 <hr>
 
@@ -31,7 +47,5 @@
             <button type="submit">Request booking</button>  
             <hr>
         </form>
-
-
     {{/each}}
 </ul>
