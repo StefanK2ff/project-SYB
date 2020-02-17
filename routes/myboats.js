@@ -143,13 +143,12 @@ router.post("/add", (req, res) => {
 })
 
 //GET add form
-router.get("/add", (req, res) => {
+router.get("/addboat", (req, res) => {
   let user = false; // 
   if(req.session.currentUser){ // checker if user is logged in to display correct navbar
     user = req.session.currentUser //
   }
-  
-  res.render("../views/addboat.hbs", {user}) 
+  res.render("addboat", {user}) 
 })
 
 // GET listensto /listing/ID and show detail
