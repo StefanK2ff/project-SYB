@@ -9,11 +9,20 @@ var Listing = require("../models/ListingModel");
 
 // POST to update a Booking
 router.post("/:id", (req,res) => {
+    const bookingId = req.params.id
     const {action} = req.body;
-    if (action === "Deny") console.log("denied!")
-    if (action === "Accept") console.log("accepted!!")
-    //console.log("the body ", req.body);
-    res.redirect("/bookings")
+    if (action === "Decline") {
+        Bookings.findByIdAndUpdate({bookingId},{status: "declined"})
+        .then( (data) => res.redirect("/bookings?update=declined"))
+        .catch( (err) => console.log(err));
+    }
+    if (action === "Accept") {
+        Bookings.findByIdAndUpdate({bookingId},{status: "accepted"})
+        .then( (data) => res.redirect("/bookings?update=accepted"))
+        .catch( (err) => console.log(err));
+    }
+    
+    
 })
 
 // POST from index to place a booking request
@@ -53,7 +62,8 @@ router.get("/", (req, res) => {
         .catch((err) => console.log(err));
 
     const prom2 = Bookings.find({
-            ownerId: req.session.currentUser._id
+            ownerId: req.session.currentUser._id,
+            status: "pending"
         })
         .then((incomingBookings) => {
             return {incomingBookings}
