@@ -24,22 +24,24 @@ router.post("/:id", (req,res) => {
 // POST from index to place a booking request
 router.post("/request/:id", (req, res) => {
     listingID = req.params.id
+    let {bookingStart} = req.body;
+    let bookingStartTurn = bookingStart.split("-")
+    bookingStart = `${bookingStartTurn[2]}/${bookingStartTurn[1]}/${bookingStartTurn[0]}`
     borrowerID = req.session.currentUser._id
-    console.log("LID ",listingID," BID ",borrowerID)
     User.findOne({
             listings: listingID
         })
         .then((result) => {
-            console.log(result)
+            //console.log(result)
             Bookings.create({
                     ownerId: result._id,
                     borrowerId: borrowerID,
                     listingId: listingID,
-                    // bookingStart:
+                    bookingStart: bookingStart,
                     status: "pending"
                 })
                 .then((result) => {
-                    console.log("booking created: ", result)
+                    // console.log("booking created: ", result)
                     res.redirect("/bookings?msg=success")
                 }).catch((err) => {
                     console.log(err)

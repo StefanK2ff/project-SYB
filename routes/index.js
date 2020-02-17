@@ -29,7 +29,7 @@ router.get("/logout", (req, res) => {
 //Get homepage with all listings 
 router.get('/', (req, res, next) => {
   let {type, bookingStart} = req.query;
-
+  console.log(req.query)
   let user = false; // 
   if(req.session.currentUser){ // checker if user is logged in to display correct navbar
     user = req.session.currentUser //
