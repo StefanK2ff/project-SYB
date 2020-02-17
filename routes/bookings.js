@@ -12,13 +12,13 @@ router.post("/:id", (req,res) => {
     const bookingId = req.params.id
     const {action} = req.body;
     if (action === "Decline") {
-        Bookings.findByIdAndUpdate({bookingId},{status: "declined"})
-        .then( (data) => res.redirect("/bookings?update=declined"))
+        Bookings.findByIdAndUpdate({_id: bookingId},{status: "declined"})
+        .then( (data) => res.redirect("/bookings?msg=declined"))
         .catch( (err) => console.log(err));
     }
     if (action === "Accept") {
-        Bookings.findByIdAndUpdate({bookingId},{status: "accepted"})
-        .then( (data) => res.redirect("/bookings?update=accepted"))
+        Bookings.findByIdAndUpdate({_id: bookingId},{status: "accepted"})
+        .then( (data) => res.redirect("/bookings?msg=accepted"))
         .catch( (err) => console.log(err));
     }
     
@@ -43,7 +43,7 @@ router.post("/request/:id", (req, res) => {
                 })
                 .then((result) => {
                     console.log("booking created: ", result)
-                    res.redirect("/bookings?status=success")
+                    res.redirect("/bookings?msg=success")
                 }).catch((err) => {
                     console.log(err)
                 });
@@ -72,11 +72,21 @@ router.get("/", (req, res) => {
 
     Promise.all([prom1, prom2])
         .then((data) => {
-            if (req.query.status==="success") {
-                var message ="Your booking request was sent to the owner!";
-                res.render("../views/bookings.hbs", {data, message});
+            let messageHandler = req.query.msg
+            switch (messageHandler) {
+                case "success":
+                    message = "Your booking request was sent to the owner!";
+                    break;
+                case "accepted":
+                    message = "The booking was accepted and the answer was sent to the Requester";
+                    break;
+                case "declined":
+                    message = "The request was declined and the answer was sent!";
+                    break;
+                default:
+                    message = null;
             }
-            else res.render("../views/bookings.hbs", {data});
+            res.render("../views/bookings.hbs", {data, message});
         })
         .catch((err) => console.log(err));
 })
