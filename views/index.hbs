@@ -41,12 +41,13 @@
         <li>Available to pick up from: {{this.locationAddress.street}}, 
                                     {{this.locationAddress.streetNumber}}, 
                                     {{this.locationAddress.city}}</li>
-        <form action="/bookings/request/{{this._id}}" method="POST">
+        <form action="/bookings/request/{{this._id}}" method="POST" name="requestForm" id="{{this._id}}">
             {{!-- <label for="start">Start date:</label>
             <input type="date" name="bookingStart"> --}}
-            <button type="submit" name="request">Request booking</button>  
-            <hr>
+            <button type="submit" name="request" id="{{this._id}}">Request booking</button>  
+            
         </form>
+        <hr>
     {{/each}}
 </ul>
 
