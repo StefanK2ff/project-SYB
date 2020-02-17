@@ -4,7 +4,6 @@ const Listing = require("../models/ListingModel");
 const User = require("../models/UserModel");
 const parser = require('../config/cloudinary');
 
-
 //GET  edits a listing
 //router to get user request and render view
 // retreive data from listing from database
@@ -20,14 +19,14 @@ router.get("/edit/:id", (req, res) => {
     .then(listing => {
       console.log(listing);
       
-      res.render("edit-boat.hbs", { listing, user }); //=> we need an hbs view here
+      res.render("edit-boat.hbs", { listing, user }); 
     })
     .catch(err => console.log(err));
 });
 
 //POST     EDIT BOAT and update
 
-router.post('/edit', (req, res, next) => {
+router.post('/edit', parser.single('photo'), (req, res, next) => {
   const imageURL = req.file.secure_url; // <-- for claudinary
 
   let { 
