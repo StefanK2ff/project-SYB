@@ -49,7 +49,6 @@ router.post("/request/:id", (req, res) => {
 
 // //GET bookings overview with where current user is Borrower
 router.get("/", (req, res) => {
-
     let user = false; // 
     if(req.session.currentUser){ // checker if user is logged in to display correct navbar
         user = req.session.currentUser //
@@ -88,7 +87,7 @@ router.get("/", (req, res) => {
                 default:
                     message = null;
             }
-            res.render("../views/bookings.hbs", {data, message});
+            res.render("../views/bookings.hbs", {data, message, user});
         })
         .catch((err) => console.log(err));
 })
