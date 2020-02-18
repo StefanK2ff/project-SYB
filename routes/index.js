@@ -29,20 +29,25 @@ router.get("/logout", (req, res) => {
 //Get homepage with all listings 
 router.get('/', (req, res, next) => {
   let {type, bookingStart} = req.query;
+  if(!bookingStart) {
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    bookingStart = tomorrow
+  }
   let user = false; // 
   if(req.session.currentUser){ // checker if user is logged in to display correct navbar
     user = req.session.currentUser //
   }
  
-  if(bookingStart || type){ // lists all listings according to filter selection
-    Listing.find({notAvailableDates: {$nin: [bookingStart]}})//{type}
+  if(type){ // lists all listings according to filter selection
+    Listing.find({$and: [{type}, {notAvailableDates: {$nin: [bookingStart]}}]})//{type}
     .then( (data) => {
       res.render('index', {data, user}); 
     })
     .catch( (err) => console.log(err));
   } 
   else {
-    Listing.find() // lists all available listings without filter
+    Listing.find({notAvailableDates: {$nin: [bookingStart]}}) // lists all available listings without filter
     .then( (data) => {
       res.render('index', {data, user})  
     })
