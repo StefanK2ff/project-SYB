@@ -15,7 +15,7 @@
 </header>
 
 <form action="/myboats/edit/{{listing._id}}" method="POST" enctype="multipart/form-data">
-    <label for="">Name:</label>
+    <label for="">Boat name:</label>
     <input type="text" name="name" required value="{{listing.name}}">
     <br>
     <label for="">Type:</label>
@@ -41,7 +41,7 @@
     <label for="">Province:</label>
     <input type="text" name="province" value="{{listing.locationAddress.province}}">
     <br>
-    <label for="photo">Upload Photo:</label>
+    <label for="photo">Upload Photo (JPG or PNG format only):</label>
     <input type="file" name="photo" value="{{listing.imageURL}}">
     <br>
     <label for="">Description:</label>
@@ -59,4 +59,8 @@
     <button type="submit">EDIT this boat</button>
 </form>
 
-<a href="/books/delete/{{boat._id}}"> DELETE BOAT</a>
+{{!-- <a href="/myboats/deleteboat/{{boat.id}}"> DELETE BOAT</a> --}}
+
+<form action="/myboats/delete/{{listing._id}}" method="POST">       
+  <button type="submit">DELETE BOAT</button>          
+</form>

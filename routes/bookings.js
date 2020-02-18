@@ -18,11 +18,11 @@ router.post("/:id", (req,res) => {
         .then( (data) => res.redirect("/bookings?msg=accepted"))
         .catch( (err) => console.log(err));
     }
-    
-})
+});
 
 // POST from index to place a booking request
 router.post("/request/:id", (req, res) => {
+<<<<<<< HEAD
     listingID = req.params.id
     let {bookingStart} = req.body;
     console.log("START ", bookingStart)
@@ -35,21 +35,39 @@ router.post("/request/:id", (req, res) => {
         .then((result) => {
             //console.log(result)
             Bookings.create({
+=======
+    if(req.session.currentUser){ // checker to see if user logged in. If not, redirects to log-in page
+        listingID = req.params.id
+        let {bookingStart} = req.body;
+        let bookingStartTurn = bookingStart.split("-")
+        bookingStart = `${bookingStartTurn[2]}/${bookingStartTurn[1]}/${bookingStartTurn[0]}`
+        borrowerID = req.session.currentUser._id;
+        User.findOne({
+                listings: listingID
+            })
+            .then((result) => {
+                //console.log(result)
+                Bookings.create({
+>>>>>>> 0da2ef3809a9e7b9b3f720e5789a5fb0d8d82659
                     ownerId: result._id,
                     borrowerId: borrowerID,
                     listingId: listingID,
                     bookingStart: bookingStart,
                     status: "pending"
+                    })
+                    .then((result) => {
+                        // console.log("booking created: ", result)
+                        res.redirect("/bookings?msg=success")
+                     }).catch((err) => {
+                     console.log(err)
+                    });
                 })
-                .then((result) => {
-                    // console.log("booking created: ", result)
-                    res.redirect("/bookings?msg=success")
-                }).catch((err) => {
-                    console.log(err)
-                });
-        })
-        .catch((err) => console.log(err));
-})
+            .catch((err) => console.log(err));
+    }
+    else {
+        res.render("log-in");
+    }
+});
 
 // //GET bookings overview with where current user is Borrower
 router.get("/", (req, res) => {
