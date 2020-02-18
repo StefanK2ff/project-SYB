@@ -1,5 +1,5 @@
-let requestButton = document.getElementsByName("request")
-console.log(requestButton)
+let requestButton = document.getElementsByName("request");
+let filterButton = document.getElementById("submitFilter");
 
 requestButton.forEach(element => {
     element.addEventListener(("click"), function(event) {
@@ -21,7 +21,28 @@ requestButton.forEach(element => {
     });
 });
 
-requestButton.removeEventListener("DOMNodeInserted", () => {
-    console.log("removed");
-    
-})
+function setDefaultDate() {
+    var dateField = document.getElementById("selected-date");
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    if (getUrlParam('bookingStart','X') === "X") dateField.value = tomorrow.toISOString().substr(0, 10)
+    else dateField.value = getUrlParam('bookingStart','HELLO')
+}
+
+document.addEventListener("DOMContentLoaded", setDefaultDate())
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+function getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getUrlVars()[parameter];
+        }
+    return urlparameter;
+}

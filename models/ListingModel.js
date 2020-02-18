@@ -25,7 +25,7 @@ const listingSchema = new Schema(
       coordinates: [] 
     },
     notAvailableDates: {
-      type: Array
+      type: [Date]
     },
     imageURL: {
       type: String,
