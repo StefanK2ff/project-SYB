@@ -4,6 +4,8 @@ const loginRouter = require("./login");
 var authRouter = require('./auth')
 var listingRouter = require("./myboats")
 var bookingsRouter = require("./bookings")
+var moment = require('moment');
+moment().format();
 
 //Model paths
 const Listing = require("./../models/ListingModel");
@@ -48,6 +50,7 @@ router.get('/', (req, res, next) => {
   else {
     Listing.find({notAvailableDates: {$nin: [bookingStart]}}) // lists all available listings without type filter
     .then( (data) => {
+
       res.render('index', {data, user})  
     })
     .catch( (err) => console.log(err));
