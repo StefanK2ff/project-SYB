@@ -1,8 +1,6 @@
 let requestButton = document.getElementsByName("request");
 let filterButton = document.getElementById("submitFilter");
 
-
-
 // Set an event listener to each Request button, that will take the date from filter and adds it to the post request
 requestButton.forEach(element => {
     element.addEventListener(("click"), function(event) {
@@ -31,7 +29,6 @@ function setDefaultDate() {
     else dateField.value = getUrlParam('bookingStart','HELLO')
 }
 
-
 // helper Function to get URL variables in FE
 function getUrlVars() {
     var vars = {};
@@ -44,19 +41,15 @@ function getUrlVars() {
 // Helper Function to  handle not set URL parameters
 function getUrlParam(parameter, defaultvalue){
     var urlparameter = defaultvalue;
-    if(window.location.href.indexOf(parameter) > -1){
-        urlparameter = getUrlVars()[parameter];
-        }
+    if(window.location.href.indexOf(parameter) > -1)urlparameter = getUrlVars()[parameter]
     return urlparameter;
 }
 
 //sets type-select to last search
 function setFilterType() {
     let typeSelect = document.getElementById("type-select");
-    console.log()
     if (getUrlParam('type','X') != "X") typeSelect.value = getUrlParam('type','X')
 }
-
 
 // global Eventlisteners
 document.addEventListener("DOMContentLoaded", () => {
