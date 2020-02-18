@@ -71,22 +71,32 @@ console.log(req.params.listingId);
   })
 });
 
-//GET DELETE form
-router.get("/delete/:id", (req, res) => {
-  let user = false; // 
-  if(req.session.currentUser){ // checker if user is logged in to display correct navbar
-    user = req.session.currentUser //
-  }
-  res.redirect("/myboats") 
-})
+// GET DELETE form
+// router.get("/delete/:id", (req, res) => {
+//   const { id } = req.params;
+//   let user = false; // 
+//   if(req.session.currentUser){ // checker if user is logged in to display correct navbar
+//     user = req.session.currentUser //
+//   }
+
+//   Listing.findByIdAndRemove(listingId)
+//   .then( () => {
+//     res.redirect("/myboats");
+//   })
+//   .catch(err => {
+//     next(err);
+//   }); 
+// })
 
 
 
 // POST deletes a listing. Then goest to myboats.hbs
-router.post("/delete/:listingId", (req, res, next) => {
+router.post("/delete/:id", (req, res, next) => {
+  const listingId = req.params.id;
+  console.log(listingId);
 
   Listing.findByIdAndRemove(listingId)
-    .then(result => {
+    .then( () => {
       res.redirect("/myboats");
     })
     .catch(err => {

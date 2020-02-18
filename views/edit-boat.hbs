@@ -59,4 +59,8 @@
     <button type="submit">EDIT this boat</button>
 </form>
 
-<a href="/myboats/deleteboat/{{boat._id}}"> DELETE BOAT</a>
+{{!-- <a href="/myboats/deleteboat/{{boat.id}}"> DELETE BOAT</a> --}}
+
+<form action="/myboats/delete/{{listing._id}}" method="POST">       
+  <button type="submit">DELETE BOAT</button>          
+</form>
