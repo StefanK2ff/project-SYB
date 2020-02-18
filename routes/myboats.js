@@ -25,7 +25,6 @@ router.get("/edit/:id", (req, res) => {
 });
 
 //POST     EDIT BOAT and update
-
 router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
   let imageURL;
 
@@ -200,12 +199,14 @@ router.get("/", (req, res) => {
     user = req.session.currentUser //
   }
 
-  Listing.find() // filter for "current user ID"
-    // find me all listing ID in the "listings Array" of the current user
-    //find many for these IDs in the boat collection
-    .then((result) => res.render("../views/myboats.hbs", {
-      result: result, user
-    }))
+  let userListings = req.session.currentUser.listings
+  console.log("USER LISTINGS", userListings)
+
+  Listing.find([])
+    .then((result) => {
+      res.render("myboats", {result , user})
+    }
+    )
     .catch((err) => console.log(err));
 })
 
