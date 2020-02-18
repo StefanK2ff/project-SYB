@@ -28,7 +28,7 @@ router.post("/request/:id", (req, res) => {
         let {bookingStart} = req.body;
         let bookingStartTurn = bookingStart.split("-")
         bookingStart = `${bookingStartTurn[2]}/${bookingStartTurn[1]}/${bookingStartTurn[0]}`
-        borrowerID = req.session.currentUser._id
+        borrowerID = req.session.currentUser._id;
         User.findOne({
                 listings: listingID
             })
