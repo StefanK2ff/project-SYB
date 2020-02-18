@@ -8,9 +8,7 @@ const parser = require('../config/cloudinary');
 //router to get user request and render view
 // retreive data from listing from database
 router.get("/edit/:id", (req, res) => {
-  const {
-    id
-  } = req.params;
+  const {id} = req.params;
 
   let user = false; // 
   if (req.session.currentUser) { // checker if user is logged in to display correct navbar
@@ -19,7 +17,6 @@ router.get("/edit/:id", (req, res) => {
 
   Listing.findById(id)
     .then(listing => {
-      console.log(listing);
 
       res.render("edit-boat.hbs", {
         listing,
@@ -31,44 +28,23 @@ router.get("/edit/:id", (req, res) => {
 
 //POST     EDIT BOAT and update
 router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
-  let imageURL; 
-  if(req.file ){ 
-    imageURL =  req.file.secure_url; // <-- for claudinary
-  } 
+  let updatedListing = {
+    ...req.body,
+  }
 
-  let {
-    name,
-    type,
-    street,
-    streetNumber,
-    city,
-    province,
-    //imageURL, //<-- for claudinary
-    description,
-    forMaxNumOfUsers,
-    notAvailableDates,
-    brand //things from the form 
-  } = req.body;
-  let ArrayOfNoAvDates = notAvailableDates.split(",");
+  if(req.file){ 
+    let imageURL =  req.file.secure_url; // <-- for claudinary
+    updatedListing = {
+      ...req.body,
+      imageURL,
+    }
+  } 
 
   Listing.updateOne({
       _id: req.params.listingId
     }, {
       $set: {
-        name,
-        type,
-        locationAddress: {
-          street,
-          streetNumber,
-          city,
-          province,
-        },
-        imageURL,
-        description,
-        forMaxNumOfUsers,
-        notAvailableDates,
-        notAvailableDates: ArrayOfNoAvDates,
-        brand //things from the form
+        ...updatedListing
       }
     }, {
       new: true
@@ -99,7 +75,7 @@ router.post("/delete/:id", (req, res, next) => {
 router.post("/add", parser.single('photo'), (req, res) => {
   let imageURL;
   if (req.file) {
-    imageURL = req.file.secure_url
+    imageURL = req.file.secure_url // For Claudinary
   }
 
   let {
@@ -108,7 +84,6 @@ router.post("/add", parser.single('photo'), (req, res) => {
     street,
     streetNumber,
     city,
-    //imageURL, //<-- for claudinary
     province,
     description,
     forMaxNumOfUsers,
@@ -175,9 +150,6 @@ router.get("/addboat", (req, res) => {
     user
   })
 })
-
-// GET listensto /listing/ID and show detail
-
 
 // GET listens to /myboats and shows overview
 router.get("/", (req, res) => {
