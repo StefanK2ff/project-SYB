@@ -175,13 +175,14 @@ router.get("/addboat", (req, res) => {
 
 // GET listens to /myboats and shows overview
 router.get("/", (req, res) => {
-  let { _id } = req.session.currentUser
 
+  const {_id} = req.session.currentUser;
+  
   User.findById(_id).populate('listings')
-    .then((user) => {
-      res.render("myboats", {user})
-    })
-    .catch((err) => console.log(err));
+  .then((user)=>{
+    res.render("myboats", { user})
+    
+  })
 })
 
 module.exports = router;

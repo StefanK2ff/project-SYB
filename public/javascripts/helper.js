@@ -51,8 +51,23 @@ function setFilterType() {
     if (getUrlParam('type','X') != "X") typeSelect.value = getUrlParam('type','X')
 }
 
+// sets minimum value of date picker to today's date
+function checkDate () {
+    var dateField = document.getElementById("selected-date");
+    // Gets today's date
+    var todaysDate = new Date();     
+    // build dates format
+    var year = todaysDate.getFullYear(); 
+    var month = ("0" + (todaysDate.getMonth() + 1)).slice(-2); 
+    var day = ("0" + todaysDate.getDate()).slice(-2);
+    var minDate = (year +"-"+ month +"-"+ day);
+    // Set the max date value for the field to be today's date
+    dateField.setAttribute('min',minDate);
+};
+
 // global Eventlisteners
 document.addEventListener("DOMContentLoaded", () => {
-    setDefaultDate()
-    setFilterType()
+    setDefaultDate();
+    setFilterType();
+    checkDate();
 })
