@@ -5,7 +5,7 @@ let filterButton = document.getElementById("submitFilter");
 requestButton.forEach(element => {
     element.addEventListener(("click"), function(event) {
         event.preventDefault();
-        let dateInDatefilter = document.getElementById("bookingStart").value;
+        let dateInDatefilter = document.getElementById("selected-date").value;
         let clickedRequestForm = document.getElementById(event.srcElement.id)
         // Create new HTML Element
         var newInputfield = document.createElement("input");
