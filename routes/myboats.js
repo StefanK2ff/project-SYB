@@ -26,10 +26,9 @@ router.get("/edit/:id", (req, res) => {
 
 //POST     EDIT BOAT and update
 router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
-  let imageURL;
-
+  //let imageURL; 
   if(req.file ){ 
-    imageURL =  req.file.secure_url // <-- for claudinary
+    imageURL =  req.file.secure_url; // <-- for claudinary
   } 
 
   let { 
@@ -38,7 +37,7 @@ router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
     street,
     streetNumber,
     city,
-    // imageURL <-- for claudinary
+    //imageURL, //<-- for claudinary
     province,
     description,
     forMaxNumOfUsers,
@@ -56,7 +55,7 @@ console.log(req.params.listingId);
       street,
       streetNumber,
       city,
-      imageURL,
+      //imageURL, //<-- for claudinary
       province,
       description,
       forMaxNumOfUsers,
@@ -65,8 +64,7 @@ console.log(req.params.listingId);
     }}, {new:true})
   .then((listing) => {
     console.log(listing);
-   
-    
+  
     res.redirect('/myboats');
   })
   .catch((error) => {
@@ -93,9 +91,8 @@ router.post("/delete/:id", (req, res, next) => {
 // POST from new Movie Form //=>adds Boat
 router.post("/add", parser.single('photo'), (req, res) => {
   let imageURL;
-
   if(req.file ){ 
-    imageURL =  req.file.secure_url
+    imageURL =  req.file.secure_url; // <-- for claudinary
   } 
 
   let {
@@ -183,6 +180,6 @@ router.get("/", (req, res) => {
     res.render("myboats", { user})
     
   })
-})
+});
 
 module.exports = router;
