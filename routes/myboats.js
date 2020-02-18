@@ -27,7 +27,11 @@ router.get("/edit/:id", (req, res) => {
 //POST     EDIT BOAT and update
 
 router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
-  const imageURL = req.file.secure_url; // <-- for claudinary
+  let imageURL;
+
+  if(req.file ){ 
+    imageURL =  req.file.secure_url // <-- for claudinary
+  } 
 
   let { 
     name,
