@@ -30,9 +30,11 @@ router.get("/edit/:id", (req, res) => {
 });
 
 //POST     EDIT BOAT and update
-
 router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
-  const imageURL = req.file.secure_url; // <-- for claudinary
+  //let imageURL; 
+  if(req.file ){ 
+    imageURL =  req.file.secure_url; // <-- for claudinary
+  } 
 
   let {
     name,
@@ -40,7 +42,7 @@ router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
     street,
     streetNumber,
     city,
-    // imageURL <-- for claudinary
+    //imageURL, //<-- for claudinary
     province,
     description,
     forMaxNumOfUsers,
@@ -58,7 +60,7 @@ router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
         street,
         streetNumber,
         city,
-        imageURL,
+        //imageURL,
         province,
         description,
         forMaxNumOfUsers,
@@ -188,7 +190,6 @@ router.get("/", (req, res) => {
     res.render("myboats", { user})
     
   })
-})
-
+});
 
 module.exports = router;
