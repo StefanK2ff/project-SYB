@@ -26,28 +26,27 @@ router.get("/logout", (req, res) => {
   });
 });
 
-//Get homepage with all listings 
+//Get homepage with all listings that are available for a given date
 router.get('/', (req, res, next) => {
   let {type, bookingStart} = req.query;
-  console.log(req.query)
+  if(!bookingStart) { // sets default booking date to tomorrow if not given via query
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    bookingStart = tomorrow
+  }
   let user = false; // 
   if(req.session.currentUser){ // checker if user is logged in to display correct navbar
-    user = req.session.currentUser //
+    user = req.session.currentUser 
   }
- 
-  if(bookingStart || type){ // lists all listings according to filter selection
-    
-    //transform date format of form date picker to DB format
-    bookingStartTurn = bookingStart.split("-")
-    bookingStart = `${bookingStartTurn[2]}/${bookingStartTurn[1]}/${bookingStartTurn[0]}`
-    Listing.find({notAvailableDates: {$nin: [bookingStart]}})//{type}
+  if(type){ // lists all listings according to filter selection
+    Listing.find({$and: [{type}, {notAvailableDates: {$nin: [bookingStart]}}]})
     .then( (data) => {
       res.render('index', {data, user}); 
     })
     .catch( (err) => console.log(err));
   } 
   else {
-    Listing.find() // lists all available listings without filter
+    Listing.find({notAvailableDates: {$nin: [bookingStart]}}) // lists all available listings without type filter
     .then( (data) => {
       res.render('index', {data, user})  
     })
