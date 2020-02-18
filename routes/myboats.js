@@ -31,7 +31,7 @@ router.get("/edit/:id", (req, res) => {
 
 //POST     EDIT BOAT and update
 router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
-  //let imageURL; 
+  let imageURL; 
   if(req.file ){ 
     imageURL =  req.file.secure_url; // <-- for claudinary
   } 
@@ -42,8 +42,8 @@ router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
     street,
     streetNumber,
     city,
-    //imageURL, //<-- for claudinary
     province,
+    //imageURL, //<-- for claudinary
     description,
     forMaxNumOfUsers,
     notAvailableDates,
@@ -57,13 +57,16 @@ router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
       $set: {
         name,
         type,
-        street,
-        streetNumber,
-        city,
-        //imageURL,
-        province,
+        locationAddress: {
+          street,
+          streetNumber,
+          city,
+          province,
+        },
+        imageURL,
         description,
         forMaxNumOfUsers,
+        notAvailableDates,
         notAvailableDates: ArrayOfNoAvDates,
         brand //things from the form
       }
@@ -71,14 +74,12 @@ router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
       new: true
     })
     .then((listing) => {
-
       res.redirect('/myboats');
     })
     .catch((error) => {
       console.log(error);
     })
 });
-
 
 // POST deletes a listing. Then goest to myboats.hbs
 router.post("/delete/:id", (req, res, next) => {
@@ -94,11 +95,9 @@ router.post("/delete/:id", (req, res, next) => {
     });
 });
 
-
 // POST from new Movie Form //=>adds Boat
 router.post("/add", parser.single('photo'), (req, res) => {
   let imageURL;
-
   if (req.file) {
     imageURL = req.file.secure_url
   }
