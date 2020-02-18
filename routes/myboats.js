@@ -180,22 +180,6 @@ router.get("/addboat", (req, res) => {
 
 // GET listens to /myboats and shows overview
 router.get("/", (req, res) => {
-<<<<<<< HEAD
-
-  let user = false; // 
-  if (req.session.currentUser) { // checker if user is logged in to display correct navbar
-    user = req.session.currentUser //
-  }
-
-  Listing.find() // filter for "current user ID"
-    // find me all listing ID in the "listings Array" of the current user
-    //find many for these IDs in the boat collection
-    .then((result) => res.render("../views/myboats.hbs", {
-      result: result,
-      user
-    }))
-    .catch((err) => console.log(err));
-=======
 
   const {_id} = req.session.currentUser;
   
@@ -204,7 +188,6 @@ router.get("/", (req, res) => {
     res.render("myboats", { user})
     
   })
->>>>>>> eedd2947a66808a8e45c2041e23246b5a12dc18a
 })
 
 
