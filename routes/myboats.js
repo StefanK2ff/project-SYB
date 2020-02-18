@@ -180,6 +180,7 @@ router.get("/addboat", (req, res) => {
 
 // GET listens to /myboats and shows overview
 router.get("/", (req, res) => {
+<<<<<<< HEAD
 
   let user = false; // 
   if (req.session.currentUser) { // checker if user is logged in to display correct navbar
@@ -194,6 +195,16 @@ router.get("/", (req, res) => {
       user
     }))
     .catch((err) => console.log(err));
+=======
+
+  const {_id} = req.session.currentUser;
+  
+  User.findById(_id).populate('listings')
+  .then((user)=>{
+    res.render("myboats", { user})
+    
+  })
+>>>>>>> eedd2947a66808a8e45c2041e23246b5a12dc18a
 })
 
 
