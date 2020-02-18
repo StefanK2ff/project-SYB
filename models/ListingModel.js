@@ -29,6 +29,7 @@ const listingSchema = new Schema(
     },
     imageURL: {
       type: String,
+      default: "https://image.flaticon.com/icons/svg/0/300.svg",
       required: true
     },
     description: {

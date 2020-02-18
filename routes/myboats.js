@@ -87,7 +87,11 @@ router.post("/:id/delete", (req, res, next) => {
 
 // POST from new Movie Form //=>adds Boat
 router.post("/add", parser.single('photo'), (req, res) => {
-  const imageURL = req.file.secure_url; // <-- for claudinary
+  let imageURL;
+
+  if(req.file ){ 
+    imageURL =  req.file.secure_url
+  } 
 
   let {
     name,
@@ -95,7 +99,7 @@ router.post("/add", parser.single('photo'), (req, res) => {
     street,
     streetNumber,
     city,
-    //imageURL, <-- for claudinary
+    //imageURL, //<-- for claudinary
     province,
     description,
     forMaxNumOfUsers,

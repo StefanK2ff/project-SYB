@@ -18,8 +18,7 @@ router.post("/:id", (req,res) => {
         .then( (data) => res.redirect("/bookings?msg=accepted"))
         .catch( (err) => console.log(err));
     }
-    
-})
+});
 
 // POST from index to place a booking request
 router.post("/request/:id", (req, res) => {
