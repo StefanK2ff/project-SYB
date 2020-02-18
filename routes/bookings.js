@@ -17,11 +17,14 @@ router.post("/:id", (req,res) => {
     if (action === "Accept") {
         return Bookings.findByIdAndUpdate({_id: bookingId},{status: "accepted"})
             .then( (updatedBooking) => {
-                console.log("updatedListing: ", updatedListing)
+                console.log("updatedBooking: ", updatedBooking)
                 let ListingToUpdate = updatedBooking.listingId;
-                let newNotAvailableDAte = updatedBooking.bookingStart;
-                return Listing.findByIdAndUpdate({_id: ListingToUpdate},{bookingStart: newNotAvailableDAte})
-                    .then( (updatedListing) => console.log("updatedListing: ", updatedListing))
+                let newNotAvailableDate = updatedBooking.bookingStart;
+                return Listing.findByIdAndUpdate({_id: ListingToUpdate},{$addToSet: {notAvailableDates: newNotAvailableDate}})
+                    .then( (updatedListing) => {
+                        console.log("updatedListing: ", updatedListing)
+                        res.redirect("/bookings?msg=accepted")
+                    })
                     .catch( (err) => console.log(err));
             })
             .catch( (err) => console.log(err));
