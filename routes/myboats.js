@@ -8,18 +8,23 @@ const parser = require('../config/cloudinary');
 //router to get user request and render view
 // retreive data from listing from database
 router.get("/edit/:id", (req, res) => {
-  const { id } = req.params;
+  const {
+    id
+  } = req.params;
 
   let user = false; // 
-  if(req.session.currentUser){ // checker if user is logged in to display correct navbar
+  if (req.session.currentUser) { // checker if user is logged in to display correct navbar
     user = req.session.currentUser //
   }
 
   Listing.findById(id)
     .then(listing => {
       console.log(listing);
-      
-      res.render("edit-boat.hbs", { listing, user }); 
+
+      res.render("edit-boat.hbs", {
+        listing,
+        user
+      });
     })
     .catch(err => console.log(err));
 });
@@ -31,7 +36,7 @@ router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
     imageURL =  req.file.secure_url; // <-- for claudinary
   } 
 
-  let { 
+  let {
     name,
     type,
     street,
@@ -44,32 +49,34 @@ router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
     notAvailableDates,
     brand //things from the form 
   } = req.body;
-console.log('anything blablabla');
+  let ArrayOfNoAvDates = notAvailableDates.split(",");
 
-console.log(req.params.listingId);
+  Listing.updateOne({
+      _id: req.params.listingId
+    }, {
+      $set: {
+        name,
+        type,
+        street,
+        streetNumber,
+        city,
+        //imageURL,
+        province,
+        description,
+        forMaxNumOfUsers,
+        notAvailableDates: ArrayOfNoAvDates,
+        brand //things from the form
+      }
+    }, {
+      new: true
+    })
+    .then((listing) => {
 
-  Listing.updateOne({_id: req.params.listingId}, 
-    { $set: {
-      name,
-      type,
-      street,
-      streetNumber,
-      city,
-      //imageURL, //<-- for claudinary
-      province,
-      description,
-      forMaxNumOfUsers,
-      notAvailableDates,
-      brand //things from the form
-    }}, {new:true})
-  .then((listing) => {
-    console.log(listing);
-  
-    res.redirect('/myboats');
-  })
-  .catch((error) => {
-    console.log(error);
-  })
+      res.redirect('/myboats');
+    })
+    .catch((error) => {
+      console.log(error);
+    })
 });
 
 
@@ -79,7 +86,7 @@ router.post("/delete/:id", (req, res, next) => {
   console.log(listingId);
 
   Listing.findByIdAndRemove(listingId)
-    .then( () => {
+    .then(() => {
       res.redirect("/myboats");
     })
     .catch(err => {
@@ -91,9 +98,10 @@ router.post("/delete/:id", (req, res, next) => {
 // POST from new Movie Form //=>adds Boat
 router.post("/add", parser.single('photo'), (req, res) => {
   let imageURL;
-  if(req.file ){ 
-    imageURL =  req.file.secure_url; // <-- for claudinary
-  } 
+
+  if (req.file) {
+    imageURL = req.file.secure_url
+  }
 
   let {
     name,
@@ -147,7 +155,7 @@ router.post("/add", parser.single('photo'), (req, res) => {
     .catch((err) => {
       console.log(err)
       if (err.code === 11000) {
-        res.render("../views/addboat.hbs",{
+        res.render("../views/addboat.hbs", {
           errorMessage: `Boats are unique. This name is already taken. Try a new one!`
         })
       } else {
@@ -161,10 +169,12 @@ router.post("/add", parser.single('photo'), (req, res) => {
 //GET add form
 router.get("/addboat", (req, res) => {
   let user = false; // 
-  if(req.session.currentUser){ // checker if user is logged in to display correct navbar
+  if (req.session.currentUser) { // checker if user is logged in to display correct navbar
     user = req.session.currentUser //
   }
-  res.render("addboat", {user}) 
+  res.render("addboat", {
+    user
+  })
 })
 
 // GET listensto /listing/ID and show detail
