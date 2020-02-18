@@ -1,6 +1,4 @@
 
-import 'vanilla-javascript';
-
 const dateInput = document.querySelector('input[name="notAvailableDates"]');
 
 const datepicker = new Datepicker(dateInput, {
