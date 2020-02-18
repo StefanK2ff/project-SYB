@@ -51,6 +51,7 @@ function setFilterType() {
     if (getUrlParam('type','X') != "X") typeSelect.value = getUrlParam('type','X')
 }
 
+// sets minimum value of date picker to today's date
 function checkDate () {
     var dateField = document.getElementById("selected-date");
     // Gets today's date
@@ -63,7 +64,6 @@ function checkDate () {
     // Set the max date value for the field to be today's date
     dateField.setAttribute('min',minDate);
 };
-
 
 // global Eventlisteners
 document.addEventListener("DOMContentLoaded", () => {
