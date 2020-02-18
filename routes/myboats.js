@@ -71,11 +71,21 @@ console.log(req.params.listingId);
   })
 });
 
+//GET DELETE form
+router.get("/deleteboat", (req, res) => {
+  let user = false; // 
+  if(req.session.currentUser){ // checker if user is logged in to display correct navbar
+    user = req.session.currentUser //
+  }
+  res.redirect("/myboats") 
+})
+
+
 
 // POST deletes a listing. Then goest to myboats.hbs
-router.post("/:id/delete", (req, res, next) => {
+router.post("/delete/:listingId", (req, res, next) => {
 
-  Listing.findByIdAndDelete(listingID)
+  Listing.findByIdAndRemove(listingId)
     .then(result => {
       res.redirect("/myboats");
     })
