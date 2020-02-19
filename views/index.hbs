@@ -13,43 +13,90 @@
       {{/if}}
 </header>
 
-<h1>WELCOME TO SYB</h1>
-<hr>
+  {{!-- MAIN CONTAINER STARTS --}}
+<div class="container">
 
-<form action="/" method="GET">
-    <label for="type">Select Type</label>
-    <select name="type" id="type-select">
-        <option value=""> -  ALL  - </option>
-        <option value="canoe">Canoe</option>
-        <option value="kayak">Kayak</option>
-        <option value="rowing">Rowing</option>
-        <option value="inflatable">Inflatable</option>
-        <option value="paddle">Paddle</option>
-        <option value="boat">Boat</option>
-    </select>
-        <label for="start">Start date:</label>
-        <input type="date" name="bookingStart" id="selected-date">
-    <button type="submit" id="submitFilter">Submit</button>
-</form>
+  {{!--HERO SECTION --}}
+  <div class="row" >
+    <div class="col-xs-12" id="hero-section">
+      <h1>SYB(Hero section)</h1>
+      <hr>
+    </div>  
+  </div>
 
-<hr>
-<ul>
-    {{#each data}}
-        <li><img src="{{this.imageURL}}" alt="image of boat"></li>
-        <li>Owner: {{this.name}}</li>
-        <li>Type: {{this.type}}</li>
-        <li>Decription: {{this.description}}</li>
-        <li>Available to pick up from: {{this.locationAddress.street}}, 
-                                       {{this.locationAddress.streetNumber}}, 
-                                       {{this.locationAddress.city}}</li>
+  {{!-- <div class="row">
+    <div class="col-xs-12" id="page-name">
+    </div>
+  </div> --}}
+
+
+  {{!-- SELECT BOAT --}}
+  <form action="/" method="GET">
+    <div class="row">
+      <div class="col-6 form-group">
+          <label for="type">Select Type</label>
+          <select name="type" class="form-control" id="type-select">
+            <option value=""> -  ALL  - </option>
+            <option value="canoe">Canoe</option>
+            <option value="kayak">Kayak</option>
+            <option value="rowing">Rowing</option>
+            <option value="inflatable">Inflatable</option>
+            <option value="paddle">Paddle</option>
+              <option value="boat">Boat</option>
+          </select>
+        </div>
+        {{!-- SELECT DATE --}}
+        <div class="col-6 form-group">
+          <label for="start">Start date:</label>
+          <input type="date" name="bookingStart" class="form-control" id="selected-date">
+        </div>
+        <hr>   
+    </div>
+    {{!-- BUTTON FOR SUBMIT SEARCH --}}
+    <div class="row">
+      <div class="col-12 text-center">
+         <button type="submit" class="btn btn-primary btn-block" id="submitFilter">Search for SYBS</button>
+      </div>
+    </div>    
+  </form>
+  <hr>
+
+
+  {{!-- LISTINGS --}}
+  {{#each data}}
+
+  <div class="row">
+    <div class="col-xs-12 col-md-6 text-center">
+      <div class="thumbnail">
+        <img src="{{this.imageURL}}" alt="image of boat">
+      </div>
+
+      <div class="caption">
+        <h3>SYB Name: {{this.name}}</h3>
+      </div>
+
+      <div>
+        <ul style="list-style-type:none"> 
+          <li>Type: {{this.type}}</li>
+          <li>Decription: {{this.description}}</li>
+          <li>Available to pick up from: {{this.locationAddress.street}}, 
+                                        {{this.locationAddress.streetNumber}}, 
+                                        {{this.locationAddress.city}}</li>
+        </ul>
+        
         <form action="/bookings/request/{{this._id}}" method="POST" name="requestForm" id="{{this._id}}">
-            {{!-- <label for="start">Start date:</label>
-            <input type="date" name="bookingStart"> --}}
-            <button type="submit" name="request" id="{{this._id}}">Request booking</button>  
-            
+          {{!-- <label for="start">Start date:</label>
+          <input type="date" name="bookingStart"> --}}
+          <button type="submit" name="request" class="btn btn-primary" id="{{this._id}}">Request booking</button>  
         </form>
-        <hr>
-    {{/each}}
-</ul>
+      </div>
+      <hr>
+    </div>
+  </div>
+{{!-- CLOSES MAIN CONTAINER --}}
+{{/each}}
+
+
+
 
 <script src="/javascripts/helper.js"></script>
