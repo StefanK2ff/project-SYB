@@ -71,7 +71,7 @@ router.post("/delete/:id", (req, res, next) => {
     });
 });
 
-// POST from new Movie Form //=>adds Boat
+// POST from new boat Form //=>adds Boat
 router.post("/add", parser.single('photo'), (req, res) => {
   let imageURL;
   if (req.file) {
@@ -119,8 +119,8 @@ router.post("/add", parser.single('photo'), (req, res) => {
             listings: listing._id
           }
         })
-        .then((User) => {
-          console.log("User updated! ", User)
+        .then((user) => {
+          console.log("User updated! ", user)
           console.log("new listing ", listing)
           res.redirect("/myboats")
         })
