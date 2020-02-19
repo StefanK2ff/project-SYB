@@ -54,17 +54,18 @@
     {{!-- BUTTON FOR SUBMIT SEARCH --}}
     <div class="row">
       <div class="col-12 text-center">
-         <button type="submit" class="btn btn-primary btn-block" id="submitFilter">Submit</button>
+         <button type="submit" class="btn btn-primary btn-block" id="submitFilter">Search for SYBS</button>
       </div>
-    </div>       
+    </div>    
   </form>
+  <hr>
 
 
   {{!-- LISTINGS --}}
   {{#each data}}
 
   <div class="row">
-    <div class="col-xs-12 col-md-6 ">
+    <div class="col-xs-12 col-md-6 text-center">
       <div class="thumbnail">
         <img src="{{this.imageURL}}" alt="image of boat">
       </div>
@@ -74,7 +75,7 @@
       </div>
 
       <div>
-        <ul> 
+        <ul style="list-style-type:none"> 
           <li>Type: {{this.type}}</li>
           <li>Decription: {{this.description}}</li>
           <li>Available to pick up from: {{this.locationAddress.street}}, 
