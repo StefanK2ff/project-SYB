@@ -1,21 +1,19 @@
 
-<header>
+
     {{#if user}}
-        <nav class="text-center">
-          <a href="/">Home</a>
-          <a href="/bookings">Bookings</a>
-          <a href="/logout">Logout</a>
-         </nav>
+        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
+          <a class="navbar-brand" href="/">Home</a>
+          <a class="navbar-brand" href="/bookings">Bookings</a>
+          <a class="navbar-brand" href="/logout">Logout</a>
+        </nav>
       {{else}}
-        <nav>
-          <a href="/">Homepage</a>
-          <a href="/log-in">Login</a>
+        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
+          <a class="navbar-brand" href="/log-in">Login</a>
         </nav>
     {{/if}}
-</header>
+
 
 <div class="container">
-
 <h1>MY SYBS</h1>
 <hr>
 

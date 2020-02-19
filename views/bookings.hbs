@@ -1,18 +1,16 @@
-<header>
+
       {{#if user}}
-        <nav>
-          <a href="/">Home</a>
-          <a href="/bookings">Bookings</a>
-          <a href="/myboats">Listings</a>
-          <a href="/logout">Logout</a>
-         </nav>
-      {{else}}
-        <nav>
-          <a href="/">Homepage</a>
-          <a href="/log-in">Login</a>
+        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
+          <a class="navbar-brand" href="/">Home</a>
+          <a class="navbar-brand" href="/myboats">My SYBs</a>
+          <a class="navbar-brand" href="/logout">Logout</a>
         </nav>
-      {{/if}}
-</header>
+      {{else}}
+        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
+          <a class="navbar-brand" href="/log-in">Login</a>
+        </nav>
+    {{/if}}
+
 
 <h1> </h1>
 <p>here you can view listings you lent to others and what you booked for yourself</p>
