@@ -68,15 +68,39 @@ router.get("/", (req, res) => {
     if(req.session.currentUser){ // checker if user is logged in to display correct navbar
         user = req.session.currentUser //
     }
-
+    // find all bookings, that the user reqested to others and are pending and in the future
     const prom1 = Bookings.find({
-            borrowerId: req.session.currentUser._id
+            borrowerId: req.session.currentUser._id,
+            status: "pending",
+            bookingStart: {$gte: new Date()}
         })
         .then((madeBookings) => { 
-            return {madeBookings}
+            return {pendingBookings}
         })
         .catch((err) => console.log(err));
 
+    // find all bookings, that the user reqested, are accepted and upcoming
+    const prom1 = Bookings.find({
+        borrowerId: req.session.currentUser._id,
+        status: "accepted",
+        bookingStart: {$gte: new Date()}
+    })
+    .then((madeBookings) => { 
+        return {madeBookings}
+    })
+    .catch((err) => console.log(err));
+
+    // find all bookings, that the user reqested to others that are declined or in the past (request archive)
+    const prom1 = Bookings.find({
+        borrowerId: req.session.currentUser._id,
+        $or: [{status: "declined"}, {bookingStart: {$lt: new Date()}}]
+    })
+    .then((madeBookings) => { 
+        return {madeBookings}
+    })
+    .catch((err) => console.log(err));
+
+    // find all the booking request , which are pending and are addressed to current user
     const prom2 = Bookings.find({
             ownerId: req.session.currentUser._id,
             status: "pending"
@@ -85,6 +109,27 @@ router.get("/", (req, res) => {
             return {incomingBookings}
         })
         .catch((err) => console.log(err));
+
+    // find all the booking request, which are accepted and are addressed to current user
+     const prom2 = Bookings.find({
+        ownerId: req.session.currentUser._id,
+        status: "accepted"
+    })
+    .then((incomingBookings) => {
+        return {incomingBookings}
+    })
+    .catch((err) => console.log(err));
+
+    // find all the booking request, which are declined and are addressed to current user
+    const prom2 = Bookings.find({
+        ownerId: req.session.currentUser._id,
+        status: "declined"
+    })
+    .then((incomingBookings) => {
+        return {incomingBookings}
+    })
+    .catch((err) => console.log(err));
+
 
     Promise.all([prom1, prom2])
         .then((data) => {
