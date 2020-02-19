@@ -41,14 +41,8 @@
     <label for="">Province:</label>
     <input type="text" name="province" value="{{listing.locationAddress.province}}">
     <br>
-    <label for="photo">Upload Photo (JPG or PNG format only):</label>
-    <input type="file" name="photo" value="{{listing.imageURL}}">
-    <br>
     <label for="">Description:</label>
     <input type="text" name="description" value="{{listing.description}}">
-    <br>
-    <label for="">Not available at:</label>
-    <input type="text" name="notAvailableDates" placeholder="DD/MM/YYYY,DD/MM/YYYY" value="{{listing.notAvailableDates}}">
     <br>
     <label for="">Max number of users:</label>
     <input type="number" name="forMaxNumOfUsers" defaul=1 required value="{{listing.forMaxNumOfUsers}}">
@@ -56,12 +50,16 @@
     <label for="">Brand:</label>
     <input type="text" name="brand" value="{{listing.brand}}">
     <br>
-    <button type="submit">EDIT this boat</button>
+    <label for="">Not available at:</label>
+    <input type="text" name="notAvailableDates" placeholder="DD/MM/YYYY,DD/MM/YYYY" value="{{listing.notAvailableDates}}">
+    <br>
+    <label for="photo">Upload Photo (JPG or PNG format only):</label>
+    <input type="file" name="photo" value="{{listing.imageURL}}">
+    <br>
+    <button type="submit">SAVE EDITS</button>
 </form>
 
-{{!-- <a href="/myboats/deleteboat/{{boat.id}}"> DELETE BOAT</a> --}}
-
 <form action="/myboats/delete/{{listing._id}}" method="POST">       
-  <button type="submit">DELETE BOAT</button>          
+  <button type="submit">DELETE THIS LISTING</button>          
 </form>
 

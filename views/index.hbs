@@ -1,14 +1,12 @@
 <header>
       {{#if user}}
         <nav>
-          <a href="/">Homepage</a>
           <a href="/bookings">Bookings</a>
           <a href="/myboats">Listings</a>
           <a href="/logout">Logout</a>
          </nav>
       {{else}}
         <nav>
-          <a href="/">Homepage</a>
           <a href="/log-in">Login</a>
         </nav>
       {{/if}}
@@ -18,6 +16,7 @@
 <hr>
 
 <form action="/" method="GET">
+    <label for="type">Select Type</label>
     <select name="type" id="type-select">
         <option value=""> -  ALL  - </option>
         <option value="canoe">Canoe</option>
@@ -35,13 +34,13 @@
 <hr>
 <ul>
     {{#each data}}
+        <li><img src="{{this.imageURL}}" alt="image of boat"></li>
         <li>Owner: {{this.name}}</li>
         <li>Type: {{this.type}}</li>
         <li>Decription: {{this.description}}</li>
         <li>Available to pick up from: {{this.locationAddress.street}}, 
                                        {{this.locationAddress.streetNumber}}, 
                                        {{this.locationAddress.city}}</li>
-        <li><img src="{{this.imageURL}}" alt="image of boat"></li>
         <form action="/bookings/request/{{this._id}}" method="POST" name="requestForm" id="{{this._id}}">
             {{!-- <label for="start">Start date:</label>
             <input type="date" name="bookingStart"> --}}

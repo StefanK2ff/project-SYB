@@ -41,14 +41,8 @@
     <label for="">Province:</label>
     <input type="text" name="province">
     <br>
-    <label for="photo">Upload Photo (JPG or PNG format only):</label>
-    <input type="file" name="photo">
-    <br>
     <label for="">Description:</label>
     <input type="text" name="description">
-    <br>
-    <label for="">Not available at:</label>
-    <input type="text" name="notAvailableDates" placeholder="YYYY-MM-DD,YYYY-MM-DD">
     <br>
     <label for="">Max number of users:</label>
     <input type="number" name="forMaxNumOfUsers" defaul=1 required>
@@ -56,7 +50,13 @@
     <label for="">Brand:</label>
     <input type="text" name="brand">
     <br>
-    <button type="submit">ADD THIS BOAT</button>
+    <label for="">Not available at:</label>
+    <input type="text" name="notAvailableDates" placeholder="Open Calendar">
+    <br>
+    <label for="photo">Upload Photo (JPG or PNG format only):</label>
+    <input type="file" name="photo">
+    <br>
+    <button type="submit">ADD THIS SYB</button>
 </form>
 
 {{#if errorMessage}}
