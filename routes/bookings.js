@@ -133,6 +133,9 @@ router.get("/", (req, res) => {
 
         Promise.all([prom1, prom2, prom3, prom4, prom5, prom6],)
             .then((data) => {
+                // data 
+                // FOR THE REQUESTER: pendingBookings, upcomingBookings, requestArchive
+                // FOR THE SHARER: incomingBookings, upcomingShares, sharerArchive
                 let messageHandler = req.query.msg
                 switch (messageHandler) {
                     case "success":

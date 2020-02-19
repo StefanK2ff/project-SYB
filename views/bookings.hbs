@@ -15,16 +15,63 @@
 
 <h1> </h1>
 <p>here you can view listings you lent to others and what you booked for yourself</p>
-
+<!-- from data obj: data 
+FOR THE REQUESTER: pendingBookings, upcomingBookings, requestArchive
+FOR THE SHARER: incomingBookings, upcomingShares, sharerArchive --> 
 
 {{#if message}}
   <div class="alert alert-danger" role="alert">{{{message}}}</div>
 {{/if}}
 
 <hr>
-<h2>Bookings I made</h2>
+<h2>Pending bookings I made</h2>
 <ul>
-{{#each data.0.madeBookings}}
+{{#each data.0.pendingBookings}}
+    <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+    <li>Status: {{this.status}}</li>
+    <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+    <hr>
+{{/each}}
+</ul>
+<hr>
+<h2>Upcoming confirmed bookings</h2>
+<ul>
+{{#each data.1.upcomingBookings}}
+    <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+    <li>Status: {{this.status}}</li>
+    <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+    <hr>
+{{/each}}
+</ul>
+<hr>
+<h2>Past / declined requests</h2>
+<ul>
+{{#each data.2.requestArchive}}
+    <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+    <li>Status: {{this.status}}</li>
+    <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+    <hr>
+{{/each}}
+</ul>
+<hr>
+<hr>
+<h2>Bookings I have reveived for my boats that need action</h2>
+<ul>
+{{#each data.3.incomingBookings}}
+    <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+    <li>Status: {{this.status}}</li>
+    <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+    <form action="/bookings/{{this._id}}" method="POST">
+        <input type="submit" name="action" value="Accept" />
+        <input type="submit" name="action" value="Decline" />
+    </form>
+    <hr>
+{{/each}}
+</ul>
+<hr>
+<h2>Upcoming Bookings I have accepted</h2>
+<ul>
+{{#each data.4.upcomingShares}}
     <li>Booking from: <span class="date">{{this.created_at}}</span></li>
     <li>Status: {{this.status}}</li>
     <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
@@ -32,21 +79,13 @@
 {{/each}}
 </ul>
 
-<h2>Bookings have reveived for my boats and need action:</h2>
-
+<hr>
+<h2>Declined or past bookings</h2>
 <ul>
-{{#each data.1.incomingBookings}}
+{{#each data.5.sharerArchive}}
     <li>Booking from: <span class="date">{{this.created_at}}</span></li>
     <li>Status: {{this.status}}</li>
     <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-    <!-- <li><a href="/bookings/{{this._id}}/deny">Deny request</a></li>
-    <li><a href="/bookings/{{this._id}}/accept">Deny request</a></li> -->
-    <form action="/bookings/{{this._id}}" method="POST">
-        <input type="submit" name="action" value="Accept" />
-        <input type="submit" name="action" value="Decline" />
-    </form>
     <hr>
-
-
 {{/each}}
 </ul>
