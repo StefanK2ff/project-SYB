@@ -1,19 +1,5 @@
+{{>navigation}}
 
-    {{#if user}}
-        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
-          <a class="navbar-brand" href="/">Home</a>
-          <a class="navbar-brand" href="/bookings">Bookings</a>
-          <a class="navbar-brand" href="/myboats">My SYBs</a>
-          <a class="navbar-brand" href="/logout">Logout</a>
-         </nav>
-      {{else}}
-        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
-          <a class="navbar-brand" href="/log-in">Login</a>
-        </nav>
-      {{/if}}
-
-
-<div class="container">
   <h1>ADD A SYB</h1>
   <form action="/myboats/add" method="post" enctype="multipart/form-data" class="needs-validation">
 
@@ -39,7 +25,6 @@
       </div>
     </div>
   </div>
-
 
   <div class="row">
     <div class="col-8">
@@ -109,7 +94,6 @@
 
       <button type="submit" class="btn btn-primary">ADD THIS SYB</button>
   </form>
-</div>
 
 {{#if errorMessage}}
 <p>{{errorMessage}}</p>

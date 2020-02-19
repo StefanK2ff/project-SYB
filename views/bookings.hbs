@@ -1,91 +1,77 @@
+{{>navigation}}
 
-      {{#if user}}
-        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
-          <a class="navbar-brand" href="/">Home</a>
-          <a class="navbar-brand" href="/bookings">Bookings</a>
-          <a class="navbar-brand" href="/myboats">My SYBs</a>
-          <a class="navbar-brand" href="/logout">Logout</a>
-         </nav>
-      {{else}}
-        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
-          <a class="navbar-brand" href="/log-in">Login</a>
-        </nav>
-      {{/if}}
-
-
-<h1> </h1>
 <p>here you can view listings you lent to others and what you booked for yourself</p>
 <!-- from data obj: data 
 FOR THE REQUESTER: pendingBookings, upcomingBookings, requestArchive
-FOR THE SHARER: incomingBookings, upcomingShares, sharerArchive --> 
+FOR THE SHARER: incomingBookings, upcomingShares, sharerArchive -->
 
 {{#if message}}
-  <div class="alert alert-danger" role="alert">{{{message}}}</div>
+<div class="alert alert-primary" role="alert">{{{message}}}</div>
 {{/if}}
 
 <hr>
 <h2>Pending bookings I made</h2>
 <ul>
-{{#each data.0.pendingBookings}}
-    <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-    <li>Status: {{this.status}}</li>
-    <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-    <hr>
-{{/each}}
+  {{#each data.0.pendingBookings}}
+  <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+  <li>Status: {{this.status}}</li>
+  <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+  <hr>
+  {{/each}}
 </ul>
 <hr>
 <h2>Upcoming confirmed bookings</h2>
 <ul>
-{{#each data.1.upcomingBookings}}
-    <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-    <li>Status: {{this.status}}</li>
-    <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-    <hr>
-{{/each}}
+  {{#each data.1.upcomingBookings}}
+  <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+  <li>Status: {{this.status}}</li>
+  <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+  <hr>
+  {{/each}}
 </ul>
 <hr>
 <h2>Past / declined requests</h2>
 <ul>
-{{#each data.2.requestArchive}}
-    <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-    <li>Status: {{this.status}}</li>
-    <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-    <hr>
-{{/each}}
+  {{#each data.2.requestArchive}}
+  <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+  <li>Status: {{this.status}}</li>
+  <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+  <hr>
+  {{/each}}
 </ul>
 <hr>
 <hr>
 <h2>Bookings I have reveived for my boats that need action</h2>
 <ul>
-{{#each data.3.incomingBookings}}
-    <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-    <li>Status: {{this.status}}</li>
-    <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-    <form action="/bookings/{{this._id}}" method="POST">
-        <input type="submit" name="action" value="Accept" />
-        <input type="submit" name="action" value="Decline" />
-    </form>
-    <hr>
-{{/each}}
+  {{#each data.3.incomingBookings}}
+  <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+  <li>Status: {{this.status}}</li>
+  <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+  <form action="/bookings/{{this._id}}" method="POST">
+    <input type="submit" name="action" value="Accept" />
+    <input type="submit" name="action" value="Decline" />
+  </form>
+  <hr>
+  {{/each}}
 </ul>
 <hr>
 <h2>Upcoming Bookings I have accepted</h2>
 <ul>
-{{#each data.4.upcomingShares}}
-    <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-    <li>Status: {{this.status}}</li>
-    <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-    <hr>
-{{/each}}
+  {{#each data.4.upcomingShares}}
+  <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+  <li>Status: {{this.status}}</li>
+  <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+  <hr>
+  {{/each}}
 </ul>
 
 <hr>
 <h2>Declined or past bookings</h2>
 <ul>
-{{#each data.5.sharerArchive}}
-    <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-    <li>Status: {{this.status}}</li>
-    <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-    <hr>
-{{/each}}
+  {{#each data.5.sharerArchive}}
+  <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+  <li>Status: {{this.status}}</li>
+  <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+  <hr>
+  {{/each}}
 </ul>
