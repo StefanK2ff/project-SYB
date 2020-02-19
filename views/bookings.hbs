@@ -36,237 +36,151 @@
   {{!-- ACCORDION BEGINS --}}
   <div class="accordion" id="accordionExample">
   
-  {{!-- PENDING BOOKINGS I MADE --}}
-  <div class="card text-center">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Pending bookings I made
-        </button>
-      </h5>
+    {{!-- PENDING BOOKINGS I MADE --}}
+    <div class="card text-center">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Pending bookings I made
+          </button>
+        </h5>
+      </div>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+          <ul>
+            {{#each data.0.pendingBookings}}
+              <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+              <li>Status: {{this.status}}</li>
+              <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+              <hr>
+            {{/each}}
+          </ul>         
+        </div>
+      </div>
     </div>
 
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-        <ul>
-          {{#each data.0.pendingBookings}}
+    {{!-- UPCOMING CONFIRMED BOOKINGS --}}
+    <div class="card text-center">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Upcoming confirmed bookings
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+          <ul>
+            {{#each data.1.upcomingBookings}}
+              <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+              <li>Status: {{this.status}}</li>
+              <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+              <hr>
+            {{/each}}
+          </ul>       
+        </div>
+      </div>
+    </div>
+
+    {{!-- PAST/DECLINED REQUESTS --}}
+    <div class="card text-center">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Past / declined requests
+          </button>
+        </h5>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+        <div class="card-body">
+          <ul>
+          {{#each data.2.requestArchive}}
             <li>Booking from: <span class="date">{{this.created_at}}</span></li>
             <li>Status: {{this.status}}</li>
             <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
             <hr>
           {{/each}}
-        </ul>         
+          </ul>      
+        </div>
       </div>
     </div>
-  </div>
 
-  {{!-- UPCOMING CONFIRMED BOOKINGS --}}
-  <div class="card text-center">
-    <div class="card-header" id="headingTwo">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Upcoming confirmed bookings
-        </button>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-        <ul>
-          {{#each data.1.upcomingBookings}}
-            <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-            <li>Status: {{this.status}}</li>
-            <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-            <hr>
-          {{/each}}
-        </ul>       
+    {{!-- Bookings I have reveived for my boats that need action --}}
+    <div class="card text-center">
+      <div class="card-header" id="headingFour">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            Bookings I have reveived for my boats that need action
+          </button>
+        </h5>
+      </div>
+      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+        <div class="card-body">
+          <ul>
+            {{#each data.3.incomingBookings}}
+              <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+              <li>Status: {{this.status}}</li>
+              <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+              <form action="/bookings/{{this._id}}" method="POST">
+                  <input type="submit" name="action" value="Accept" />
+                  <input type="submit" name="action" value="Decline" />
+              </form>
+              <hr>
+            {{/each}}
+          </ul>       
+        </div>
       </div>
     </div>
-  </div>
 
-  {{!-- PAST/DECLINED REQUESTS --}}
-  <div class="card text-center">
-    <div class="card-header" id="headingThree">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Past / declined requests
-        </button>
-      </h5>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-      <div class="card-body">
-        <ul>
-        {{#each data.2.requestArchive}}
-          <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-          <li>Status: {{this.status}}</li>
-          <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-          <hr>
-        {{/each}}
-        </ul>      
+    {{!-- Upcoming Bookings I have accepted --}}
+    <div class="card text-center">
+      <div class="card-header" id="headingFive">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+            Upcoming Bookings I have accepted
+          </button>
+        </h5>
+      </div>
+      <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+        <div class="card-body">
+          <ul>
+            {{#each data.4.upcomingShares}}
+              <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+              <li>Status: {{this.status}}</li>
+              <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+              <hr>
+            {{/each}}
+          </ul>       
+        </div>
       </div>
     </div>
-  </div>
 
-  {{!-- Bookings I have reveived for my boats that need action --}}
-  <div class="card text-center">
-    <div class="card-header" id="headingFour">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-          Bookings I have reveived for my boats that need action
-        </button>
-      </h5>
-    </div>
-    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-      <div class="card-body">
-        <ul>
-          {{#each data.3.incomingBookings}}
-            <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-            <li>Status: {{this.status}}</li>
-            <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-            <form action="/bookings/{{this._id}}" method="POST">
-                <input type="submit" name="action" value="Accept" />
-                <input type="submit" name="action" value="Decline" />
-            </form>
-            <hr>
-          {{/each}}
-        </ul>       
+    {{!-- Declined or past bookings --}}
+    <div class="card text-center">
+      <div class="card-header" id="headingSix">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+            Declined or past bookings
+          </button>
+        </h5>
+      </div>
+      <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+        <div class="card-body">
+          <ul>
+            {{#each data.5.sharerArchive}}
+              <li>Booking from: <span class="date">{{this.created_at}}</span></li>
+              <li>Status: {{this.status}}</li>
+              <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
+              <hr>
+            {{/each}}
+          </ul>
+        </div>
       </div>
     </div>
+
+  {{!-- ACCORDEON CLOSES HERE --}}
   </div>
-
-{{!-- Upcoming Bookings I have accepted --}}
-  <div class="card text-center">
-    <div class="card-header" id="headingFive">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-          Upcoming Bookings I have accepted
-        </button>
-      </h5>
-    </div>
-    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-      <div class="card-body">
-        <ul>
-          {{#each data.4.upcomingShares}}
-            <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-            <li>Status: {{this.status}}</li>
-            <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-            <hr>
-          {{/each}}
-        </ul>       
-      </div>
-    </div>
-  </div>
-
-  {{!-- Declined or past bookings --}}
-  <div class="card text-center">
-    <div class="card-header" id="headingSix">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-          Declined or past bookings
-        </button>
-      </h5>
-    </div>
-    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
-      <div class="card-body">
-        <ul>
-          {{#each data.5.sharerArchive}}
-            <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-            <li>Status: {{this.status}}</li>
-            <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-            <hr>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  </div>
-
-{{!-- ACCORDEON CLOSES HERE --}}
-</div>
-
-
-
-
-
-
-  {{!-- OLD STUFF IS FROM HERE ON --}}
-{{!--  --}}
-{{!--  --}}
-      <h1> </h1>
-      <p>here you can view listings you lent to others and what you booked for yourself</p>
-      <!-- from data obj: data 
-      FOR THE REQUESTER: pendingBookings, upcomingBookings, requestArchive
-      FOR THE SHARER: incomingBookings, upcomingShares, sharerArchive --> 
-
-
-
-      <hr>
-      <h2>Pending bookings I made</h2>
-      <ul>
-      {{#each data.0.pendingBookings}}
-          <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-          <li>Status: {{this.status}}</li>
-          <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-          <hr>
-      {{/each}}
-      </ul>
-
-
-      <hr>
-      <h2>Upcoming confirmed bookings</h2>
-      <ul>
-      {{#each data.1.upcomingBookings}}
-          <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-          <li>Status: {{this.status}}</li>
-          <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-          <hr>
-      {{/each}}
-      </ul>
-      <hr>
-      <h2>Past / declined requests</h2>
-      <ul>
-      {{#each data.2.requestArchive}}
-          <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-          <li>Status: {{this.status}}</li>
-          <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-          <hr>
-      {{/each}}
-      </ul>
-      <hr>
-      <hr>
-      <h2>Bookings I have reveived for my boats that need action</h2>
-      <ul>
-      {{#each data.3.incomingBookings}}
-          <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-          <li>Status: {{this.status}}</li>
-          <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-          <form action="/bookings/{{this._id}}" method="POST">
-              <input type="submit" name="action" value="Accept" />
-              <input type="submit" name="action" value="Decline" />
-          </form>
-          <hr>
-      {{/each}}
-      </ul>
-      <hr>
-      <h2>Upcoming Bookings I have accepted</h2>
-      <ul>
-      {{#each data.4.upcomingShares}}
-          <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-          <li>Status: {{this.status}}</li>
-          <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-          <hr>
-      {{/each}}
-      </ul>
-
-      <hr>
-      <h2>Declined or past bookings</h2>
-      <ul>
-      {{#each data.5.sharerArchive}}
-          <li>Booking from: <span class="date">{{this.created_at}}</span></li>
-          <li>Status: {{this.status}}</li>
-          <li>Day of Booking: <span class="date">{{this.bookingStart}}</span></li>
-          <hr>
-      {{/each}}
-      </ul>
-
+  <hr>
   
-    {{!-- MAIN CONTAINER ENDS HERE --}}
+{{!-- MAIN CONTAINER ENDS HERE --}}
 </div>
