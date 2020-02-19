@@ -30,28 +30,33 @@
 
 
   {{!-- SELECT BOAT --}}
-<form action="/" method="GET">
-  <div class="row">
-     <div class="col-6 form-group">
-        <label for="type">Select Type</label>
-        <select name="type" class="form-control" id="type-select">
-          <option value=""> -  ALL  - </option>
-          <option value="canoe">Canoe</option>
-          <option value="kayak">Kayak</option>
-          <option value="rowing">Rowing</option>
-          <option value="inflatable">Inflatable</option>
-          <option value="paddle">Paddle</option>
-            <option value="boat">Boat</option>
-        </select>
-      </div>
-      {{!-- SELECT DATE --}}
+  <form action="/" method="GET">
+    <div class="row">
       <div class="col-6 form-group">
-        <label for="start">Start date:</label>
-        <input type="date" name="bookingStart" class="form-control" id="selected-date">
-        <button type="submit" class="btn btn-primary " id="submitFilter">Submit</button>
-      </div>
-      {{!-- <hr>    --}}
+          <label for="type">Select Type</label>
+          <select name="type" class="form-control" id="type-select">
+            <option value=""> -  ALL  - </option>
+            <option value="canoe">Canoe</option>
+            <option value="kayak">Kayak</option>
+            <option value="rowing">Rowing</option>
+            <option value="inflatable">Inflatable</option>
+            <option value="paddle">Paddle</option>
+              <option value="boat">Boat</option>
+          </select>
+        </div>
+        {{!-- SELECT DATE --}}
+        <div class="col-6 form-group">
+          <label for="start">Start date:</label>
+          <input type="date" name="bookingStart" class="form-control" id="selected-date">
+        </div>
+        <hr>   
     </div>
+    {{!-- BUTTON FOR SUBMIT SEARCH --}}
+    <div class="row">
+      <div class="col-12 text-center">
+         <button type="submit" class="btn btn-primary btn-block" id="submitFilter">Submit</button>
+      </div>
+    </div>       
   </form>
 
 
