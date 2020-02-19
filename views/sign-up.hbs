@@ -4,16 +4,30 @@
   </nav>
 </header>
 
-<form action="/sign-up" method="post">
 
-  <label for="">Email</label>
-  <input type="email" name="email">
+<div class="container-sm">
+  <h1>Sign Up</h1>
+  <form action="/sign-up" method="post" class="needs-validation">
 
-  <label for="">Password</label>
-  <input type="password" name="password">
+  <div class="form-group row">
+    <div class="col">
+      <label for="">Email</label>
+      <input type="email" name="email" required class="form-control" placeholder="user@syb.com">
+    </div>
+  </div>
 
-  <button>Sign up</button>
-</form>
+  <div class="form-group row">
+    <div class="col">
+        <label for="">Password</label>
+        <input type="password" name="password" class="form-control">
+    </div>
+  </div>
+
+        <button class="btn btn-primary">Sign up</button>
+        <p class="form-group">Already have an account? <a href="/log-in">Login!</a></p>
+      </form>
+</div>
+
 
 {{#if errorMessage}}
 <p>{{errorMessage}}</p>
