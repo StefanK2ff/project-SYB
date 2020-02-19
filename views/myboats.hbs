@@ -1,7 +1,7 @@
 
 
     {{#if user}}
-        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
+        <nav class="navbar navbar-dark navbar-color">
           <a class="navbar-brand" href="/">Home</a>
           <a class="navbar-brand" href="/bookings">Bookings</a>
           <a class="navbar-brand" href="/myboats">My SYBs</a>
@@ -27,7 +27,7 @@
   <form action="/myboats/addboat" method="GET">     
     <div class="row">
       <div class="col-12 text-center">
-        <button type="submit" class="btn btn-primary btn-block">ADD A LISTING</button>
+        <button type="submit" class="btn cta-top btn-block">ADD A LISTING</button>
       </div>
     </div>
   </form> 
@@ -45,7 +45,7 @@
         <h5 class="card-title mt-3">{{this.name}}</h5>
         <h6 class="card-subtitle mb-2 mt-3 text-muted">{{this.brand}}</h6>
         <p class="card-text mt-3 pl-2 pr-2">{{this.type}} for {{this.forMaxNumOfUsers}} user(s). Pickup near {{this.locationAddress.street}}, {{this.locationAddress.city}}.</p>
-        <a href="/myboats/edit/{{this._id}}" class="btn btn-primary m-3">EDIT BOAT</a>
+        <a href="/myboats/edit/{{this._id}}" class="btn cta-bottom m-3">EDIT THIS LISTING</a>
         <!-- <a href="#" class="card-link">Add to favorites (soon)</a> --> 
       </div>
     </div>

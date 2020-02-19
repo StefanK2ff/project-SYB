@@ -1,5 +1,24 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+img{
+  align-self: center;
+  max-width: 50%;
+}
+
+.navbar-color{
+  background-color: #69B1FF;
+}
+
+.cta-top{
+  color: white;
+  background-color: #548ECC;
+}
+
+.cta-bottom{
+  background-color: #C3C6C9;
 }
 
 
@@ -8,5 +27,4 @@ body {
     width: 40%;
     margin: 0 auto;
   }
-
  }
