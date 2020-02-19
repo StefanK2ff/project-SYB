@@ -1,16 +1,18 @@
-<header>
+
+
+
       {{#if user}}
-        <nav class="text-center">
-          <a href="/bookings">Bookings</a>
-          <a href="/myboats">Listings</a>
-          <a href="/logout">Logout</a>
+        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
+          <a class="navbar-brand" href="/bookings">Bookings</a>
+          <a class="navbar-brand" href="/myboats">My SYBs</a>
+          <a class="navbar-brand" href="/logout">Logout</a>
          </nav>
       {{else}}
-        <nav>
-          <a href="/log-in">Login</a>
+        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
+          <a class="navbar-brand" href="/log-in">Login</a>
         </nav>
       {{/if}}
-</header>
+
 
   {{!-- MAIN CONTAINER STARTS --}}
 <div class="container">
@@ -18,7 +20,7 @@
   {{!--HERO SECTION --}}
   <div class="row" >
     <div class="col-12 text-center" id="hero-section">
-      <h1>(Hero section)</h1>
+      <h1>Welcome to SYB</h1>
       <hr>
     </div>  
   </div>

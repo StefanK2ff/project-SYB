@@ -1,7 +1,7 @@
 <header>
     {{#if user}}
         <nav>
-          <a href="/">Homepage</a>
+          <a href="/">Home</a>
           <a href="/bookings">Bookings</a>
           <a href="/myboats">Listings</a>
           <a href="/logout">Logout</a>
@@ -14,52 +14,112 @@
     {{/if}}
 </header>
 
-<form action="/myboats/edit/{{listing._id}}" method="POST" enctype="multipart/form-data">
-    <label for="">Boat name:</label>
-    <input type="text" name="name" required value="{{listing.name}}">
-    <br>
-    <label for="">Type:</label>
-    <input list="type_options" name="type" required value="{{listing.type}}">
-    <datalist id="type_options">
-        <option value="canoe">Canoe</option>
-        <option value="kayak">Kayak</option>
-        <option value="rowing">Rowing</option>
-        <option value="inflatable">Inflatable</option>
-        <option value="paddle">Paddle</option>
-        <option value="boat">Boat</option>
-    </datalist>
-    <br>
-    <label for="">Street:</label>
-    <input type="text" name="street" required value="{{listing.locationAddress.street}}">
-    <br>
-    <label for="">Street Number:</label>
-    <input type="text" name="streetNumber" required value="{{listing.locationAddress.streetNumber}}">
-    <br>
-    <label for="">City:</label>
-    <input type="text" name="city" required value="{{listing.locationAddress.city}}">
-    <br>
-    <label for="">Province:</label>
-    <input type="text" name="province" value="{{listing.locationAddress.province}}">
-    <br>
-    <label for="">Description:</label>
-    <input type="text" name="description" value="{{listing.description}}">
-    <br>
-    <label for="">Max number of users:</label>
-    <input type="number" name="forMaxNumOfUsers" defaul=1 required value="{{listing.forMaxNumOfUsers}}">
-    <br>
-    <label for="">Brand:</label>
-    <input type="text" name="brand" value="{{listing.brand}}">
-    <br>
-    <label for="">Not available at:</label>
-    <input type="text" name="notAvailableDates" placeholder="DD/MM/YYYY,DD/MM/YYYY" value="{{listing.notAvailableDates}}">
-    <br>
-    <label for="photo">Upload Photo (JPG or PNG format only):</label>
-    <input type="file" name="photo" value="{{listing.imageURL}}">
-    <br>
-    <button type="submit">SAVE EDITS</button>
-</form>
+<div class="container">
+  <h1>EDIT THIS SYB</h1>
+  <form action="/myboats/edit/{{listing._id}}" method="POST" enctype="multipart/form-data">
+      
+    <div class="row">
+      <div class="col-8">
+        <div class="form-group">
+          <label for="">Boat name:</label>
+          <input type="text" name="name" required value="{{listing.name}}" class="form-control">
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-group">
+          <label for="">Type:</label>
+          <input list="type_options" name="type" required value="{{listing.type}}" class="form-control" placeholder="select">
+          <datalist id="type_options">
+            <option value="canoe">Canoe</option>
+            <option value="kayak">Kayak</option>
+            <option value="rowing">Rowing</option>
+            <option value="inflatable">Inflatable</option>
+            <option value="paddle">Paddle</option>
+            <option value="boat">Boat</option>
+          </datalist>
+         </div>
+     </div>
+    </div>
+      
+      <div class="row">
+        <div class="col-8">
+         <div class="form-group">
+          <label for="">Street:</label>
+          <input type="text" name="street" required value="{{listing.locationAddress.street}}" class="form-control">
+         </div>
+       </div>
+       <div class="col-4">
+        <div class="form-group">
+          <label for="">Street #:</label>
+          <input type="text" name="streetNumber" required value="{{listing.locationAddress.streetNumber}}" class="form-control">
+        </div>
+       </div>
+      </div>
 
-<form action="/myboats/delete/{{listing._id}}" method="POST">       
-  <button type="submit">DELETE THIS LISTING</button>          
-</form>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="">City:</label>
+            <input type="text" name="city" required value="{{listing.locationAddress.city}}" class="form-control">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="">Province:</label>
+            <input type="text" name="province" value="{{listing.locationAddress.province}}" class="form-control">
+          </div>
+        </div>
+        </div>
 
+      <div class="form-group row">
+        <div class="col">
+          <label for="">Description:</label>
+          <input type="textarea" name="description" value="{{listing.description}}" class="form-control">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+         <div class="form-group">
+          <label for="">Max users:</label>
+          <input type="number" name="forMaxNumOfUsers" min="1" required value="{{listing.forMaxNumOfUsers}}" class="form-control">
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="form-group">
+          <label for="">Brand:</label>
+          <input type="text" name="brand" value="{{listing.brand}}" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col">
+        <label for="">Not available at:</label>
+        <input type="text" name="notAvailableDates" placeholder="DD/MM/YYYY,DD/MM/YYYY" value="{{listing.notAvailableDates}}" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col"> 
+        <label for="photo">Upload Photo (JPG or PNG format only):</label>
+        <input type="file" name="photo" value="{{listing.imageURL}}" class="form-control-file">
+       </div>
+    </div>
+
+      <button type="submit" class="btn btn-primary">SAVE EDITS</button>
+  </form>
+  <br>
+
+   <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <form action="/myboats/delete/{{listing._id}}" method="POST">       
+          <button type="submit" class="btn btn-danger">DELETE THIS SYB</button>          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 

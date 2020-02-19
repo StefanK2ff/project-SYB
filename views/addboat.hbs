@@ -1,63 +1,114 @@
-<header>
+
     {{#if user}}
-        <nav>
-          <a href="/">Homepage</a>
-          <a href="/bookings">Bookings</a>
-          <a href="/myboats">Listings</a>
-          <a href="/logout">Logout</a>
+        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
+          <a class="navbar-brand" href="/home">Home</a>
+          <a class="navbar-brand" href="/bookings">Bookings</a>
+          <a class="navbar-brand" href="/logout">Logout</a>
          </nav>
       {{else}}
-        <nav>
-          <a href="/">Homepage</a>
-          <a href="/log-in">Login</a>
+        <nav class="navbar navbar-dark" style="background-color: #80b0ff">
+          <a class="navbar-brand" href="/log-in">Login</a>
         </nav>
     {{/if}}
-</header>
 
-<form action="/myboats/add" method="post" enctype="multipart/form-data">
-    <label for="">Boat name:</label>
-    <input type="text" name="name" required>
-    <br>
-    <label for="">Type:</label>
-    <input list="type_options" name="type" required>
-    <datalist id="type_options">
-        <option value="canoe">Canoe</option>
-        <option value="kayak">Kayak</option>
-        <option value="rowing">Rowing</option>
-        <option value="inflatable">Inflatable</option>
-        <option value="paddle">Paddle</option>
-        <option value="boat">Boat</option>
-    </datalist>
-    <br>
-    <label for="">Street:</label>
-    <input type="text" name="street" required>
-    <br>
-    <label for="">Street Number:</label>
-    <input type="text" name="streetNumber" required>
-    <br>
-    <label for="">City:</label>
-    <input type="text" name="city" required>
-    <br>
-    <label for="">Province:</label>
-    <input type="text" name="province">
-    <br>
+
+<div class="container">
+  <h1>ADD A SYB</h1>
+  <form action="/myboats/add" method="post" enctype="multipart/form-data" class="needs-validation">
+
+    <div class="row">
+      <div class="col-8">
+        <div class="form-group">
+        <label for="">Boat name:</label>
+        <input type="text" name="name" required class="form-control" placeholder="make it unique" autocomplete="off">
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label for="">Type:</label>
+        <input list="type_options" name="type" required class="form-control" placeholder="select">
+        <datalist id="type_options">
+            <option value="canoe">Canoe</option>
+            <option value="kayak">Kayak</option>
+            <option value="rowing">Rowing</option>
+            <option value="inflatable">Inflatable</option>
+            <option value="paddle">Paddle</option>
+            <option value="boat">Boat</option>
+        </datalist>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-8">
+      <div class="form-group">
+        <label for="">Street:</label>
+        <input type="text" name="street" required class="form-control" autocomplete="off">
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label for="">House #:</label>
+        <input type="text" name="streetNumber" required class="form-control" autocomplete="off">
+      </div>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <div class="form-group">
+        <label for="">City:</label>
+        <input type="text" name="city" required class="form-control" autocomplete="off">
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label for="">Province:</label>
+        <input type="text" name="province" class="form-control" autocomplete="off">
+      </div>
+    </div>
+</div>
+
+<div class="form-group row">
+  <div class="col">
     <label for="">Description:</label>
-    <input type="text" name="description">
-    <br>
-    <label for="">Max number of users:</label>
-    <input type="number" name="forMaxNumOfUsers" defaul=1 required>
-    <br>
-    <label for="">Brand:</label>
-    <input type="text" name="brand">
-    <br>
-    <label for="">Not available at:</label>
-    <input type="text" name="notAvailableDates" placeholder="Open Calendar">
-    <br>
-    <label for="photo">Upload Photo (JPG or PNG format only):</label>
-    <input type="file" name="photo">
-    <br>
-    <button type="submit">ADD THIS SYB</button>
-</form>
+    <input type="textarea" name="description" class="form-control" autocomplete="off">
+    </div>
+</div>
+
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <label for="">Max users:</label>
+        <input type="number" name="forMaxNumOfUsers" min="1" value="1" required class="form-control">
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="form-group">
+        <label for="">Brand:</label>
+        <input type="text" name="brand" class="form-control" autocomplete="off">
+      </div>
+    </div>
+  </div>
+
+    <div class="form-group row">
+      <div class="col">
+        <label for="">Not available at:</label>
+        <input type="text" name="notAvailableDates" placeholder="Open Calendar" class="form-control" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col">
+        <label for="photo">Upload Photo (JPG or PNG format only):</label>
+        <input type="file" name="photo" class="form-control-file" autocomplete="off">
+      </div>
+    </div>
+
+      <button type="submit" class="btn btn-primary">ADD THIS SYB</button>
+  </form>
+</div>
 
 {{#if errorMessage}}
 <p>{{errorMessage}}</p>

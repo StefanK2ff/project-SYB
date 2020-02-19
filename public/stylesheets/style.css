@@ -8,10 +8,10 @@ a {
 }
 
 
-#page-name {
+@media screen and (min-width: 575px ) { 
+  .auth-form{
+    width: 40%;
+    margin: 0 auto;
+  }
 
-}
-
-#hero-section {
-  
-}
+ }
