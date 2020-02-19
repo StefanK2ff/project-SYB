@@ -23,13 +23,6 @@
     </div>  
   </div>
 
-    {{!-- PAGE NAME --}}
-  {{!-- <div class="row">
-    <div class="col-12 text-center" id="page-name">
-      <h2>My SYBS</h2>
-    </div>
-  </div> --}}
-
 {{!-- ADD A LISTING BUTTON --}}
   <form action="/myboats/addboat" method="GET">     
     <div class="row">
@@ -39,32 +32,22 @@
     </div>
   </form> 
   <hr>
+
+
   
 {{!-- MY LISTINGS SECTION --}}
+  {{!-- LISTINGS --}}
   <div class="row">
     {{#each user.listings}}
-    <div class="col-xs-12 col-xl-6 text-center">
-
-      <div class="thumbnail">
-        <img src="{{this.imageURL}}" alt="image of boat">
+    <div class="col-s-12 col-md-6 text-center">
+      <div class="card result-card mt-3">
+        <img src="{{this.imageURL}}" class="card-img-top backup mt-3" alt="Image of {{this.name}}">
+        <h5 class="card-title mt-3">{{this.name}}</h5>
+        <h6 class="card-subtitle mb-2 mt-3 text-muted">{{this.brand}}</h6>
+        <p class="card-text mt-3 pl-2 pr-2">{{this.type}} for {{this.forMaxNumOfUsers}} user(s). Pickup near {{this.locationAddress.street}}, {{this.locationAddress.city}}.</p>
+        <a href="/myboats/edit/{{this._id}}" class="btn btn-primary m-3">EDIT BOAT</a>
+        <!-- <a href="#" class="card-link">Add to favorites (soon)</a> --> 
       </div>
-    
-      <div class="caption">
-        <h4>SYB Name: {{this.name}}</h4>
-      </div>
-
-      <div>
-        <ul style="list-style-type:none"> 
-          <li>Type: {{this.type}}</li>
-          <li>Decription: {{this.description}}</li>
-          <li>Available to pick up from: {{this.locationAddress.street}}, 
-                                        {{this.locationAddress.streetNumber}}, 
-                                        {{this.locationAddress.city}}</li>
-        </ul>
-        
-        <a href="/myboats/edit/{{this._id}}" class="btn btn-secondary">EDIT BOAT</a>
-      </div>
-      <hr>
     </div>
     {{/each}}
   </div>
