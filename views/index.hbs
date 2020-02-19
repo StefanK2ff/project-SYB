@@ -33,7 +33,7 @@
     {{!-- BUTTON FOR SUBMIT SEARCH --}}
     <div class="row">
       <div class="col-12 text-center">
-        <button type="submit" class="btn btn-primary btn-block" id="submitFilter">Search for SYBs</button>
+        <button type="submit" class="btn cta-top btn-block" id="submitFilter">Search for SYBs</button>
       </div>
     </div>
   </form>
@@ -50,7 +50,7 @@
         <h6 class="card-subtitle mb-2 mt-3 text-muted">{{this.brand}}</h6>
         <p class="card-text mt-3 pl-2 pr-2">{{this.type}} for {{this.forMaxNumOfUsers}} user(s). Pickup near {{this.locationAddress.street}}, {{this.locationAddress.city}}.</p>
         <form action="/bookings/request/{{this._id}}" method="POST" name="requestForm" id="{{this._id}}">
-          <button type="submit" name="request" class="btn btn-primary mt-3 mb-3" id="{{this._id}}">Request booking</button>
+          <button type="submit" name="request" class="btn cta-bottom mt-3 mb-3" id="{{this._id}}">Request booking</button>
         </form>
         <!-- <a href="#" class="card-link">Add to favorites (soon)</a> --> 
       </div>

@@ -9,28 +9,29 @@
 </div>
 
 {{!-- ADD A LISTING BUTTON --}}
-<form action="/myboats/addboat" method="GET">
-  <div class="row">
-    <div class="col-12 text-center">
-      <button type="submit" class="btn btn-primary btn-block">ADD A LISTING</button>
+  <form action="/myboats/addboat" method="GET">     
+    <div class="row">
+      <div class="col-12 text-center">
+        <button type="submit" class="btn cta-top btn-block">ADD A LISTING</button>
+      </div>
     </div>
   </div>
 </form>
 <hr>
 
 {{!-- MY LISTINGS SECTION --}}
-{{!-- LISTINGS --}}
-<div class="row">
-  {{#each user.listings}}
-  <div class="col-s-12 col-md-6 text-center">
-    <div class="card result-card mt-3">
-      <img src="{{this.imageURL}}" class="card-img-top backup mt-3" alt="Image of {{this.name}}">
-      <h5 class="card-title mt-3">{{this.name}}</h5>
-      <h6 class="card-subtitle mb-2 mt-3 text-muted">{{this.brand}}</h6>
-      <p class="card-text mt-3 pl-2 pr-2">{{this.type}} for {{this.forMaxNumOfUsers}} user(s). Pickup near
-        {{this.locationAddress.street}}, {{this.locationAddress.city}}.</p>
-      <a href="/myboats/edit/{{this._id}}" class="btn btn-primary m-3">EDIT BOAT</a>
-      <!-- <a href="#" class="card-link">Add to favorites (soon)</a> -->
+  {{!-- LISTINGS --}}
+  <div class="row">
+    {{#each user.listings}}
+    <div class="col-s-12 col-md-6 text-center">
+      <div class="card result-card mt-3">
+        <img src="{{this.imageURL}}" class="card-img-top backup mt-3" alt="Image of {{this.name}}">
+        <h5 class="card-title mt-3">{{this.name}}</h5>
+        <h6 class="card-subtitle mb-2 mt-3 text-muted">{{this.brand}}</h6>
+        <p class="card-text mt-3 pl-2 pr-2">{{this.type}} for {{this.forMaxNumOfUsers}} user(s). Pickup near {{this.locationAddress.street}}, {{this.locationAddress.city}}.</p>
+        <a href="/myboats/edit/{{this._id}}" class="btn cta-bottom m-3">EDIT THIS LISTING</a>
+        <!-- <a href="#" class="card-link">Add to favorites (soon)</a> --> 
+      </div>
     </div>
   </div>
   {{/each}}
