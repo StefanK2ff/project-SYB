@@ -62,10 +62,11 @@
 
 
   {{!-- LISTINGS --}}
-  {{#each data}}
+
 
   <div class="row">
-    <div class="col-12 text-center">
+      {{#each data}}
+    <div class="col-xs-12 col-xl-6 text-center">
       <div class="thumbnail">
         <img src="{{this.imageURL}}" alt="image of boat">
       </div>
@@ -91,10 +92,12 @@
       </div>
       <hr>
     </div>
+    {{/each}}
   </div>
-{{!-- CLOSES MAIN CONTAINER --}}
-{{/each}}
 
+{{!-- CLOSES MAIN CONTAINER --}}
+
+  </div>
 
 
 
