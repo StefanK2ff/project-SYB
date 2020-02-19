@@ -16,28 +16,58 @@
 
 <div class="container">
 
-<h1>MY SYBS</h1>
-<hr>
+  {{!--HERO SECTION --}}
+  <div class="row" >
+    <div class="col-12 text-center" id="hero-section">
+      <h1>(Hero section)</h1>
+      <hr>
+    </div>  
+  </div>
 
-<form action="/myboats/addboat" method="GET">       
-  <button type="submit">ADD A LISTING</button>          
-</form>
-<hr>
-  
-<ul>
-{{#each user.listings}}
-    <li><img src="{{this.imageURL}}" alt="image of boat"></li>  
-    <li>Name: {{this.name}}</li>
-    <li>Type: {{this.type}}</li>
-    <li>Description: {{this.description}}</li>
-    <li>Available to pick up from: {{this.locationAddress.street}}, 
-                                   {{this.locationAddress.streetNumber}}, 
-                                   {{this.locationAddress.city}}</li>
-    <a href="/myboats/edit/{{this._id}}">EDIT BOAT</a>   
+  {{!-- PAGE NAME --}}
+  <div class="row">
+    <div class="col-12 text-center" id="page-name">
+      <h2>My SYBS</h2>
+    </div>
+  </div>
+
+  {{!-- ADD A LISTING BUTTON --}}
+  <form action="/myboats/addboat" method="GET">     
+    <div class="row">
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary btn-block">ADD A LISTING</button>
+      </div>
+    </div>
+  </form> 
+  <hr>
+
+
+{{!-- MY LISTINGS SECTION --}}
+  <div class="row">
+    {{#each user.listings}}
+    <div class="col-xs-12 col-xl-6 text-center">
+
+      <div class="thumbnail">
+        <img src="{{this.imageURL}}" alt="image of boat">
+      </div>
     
-    <hr>
+      <div class="caption">
+        <h4>SYB Name: {{this.name}}</h4>
+      </div>
 
-{{/each}}
-</ul>
-
+      <div>
+        <ul style="list-style-type:none"> 
+          <li>Type: {{this.type}}</li>
+          <li>Decription: {{this.description}}</li>
+          <li>Available to pick up from: {{this.locationAddress.street}}, 
+                                        {{this.locationAddress.streetNumber}}, 
+                                        {{this.locationAddress.city}}</li>
+        </ul>
+        
+        <a href="/myboats/edit/{{this._id}}" class="btn btn-secondary">EDIT BOAT</a>
+      </div>
+      <hr>
+    </div>
+    {{/each}}
+  </div>
 </div>
