@@ -30,18 +30,23 @@ router.get("/logout", (req, res) => {
 
 //Get homepage with all listings that are available for a given date
 router.get('/', (req, res, next) => {
+  // checker if user is logged in to display correct navbar
+  let user = false;
+  let userListings = [];
+  if(req.session.currentUser){ 
+    user = req.session.currentUser 
+    userListings = req.session.currentUser.listings
+  }
   let {type, bookingStart} = req.query;
-  if(!bookingStart) { // sets default booking date to tomorrow if not given via query
+  // sets default booking date to tomorrow if not given via query
+  if(!bookingStart) { 
     var tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     bookingStart = tomorrow
   }
-  let user = false; // 
-  if(req.session.currentUser){ // checker if user is logged in to display correct navbar
-    user = req.session.currentUser 
-  }
-  if(type){ // lists all listings according to filter selection
-    Listing.find({$and: [{type}, {notAvailableDates: {$nin: [bookingStart]}}]})
+  // lists all listings according to filter selection
+  if(type){ 
+    Listing.find({$and: [{type}, {notAvailableDates: {$nin: [bookingStart]}}, {owner: {$nin: [userListings]}}]})
     .then( (data) => {
       res.render('index', {data, user}); 
     })
