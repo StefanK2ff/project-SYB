@@ -47,7 +47,7 @@
       </div>
       <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-          <ul>
+          <ul class="list-unstyled">
             {{#each data.0.pendingBookings}}
               <li>Booking from: <span class="date">{{this.created_at}}</span></li>
               <li>Status: {{this.status}}</li>
@@ -70,7 +70,7 @@
       </div>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
         <div class="card-body">
-          <ul>
+          <ul class="list-unstyled">
             {{#each data.1.upcomingBookings}}
               <li>Booking from: <span class="date">{{this.created_at}}</span></li>
               <li>Status: {{this.status}}</li>
@@ -93,7 +93,7 @@
       </div>
       <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
         <div class="card-body">
-          <ul>
+          <ul class="list-unstyled">
           {{#each data.2.requestArchive}}
             <li>Booking from: <span class="date">{{this.created_at}}</span></li>
             <li>Status: {{this.status}}</li>
@@ -116,7 +116,7 @@
       </div>
       <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
         <div class="card-body">
-          <ul>
+          <ul class="list-unstyled">
             {{#each data.3.incomingBookings}}
               <li>Booking from: <span class="date">{{this.created_at}}</span></li>
               <li>Status: {{this.status}}</li>
@@ -143,7 +143,7 @@
       </div>
       <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
         <div class="card-body">
-          <ul>
+          <ul class="list-unstyled">
             {{#each data.4.upcomingShares}}
               <li>Booking from: <span class="date">{{this.created_at}}</span></li>
               <li>Status: {{this.status}}</li>
@@ -166,7 +166,7 @@
       </div>
       <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
         <div class="card-body">
-          <ul>
+          <ul class="list-unstyled">
             {{#each data.5.sharerArchive}}
               <li>Booking from: <span class="date">{{this.created_at}}</span></li>
               <li>Status: {{this.status}}</li>

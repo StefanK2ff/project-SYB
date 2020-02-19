@@ -5,7 +5,7 @@ body {
 
 img{
   align-self: center;
-  max-width: 50%;
+  max-width: 80%;
 }
 
 .navbar-color{
@@ -18,7 +18,7 @@ img{
 }
 
 .cta-bottom{
-  background-color: #C3C6C9;
+  background-color: rgb(208, 212, 214);
 }
 
 
