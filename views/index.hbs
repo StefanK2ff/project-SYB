@@ -1,7 +1,6 @@
 <header>
       {{#if user}}
-        <nav>
-          <a href="/">Home</a>
+        <nav class="text-center">
           <a href="/bookings">Bookings</a>
           <a href="/myboats">Listings</a>
           <a href="/logout">Logout</a>
@@ -18,7 +17,7 @@
 
   {{!--HERO SECTION --}}
   <div class="row" >
-    <div class="col-xs-12" id="hero-section">
+    <div class="col-12 text-center" id="hero-section">
       <h1>SYB(Hero section)</h1>
       <hr>
     </div>  
@@ -63,10 +62,11 @@
 
 
   {{!-- LISTINGS --}}
-  {{#each data}}
+
 
   <div class="row">
-    <div class="col-xs-12 col-md-6 text-center">
+      {{#each data}}
+    <div class="col-xs-12 col-xl-6 text-center">
       <div class="thumbnail">
         <img src="{{this.imageURL}}" alt="image of boat">
       </div>
@@ -92,10 +92,12 @@
       </div>
       <hr>
     </div>
+    {{/each}}
   </div>
-{{!-- CLOSES MAIN CONTAINER --}}
-{{/each}}
 
+{{!-- CLOSES MAIN CONTAINER --}}
+
+  </div>
 
 
 

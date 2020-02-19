@@ -1,9 +1,8 @@
 
 <header>
     {{#if user}}
-        <nav>
+        <nav class="text-center">
           <a href="/">Home</a>
-          <a href="/myboats">Listings</a>
           <a href="/bookings">Bookings</a>
           <a href="/logout">Logout</a>
          </nav>
@@ -14,6 +13,8 @@
         </nav>
     {{/if}}
 </header>
+
+<div class="container">
 
 <h1>MY SYBS</h1>
 <hr>
@@ -38,3 +39,5 @@
 
 {{/each}}
 </ul>
+
+</div>
