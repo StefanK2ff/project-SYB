@@ -32,6 +32,10 @@ router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
     ...req.body,
   }
 
+  if (updatedListing.notAvailableDates.length > 0) {
+    updatedListing.notAvailableDates = updatedListing.notAvailableDates.split(",")
+  }
+
   if(req.file){ 
     let imageURL =  req.file.secure_url; // <-- for claudinary
     updatedListing = {
@@ -89,13 +93,7 @@ router.post("/add", parser.single('photo'), (req, res) => {
     forMaxNumOfUsers,
     notAvailableDates,
     brand //things from the form
-  } = req.body; //deconstructing the object right away
-  if (notAvailableDates.length > 0) {
-    notAvailableDates = notAvailableDates.split(",")
-  }
-  console.log(city)
-  console.log(province)
-
+  } = req.body; //deconstructing the object right away  
   Listing.create({
       name,
       type,
