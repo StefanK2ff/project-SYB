@@ -12,7 +12,7 @@
       {{/if}}
 </header>
 
-{{!-- CONTAINER START --}}
+{{!-- MAIN CONTAINER STARTS --}}
 <div class="container">
 
 {{!--HERO SECTION --}}
@@ -27,51 +27,77 @@
     <div class="col-xs-12" id="page-name">
     </div>
   </div>
+  
+{{!-- SELECT BOAT --}}
+  <form action="/" method="GET">
 
-<form action="/" method="GET">
-    <label for="type">Select Type</label>
-    <select name="type" id="type-select">
+    <div class="form-group">
+          <label for="type">Select Type</label>
+      <select name="type" class="form-control" id="type-select">
         <option value=""> -  ALL  - </option>
         <option value="canoe">Canoe</option>
         <option value="kayak">Kayak</option>
         <option value="rowing">Rowing</option>
         <option value="inflatable">Inflatable</option>
         <option value="paddle">Paddle</option>
-        <option value="boat">Boat</option>
-    </select>
-        <label for="start">Start date:</label>
-        <input type="date" name="bookingStart" id="selected-date">
-    <button type="submit" id="submitFilter">Submit</button>
-</form>
+          <option value="boat">Boat</option>
+      </select>
+    </div>
 
+  {{!-- SELECT DATE --}}
+    <div class="form-group"></div>
+      <label for="start">Start date:</label>
+        <input type="date" name="bookingStart" class="form-control" id="selected-date">
+    <button type="submit" class="btn btn-primary " id="submitFilter">Submit</button>
+  </form>
+  <hr>
 
+  {{!-- LISTINGS --}}
 
+{{#each data}}
+<div class="row">
+  <div class="col-sm-12">
+    <div class="thumbnail">
+      <img src="{{this.imageURL}}" alt="image of boat">
+    </div>
 
+    <div class="caption">
+      <h3>Name: {{this.name}}</h3>
+    </div>
 
-</div>
-
-
-
-
-
-<hr>
-<ul>
-    {{#each data}}
-        <li><img src="{{this.imageURL}}" alt="image of boat"></li>
-        <li>Owner: {{this.name}}</li>
+    <div>
+      <ul> 
         <li>Type: {{this.type}}</li>
         <li>Decription: {{this.description}}</li>
         <li>Available to pick up from: {{this.locationAddress.street}}, 
-                                       {{this.locationAddress.streetNumber}}, 
-                                       {{this.locationAddress.city}}</li>
-        <form action="/bookings/request/{{this._id}}" method="POST" name="requestForm" id="{{this._id}}">
-            {{!-- <label for="start">Start date:</label>
-            <input type="date" name="bookingStart"> --}}
-            <button type="submit" name="request" id="{{this._id}}">Request booking</button>  
-            
-        </form>
-        <hr>
-    {{/each}}
-</ul>
+                                      {{this.locationAddress.streetNumber}}, 
+                                      {{this.locationAddress.city}}</li>
+      </ul>
+      
+      <form action="/bookings/request/{{this._id}}" method="POST" name="requestForm" id="{{this._id}}">
+        {{!-- <label for="start">Start date:</label>
+        <input type="date" name="bookingStart"> --}}
+        <button type="submit" name="request" class="btn btn-primary" id="{{this._id}}">Request booking</button>  
+      </form>
+    </div>
+    <hr>
+  {{/each}}
+
+      </div>
+
+
+
+
+
+
+
+
+{{!-- CLOSES MAIN CONTAINER --}}
+
+
+
+
+
+
 
 <script src="/javascripts/helper.js"></script>
