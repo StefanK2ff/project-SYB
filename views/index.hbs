@@ -28,11 +28,11 @@
     </div>
   </div>
   
+
 {{!-- SELECT BOAT --}}
   <form action="/" method="GET">
-
     <div class="form-group">
-          <label for="type">Select Type</label>
+      <label for="type">Select Type</label>
       <select name="type" class="form-control" id="type-select">
         <option value=""> -  ALL  - </option>
         <option value="canoe">Canoe</option>
@@ -43,7 +43,6 @@
           <option value="boat">Boat</option>
       </select>
     </div>
-
   {{!-- SELECT DATE --}}
     <div class="form-group"></div>
       <label for="start">Start date:</label>
@@ -53,10 +52,9 @@
   <hr>
 
   {{!-- LISTINGS --}}
-
 {{#each data}}
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-xs-12 col-md-6 ">
     <div class="thumbnail">
       <img src="{{this.imageURL}}" alt="image of boat">
     </div>
@@ -81,21 +79,10 @@
       </form>
     </div>
     <hr>
-  {{/each}}
-
-      </div>
-
-
-
-
-
-
-
-
+  </div>
+</div>
 {{!-- CLOSES MAIN CONTAINER --}}
-
-
-
+{{/each}}
 
 
 
