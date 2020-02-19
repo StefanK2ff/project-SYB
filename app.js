@@ -52,6 +52,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+hbs.registerPartials(__dirname + "/views/partials")
 
 // ROUTING 
 app.use('/', indexRouter);
