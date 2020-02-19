@@ -7,9 +7,14 @@
   </div>
 </div>
 
-<div class="alert alert-light" role="alert">
-  Here you can see all the boats that you are already contributing to the community.
+<div class="row">
+  <div class="col-12 text-center">
+    <div class="alert alert-light" role="alert">
+      Here you can see all the boats that you are already contributing to the community.
+    </div>
+  </div>
 </div>
+
 
 {{!-- ADD A LISTING BUTTON --}}
 <form action="/myboats/addboat" method="GET">
@@ -18,9 +23,8 @@
       <button type="submit" class="btn cta-top btn-block">Add a new listing</button>
     </div>
   </div>
-  </div>
 </form>
-<hr>
+
 
 {{!-- MY LISTINGS SECTION --}}
 {{!-- LISTINGS --}}
@@ -37,5 +41,5 @@
       <!-- <a href="#" class="card-link">Add to favorites (soon)</a> -->
     </div>
   </div>
-{{/each}}
+  {{/each}}
 </div>
