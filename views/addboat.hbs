@@ -14,19 +14,19 @@
     {{/if}}
 </header>
 
-<div class="container-sm">
+<div class="container">
   <h1>ADD A SYB</h1>
   <form action="/myboats/add" method="post" enctype="multipart/form-data" class="needs-validation">
-    
-    <div class="form-group row">
-      <div class="col">
+
+    <div class="row">
+      <div class="col-8">
+        <div class="form-group">
         <label for="">Boat name:</label>
-        <input type="text" name="name" required class="form-control" placeholder="make it unique">
+        <input type="text" name="name" required class="form-control" placeholder="make it unique" autocomplete="off">
       </div>
     </div>
-    
-    <div class="form-group row">
-      <div class="col">
+    <div class="col-4">
+      <div class="form-group">
         <label for="">Type:</label>
         <input list="type_options" name="type" required class="form-control" placeholder="select from dropdown menu">
         <datalist id="type_options">
@@ -39,73 +39,77 @@
         </datalist>
       </div>
     </div>
-     
-    <div class="form-group row">
-      <div class="col">
+  </div>
+
+
+  <div class="row">
+    <div class="col-8">
+      <div class="form-group">
         <label for="">Street:</label>
-        <input type="text" name="street" required class="form-control">
+        <input type="text" name="street" required class="form-control" autocomplete="off">
       </div>
     </div>
-      
-    <div class="form-group row">
-      <div class="col">
-        <label for="">House Number:</label>
-        <input type="text" name="streetNumber" required class="form-control">
+    <div class="col-4">
+      <div class="form-group">
+        <label for="">House #:</label>
+        <input type="text" name="streetNumber" required class="form-control" autocomplete="off">
       </div>
     </div>
+</div>
 
-    <div class="form-group row">
-      <div class="col">
+<div class="row">
+  <div class="col-6">
+    <div class="form-group">
         <label for="">City:</label>
-        <input type="text" name="city" required class="form-control">
+        <input type="text" name="city" required class="form-control" autocomplete="off">
       </div>
     </div>
-
-    <div class="form-group row">
-      <div class="col">
+    <div class="col-6">
+      <div class="form-group">
         <label for="">Province:</label>
-        <input type="text" name="province" class="form-control">
+        <input type="text" name="province" class="form-control" autocomplete="off">
       </div>
     </div>
+</div>
 
-    <div class="form-group row">
-      <div class="col">
-        <label for="">Description:</label>
-        <input type="text" name="description" class="form-control">
+<div class="form-group row">
+  <div class="col">
+    <label for="">Description:</label>
+    <input type="textarea" name="description" class="form-control" autocomplete="off">
+    </div>
+</div>
+
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <label for="">Max users:</label>
+        <input type="number" name="forMaxNumOfUsers" min="1" value="1" required class="form-control">
       </div>
     </div>
-
-    <div class="form-group row">
-      <div class="col">
-        <label for="">Max number of users:</label>
-        <input type="number" name="forMaxNumOfUsers" defaul=1 required class="form-control">
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class="col">
+    <div class="col-8">
+      <div class="form-group">
         <label for="">Brand:</label>
-        <input type="text" name="brand" class="form-control">
+        <input type="text" name="brand" class="form-control" autocomplete="off">
       </div>
     </div>
+  </div>
 
     <div class="form-group row">
       <div class="col">
         <label for="">Not available at:</label>
-        <input type="text" name="notAvailableDates" placeholder="Open Calendar" class="form-control">
+        <input type="text" name="notAvailableDates" placeholder="Open Calendar" class="form-control" autocomplete="off">
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col">
         <label for="photo">Upload Photo (JPG or PNG format only):</label>
-        <input type="file" name="photo" class="form-control">
+        <input type="file" name="photo" class="form-control-file" autocomplete="off">
       </div>
     </div>
 
       <button type="submit" class="btn btn-primary">ADD THIS SYB</button>
   </form>
-
 </div>
 
 {{#if errorMessage}}
