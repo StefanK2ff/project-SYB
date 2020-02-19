@@ -1,6 +1,9 @@
 {{>navigation}}
 
-<h1>EDIT THIS SYB</h1>
+<h1 class="display-3">Edit your boat</h1>
+<div class="alert alert-light" role="alert">
+  Edit the fields you want and submit the changes.
+</div>
 <form action="/myboats/edit/{{listing._id}}" method="POST" enctype="multipart/form-data">
 
   <div class="row">
@@ -91,12 +94,12 @@
 
   <div class="form-group row">
     <div class="col">
-      <label for="photo">Upload Photo (JPG or PNG format only):</label>
+      <label for="photo">Upload Photo (.jpg or .png  only)</label>
       <input type="file" name="photo" value="{{listing.imageURL}}" class="form-control-file">
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary">SAVE EDITS</button>
+  <button type="submit" class="btn btn-primary">Save changes</button>
 </form>
 <br>
 
@@ -104,7 +107,7 @@
   <div class="col">
     <div class="form-group">
       <form action="/myboats/delete/{{listing._id}}" method="POST">
-        <button type="submit" class="btn btn-danger">DELETE THIS SYB</button>
+        <button type="submit" class="btn btn-danger">Delete the boat</button>
       </form>
     </div>
   </div>
