@@ -4,30 +4,31 @@
         <nav class="navbar navbar-dark" style="background-color: #80b0ff">
           <a class="navbar-brand" href="/">Home</a>
           <a class="navbar-brand" href="/bookings">Bookings</a>
+          <a class="navbar-brand" href="/myboats">My SYBs</a>
           <a class="navbar-brand" href="/logout">Logout</a>
-        </nav>
+         </nav>
       {{else}}
         <nav class="navbar navbar-dark" style="background-color: #80b0ff">
           <a class="navbar-brand" href="/log-in">Login</a>
         </nav>
-    {{/if}}
+      {{/if}}
 
 
 <div class="container">
  {{!--HERO SECTION --}}
   <div class="row" >
     <div class="col-12 text-center" id="hero-section">
-      <h1>(Hero section)</h1>
-      <hr>
+      <h1>My SYBs</h1>
+      
     </div>  
   </div>
 
     {{!-- PAGE NAME --}}
-  <div class="row">
+  {{!-- <div class="row">
     <div class="col-12 text-center" id="page-name">
       <h2>My SYBS</h2>
     </div>
-  </div>
+  </div> --}}
 
 {{!-- ADD A LISTING BUTTON --}}
   <form action="/myboats/addboat" method="GET">     
