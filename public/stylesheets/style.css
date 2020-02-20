@@ -17,6 +17,61 @@ body {
   color: rgba(240, 242, 241, 1);
 }
 
+
+.btn-primary {
+  background-color: rgba(31, 31, 173, 1);
+}
+
+#sign-up-link {
+  color: rgba(31, 31, 173, 1);
+}
+
+#log-in-link {
+  color: rgba(31, 31, 173, 1);
+}
+
+#submitFilter {
+  background-color: rgba(31, 31, 173, 1);
+}
+
+#submitFilter:hover {
+  color: rgba(219, 153, 5, 1);
+}
+
+.card-header {
+  color: rgba(31, 31, 173, 1);
+}
+
+#type-select {
+  /* color: rgba(219, 153, 5, 1);; */
+}
+
+#bookings-acc-btns {
+  color: rgba(31, 31, 173, 1);
+  text-decoration: none;
+}
+
+#bookings-acc-btns:hover {
+  color: rgba(0, 21, 20, 1);
+}
+
+#bookings-acc-btns:active { 
+  font-weight: bold;
+  color: rgba(219, 153, 5, 1) !important;
+}
+
+#add-boat-btn {
+  background-color: rgba(31, 31, 173, 1)
+}
+
+#add-boat-btn:hover {
+  color: rgba(219, 153, 5, 1);
+}
+
+
+
+
+
 img{
   align-self: center;
   max-width: 80%;
@@ -34,7 +89,12 @@ h1{
 }
 
 .cta-bottom{
-  background-color: rgb(208, 212, 214);
+  background-color: rgba(43, 65, 98, 1);
+  color: rgba(240, 242, 241, 1);; 
+}
+
+.cta-bottom:hover{
+  color: rgba(219, 153, 5, 1); 
 }
 
 
