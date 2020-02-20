@@ -18,24 +18,23 @@ loginRouter.get("/", (req, res) => {
 
 // POST /login
 loginRouter.post("/", (req, res) => {
-  const { password, username } = req.body;
+  const { password, email } = req.body;
 
-  if (username === "" || password === "") {
+  if (email === "" || password === "") {
     res.render("log-in", {
-      errorMessage: "Username and password are required"
+      errorMessage: "email and password are required"
     });
     return;
   }
 
-  User.findOne({ username })
+  User.findOne({ email })
     .then(foundUser => {
       if (!foundUser) {
         res.render("log-in", {
-          errorMessage: "Username doesn't exist"
+          errorMessage: "email doesn't exist"
         });
         return;
       }
-
       if (bcrypt.compareSync(password, foundUser.password)) {
         req.session.currentUser = foundUser;
         res.redirect("/");
