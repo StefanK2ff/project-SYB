@@ -1,14 +1,26 @@
 body {
   font: 14px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  /* letter-spacing: 0.05em; */
+}
+
+#navbar-style {
+  background-color: rgba(228, 227, 225, 1);
+  /* background-color: rgba(43, 65, 98, 1); */
+}
+
+.navbar-toggler {
+  color: rgba(240, 242, 241, 1);
+}
+
+.navbar-toggler-icon {
+  color: rgba(240, 242, 241, 1);
 }
 
 img{
   align-self: center;
   max-width: 80%;
 }
-
-
 
 .cta-top{
   color: white;
