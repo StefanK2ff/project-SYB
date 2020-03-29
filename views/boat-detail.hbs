@@ -1,7 +1,42 @@
-
-
 {{>navigation}}
 
-{{listing.name}}
+{{>boatDetailMap listing}}
+<div class="container">
+    <div class="row px-3">
+        <h1> {{listing.name}}</h1>
+    </div>
+    <div class="row px-3"><span>{{listing.type}}</span></div>
+    <div class="row ">
+        <div class="col-s-12 col-md-6 mt-4 px-3">
+            <img src="{{listing.imageURL}}" alt="Image of {{listing.name}} a {{listing.type}}">
+        </div>
+        <div class="col-s-12 col-md-6 mt-4 ">
+            <div class="row px-3">{{listing.description}}</div>
+            <div class="row px-3">Max Number of users: {{listing.forMaxNumOfUsers}}</div>
+            <div class="row px-3">Brand: {{listing.brand}}</div>
+            <div class="row px-3">Pickup near
+                {{this.locationAddress.street}}, {{this.locationAddress.city}}.</div>
+        </div>
 
-{{>boatDetailMap }}
+    </div>
+
+
+    <div class="row px-3">
+        <div class="col-s-12 mt-4">
+            <form action="/bookings/request/{{this._id}}" method="POST" name="requestForm" id="{{this._id}}">
+                <div class="form-group">
+                    <label for="start">Chose date for rental:</label>
+                    <div id="datePickerDetail" data-date="12/03/2012"></div>
+                    <input type="hidden" id="datePickerDetail" name="bookingStart" placeholder="Open Calendar"
+                        class="form-control" autocomplete="off" data-not-available-dates-string="{{listing.notAvailableDates}}">
+                </div>
+                <button type="submit" name="request" class="btn cta-bottom mt-3 mb-3" id="{{this._id}}">
+                    Request booking
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+

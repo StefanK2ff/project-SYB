@@ -1,58 +1,57 @@
-
 {{>navigation}}
 
- <div class="container">
-   
-{{!--HERO SECTION --}}
-<div class="row">
-  <div class="col-12 text-center" id="hero-section">
-    <h1>Welcome to SYB</h1>
-  </div>
-</div>
+<div class="container">
 
-<div class="alert alert-light text-justify" role="alert">
-  This is a platform where you can build a community while you Share Your Boat.
-</div>
-
-{{!-- SELECT BOAT --}}
-<form action="/" method="GET">
+  {{!--HERO SECTION --}}
   <div class="row">
-    <div class="col-6 form-group">
-      <label for="type">Select Type</label>
-      <select name="type" class="form-control" id="type-select">
-        <option value=""> - ALL - </option>
-        <option value="canoe">Canoe</option>
-        <option value="kayak">Kayak</option>
-        <option value="rowing">Rowing</option>
-        <option value="inflatable">Inflatable</option>
-        <option value="paddle">Paddle</option>
-        <option value="boat">Boat</option>
-      </select>
+    <div class="col-12 text-center" id="hero-section">
+      <h1>Welcome to SYB</h1>
     </div>
-    {{!-- SELECT DATE --}}
-    <div class="col-6 form-group">
-      <label for="start">Start date:</label>
-      <input type="date" name="bookingStart" class="form-control" id="selected-date">
-    </div>
-    <hr>
   </div>
-  {{!-- BUTTON FOR SUBMIT SEARCH --}}
+
+  <div class="alert alert-light text-justify" role="alert">
+    This is a platform where you can build a community while you Share Your Boat.
+  </div>
+
+  {{!-- SELECT BOAT --}}
+  <form action="/" method="GET">
+    <div class="row">
+      <div class="col-6 form-group">
+        <label for="type">Select Type</label>
+        <select name="type" class="form-control" id="type-select">
+          <option value=""> - ALL - </option>
+          <option value="canoe">Canoe</option>
+          <option value="kayak">Kayak</option>
+          <option value="rowing">Rowing</option>
+          <option value="inflatable">Inflatable</option>
+          <option value="paddle">Paddle</option>
+          <option value="boat">Boat</option>
+        </select>
+      </div>
+      {{!-- SELECT DATE --}}
+      <div class="col-6 form-group">
+        <label for="start">Start date:</label>
+        <input type="date" name="bookingStart" class="form-control" id="selected-date">
+      </div>
+      <hr>
+    </div>
+    {{!-- BUTTON FOR SUBMIT SEARCH --}}
+    <div class="row">
+      <div class="col-12 text-center">
+        <button type="submit" class="btn cta-top btn-block" id="submitFilter">Search for boats</button>
+      </div>
+    </div>
+  </form>
+
+
+  {{!-- LISTINGS --}}
   <div class="row">
-    <div class="col-12 text-center">
-      <button type="submit" class="btn cta-top btn-block" id="submitFilter">Search for boats</button>
-    </div>
-  </div>
-</form>
-
-
-{{!-- LISTINGS --}}
-<div class="row">
-  {{#each data}}
+    {{#each data}}
     {{>listingCard this }}
-  
-  {{/each}}
-</div>
 
- </div>
+    {{/each}}
+  </div>
+
+</div>
 
 <script src="/javascripts/helper.js"></script>
