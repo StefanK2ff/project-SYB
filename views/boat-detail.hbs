@@ -23,11 +23,11 @@
 
     <div class="row px-3">
         <div class="col-s-12 mt-4">
-            <form action="/bookings/request/{{this._id}}" method="POST" name="requestForm" id="{{this._id}}">
+            <form action="/bookings/request/{{listing._id}}" method="POST" name="requestForm" id="{{listing._id}}">
                 <div class="form-group">
                     <label for="start">Chose date for rental:</label>
-                    <div id="datePickerDetail" data-date="12/03/2012"></div>
-                    <input type="hidden" id="datePickerDetail" name="bookingStart" placeholder="Open Calendar"
+                    <div id="datePickerDiv"></div>
+                    <input type="hidden" id="datePickerForm" name="bookingStart" placeholder="Open Calendar"
                         class="form-control" autocomplete="off" data-not-available-dates-string="{{listing.notAvailableDates}}">
                 </div>
                 <button type="submit" name="request" class="btn cta-bottom mt-3 mb-3" id="{{this._id}}">
@@ -36,7 +36,5 @@
             </form>
         </div>
     </div>
-
-
 </div>
 

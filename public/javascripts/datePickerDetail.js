@@ -1,13 +1,12 @@
-const dateInputDetail = document.getElementById("datePickerDetail")
-const notAvailableDates = dateInputDetail.attributes[6].nodeValue.split(",")
-console.log(notAvailableDates)
+const dateInputDiv = document.getElementById("datePickerDiv")
+const dateInputForm = document.getElementById("datePickerForm")
+const notAvailableDates = dateInputForm.attributes[6].nodeValue.split(",")
 
-const datepicker2 = new Datepicker(dateInputDetail, {
+const datepicker2 = new Datepicker(dateInputDiv, {
     autohide: false,
     calendarWeeks: false,
     clearBtn: false,
     dateDelimiter: ",",
-    // Array of date strings or a single date string formatted in the given date format.
     datesDisabled: notAvailableDates,
     disableTouchKeyboard: true,
     format: "yyyy-mm-dd",
@@ -21,3 +20,8 @@ const datepicker2 = new Datepicker(dateInputDetail, {
     todayBtnMode: 0,
     todayHighlight: true,
 });
+
+dateInputDiv.addEventListener("changeDate", function() {
+    const selectedDate = document.getElementsByClassName("selected focused")
+    dateInputForm.value = new Date(parseInt(selectedDate[0].attributes[1].nodeValue))
+})
