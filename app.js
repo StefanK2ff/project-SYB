@@ -52,7 +52,12 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-hbs.registerPartials(__dirname + "/views/partials")
+hbs.registerPartials(__dirname + "/views/partials");
+hbs.registerHelper("section",function(name, options){
+  if(!this._sections) this._sections = {};
+  this._sections[name] = options.fn(this);
+  return null;
+});
 
 // ROUTING 
 app.use('/', indexRouter);
