@@ -3,6 +3,7 @@ var router = express.Router();
 const loginRouter = require("./login");
 var authRouter = require('./auth')
 var listingRouter = require("./myboats")
+var detailRouter = require("./detail")
 var bookingsRouter = require("./bookings")
 var moment = require('moment');
 var mongoose = require('mongoose');
@@ -15,6 +16,7 @@ const User = require("./../models/UserModel");
 
 //Set up routers here
 router.use(["/myboats"], listingRouter);
+router.use("/detail", detailRouter);
 router.use(["/sign-up", "/signup"], authRouter);
 router.use(["/log-in", "/login"], loginRouter);
 router.use("/bookings", bookingsRouter);

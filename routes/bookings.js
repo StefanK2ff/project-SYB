@@ -3,7 +3,7 @@ var router = express.Router();
 var Bookings = require("../models/BookingModel");
 var User = require("../models/UserModel");
 var Listing = require("../models/ListingModel");
-var moment = require('moment');
+
 
 // POST to update a Booking
 router.post("/:id", (req,res) => {
