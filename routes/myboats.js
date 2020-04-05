@@ -31,7 +31,6 @@ router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
   let updatedListing = {
     ...req.body,
   }
-  console.log(updatedListing)
 
   if (updatedListing.notAvailableDates.length > 0) {
     updatedListing.notAvailableDates = updatedListing.notAvailableDates.split(",")
@@ -49,13 +48,16 @@ router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
       _id: req.params.listingId
     }, {
       $set: {
-        ...updatedListing
+        ...updatedListing,
+        locationGeoCoord: {
+          coordinates: updatedListing.coordinates }
       }
     }, {
       new: true
     })
     .then((listing) => {
       res.redirect('/myboats');
+      console.log("updated listing ", listing)
     })
     .catch((error) => {
       console.log(error);

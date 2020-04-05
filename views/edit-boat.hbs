@@ -43,7 +43,7 @@
     <div class="form-group row">
       <div class="col">
         <label id="locationGeoCoordLabel" for="">Coordinates:</label>
-        <input type="text" id="locationGeoCoordField" name="coordinates" required class="form-control"
+        <input type="hidden" id="locationGeoCoordField" name="coordinates" required class="form-control"
           autocomplete="off" value="{{listing.locationGeoCoord.coordinates}}">
       </div>
     </div>
@@ -63,6 +63,7 @@
             class="form-control">
         </div>
       </div>
+
       <div class="col-8">
         <div class="form-group">
           <label for="">Brand:</label>
