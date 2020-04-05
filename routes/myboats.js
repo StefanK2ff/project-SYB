@@ -92,7 +92,6 @@ router.post("/add", parser.single('photo'), (req, res) => {
     notAvailableDates,
     brand //things from the form
   } = req.body; //deconstructing the object right away  
-  console.log("coordinates from body ", coordinates, "<<")
   Listing.create({
       name,
       type,
