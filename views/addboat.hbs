@@ -33,35 +33,7 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-8">
-      <div class="form-group">
-        <label for="">Street:</label>
-        <input type="text" name="street" required class="form-control" autocomplete="off">
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="form-group">
-        <label for="">House #:</label>
-        <input type="text" name="streetNumber" required class="form-control" autocomplete="off">
-      </div>
-    </div>
-</div>
-
-<div class="row">
-  <div class="col-6">
-    <div class="form-group">
-        <label for="">City:</label>
-        <input type="text" name="city" required class="form-control" autocomplete="off">
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="form-group">
-        <label for="">Province:</label>
-        <input type="text" name="province" class="form-control" autocomplete="off">
-      </div>
-    </div>
-</div>
+  {{> selectPosMap }}
 
 <div class="form-group row">
   <div class="col">
@@ -99,7 +71,7 @@
       </div>
     </div>
 
-      <button type="submit" class="btn btn-primary">ADD THIS BOAT</button>
+      <button type="submit" class="btn btn-primary mb-5">ADD THIS BOAT</button>
   </form>
 
   </div>
