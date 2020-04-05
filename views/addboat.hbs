@@ -1,4 +1,3 @@
-
 {{>navigation}}
 
 <div class="container">
@@ -13,54 +12,68 @@
     <div class="row">
       <div class="col-8">
         <div class="form-group">
-        <label for="">Boat name:</label>
-        <input type="text" name="name" required class="form-control" placeholder="make it unique" autocomplete="off">
+          <label for="">Boat name:</label>
+          <input type="text" name="name" required class="form-control" placeholder="make it unique" autocomplete="off">
+        </div>
       </div>
-    </div>
-    <div class="col-4">
-      <div class="form-group">
-        <label for="">Type:</label>
-        <input list="type_options" name="type" required class="form-control" placeholder="select">
-        <datalist id="type_options">
+      <div class="col-4">
+        <div class="form-group">
+          <label for="">Type:</label>
+          <input list="type_options" name="type" required class="form-control" placeholder="select">
+          <datalist id="type_options">
             <option value="canoe">Canoe</option>
             <option value="kayak">Kayak</option>
             <option value="rowing">Rowing</option>
             <option value="inflatable">Inflatable</option>
             <option value="paddle">Paddle</option>
             <option value="boat">Boat</option>
-        </datalist>
+          </datalist>
+        </div>
       </div>
     </div>
-  </div>
-
-  {{> selectPosMap }}
-
-<div class="form-group row">
-  <div class="col">
-    <label for="">Listing description:</label>
-    <input type="textarea" name="description" class="form-control" autocomplete="off">
+    <div class="form-group row">
+      <div class="col-12">
+        <label for="map">Pick-up position</label>
+      </div>
+      <div id="map" class="col-s-12"></div>
+      <pre id="coordinates" class="coordinates"></pre>
     </div>
-</div>
 
-  <div class="row">
-    <div class="col-4">
-      <div class="form-group">
-        <label for="">Max users:</label>
-        <input type="number" name="forMaxNumOfUsers" min="1" value="1" required class="form-control">
+    <div class="form-group row">
+      <div class="col">
+        <label id="locationGeoCoordLabel" for="">Coordinates:</label>
+        <input type="hidden" id="locationGeoCoordField" name="coordinates" required class="form-control"
+          autocomplete="off" >
       </div>
     </div>
-    <div class="col-8">
-      <div class="form-group">
-        <label for="">Brand:</label>
-        <input type="text" name="brand" class="form-control" autocomplete="off">
+
+    <div class="form-group row">
+      <div class="col">
+        <label for="">Listing description:</label>
+        <input type="textarea" name="description" class="form-control" autocomplete="off" required>
       </div>
     </div>
-  </div>
+
+    <div class="form-group row">
+      <div class="col-4">
+        <div class="form-group">
+          <label for="">Max users:</label>
+          <input type="number" name="forMaxNumOfUsers" min="1" value="1" required class="form-control">
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="form-group">
+          <label for="">Brand:</label>
+          <input type="text" name="brand" class="form-control" autocomplete="off">
+        </div>
+      </div>
+    </div>
 
     <div class="form-group row">
       <div class="col">
         <label for="">Not available at:</label>
-        <input type="text" id="notAvailableDatesPicker" name="notAvailableDates" placeholder="Open Calendar" class="form-control" autocomplete="off">
+        <input type="text" id="notAvailableDatesPicker" name="notAvailableDates" placeholder="Open Calendar"
+          class="form-control" autocomplete="off">
       </div>
     </div>
 
@@ -71,11 +84,12 @@
       </div>
     </div>
 
-      <button type="submit" class="btn btn-primary mb-5">ADD THIS BOAT</button>
+    <button type="submit" class="btn btn-primary mb-5">ADD THIS BOAT</button>
   </form>
 
-  </div>
+</div>
 
 {{#if errorMessage}}
 <p>{{errorMessage}}</p>
 {{/if}}
+{{> selectPosMap }}

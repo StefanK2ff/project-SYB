@@ -15,15 +15,16 @@ const listingSchema = new Schema(
     },
     locationAddress: {
       street: { type: String },
-      streetNumber: { type: String},
+      streetNumber: { type: String },
       city: { type: String },
       province: { type: String },
-      country: {type: String }
+      country: { type: String }
     },
     locationGeoCoord: {
       type: { type: String },
-      coordinates: [] 
+      coordinates: []
     },
+
     notAvailableDates: {
       type: [Date]
     },
@@ -35,22 +36,21 @@ const listingSchema = new Schema(
     description: {
       type: String,
       required: true
-
     },
     forMaxNumOfUsers: {
       type: Number,
       required: true
     },
     brand: {
-      type: String,
+      type: String
     }
-},
+  },
   {
     timestamps: {
       createdAt: "created_at",
       updatedAt: "updated_at"
+    }
   }
-}
 );
 
 const Listing = mongoose.model("Listing", listingSchema);

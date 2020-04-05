@@ -1,23 +1,7 @@
-<div class="row">
-    <div class="col-12">
-        <label for="map">Pick-up position</label>
-    </div>
-    <div id="map" class="col-s-12"></div>
-    <pre id="coordinates" class="coordinates"></pre>
-</div>
-<div class="row">
-    <div class="col-12">
-        <div class="form-group">
-            <label for="locationGeoCoordField">Longitude / Latitude:</label>
-            <input type="text" id="locationGeoCoordField" name="locationGeoCoord" required class="form-control"
-                autocomplete="off" disabled>
-        </div>
-    </div>
-</div>
-
 <script>
     var hamburg = [9.993682, 53.551086]
     var locationGeoCoordField = document.getElementById("locationGeoCoordField")
+    var locationGeoCoordLabel = document.getElementById("locationGeoCoordLabel")
     mapboxgl.accessToken = 'pk.eyJ1Ijoic3RmbmsyZmYiLCJhIjoiY2s2a2gxZjh2MDN2NzNvcGFxaGlpaW1ieSJ9.RSzVuCNsjuaSIP--0DOl4g';
     var map = new mapboxgl.Map({
         container: 'map',
@@ -35,8 +19,9 @@
     function onDragEnd() {
         var lngLat = marker.getLngLat();
         locationGeoCoordField.value = `${lngLat.lng}, ${lngLat.lat}`;
+        locationGeoCoordLabel.innerHTML = `Coordinates: ${lngLat.lng}, ${lngLat.lat}`;
+        console.log(locationGeoCoordField.value)
     }
 
     marker.on('dragend', onDragEnd);
-
 </script>

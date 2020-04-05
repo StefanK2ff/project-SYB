@@ -81,27 +81,23 @@ router.post("/add", parser.single('photo'), (req, res) => {
   if (req.file) {
     imageURL = req.file.secure_url // For Claudinary
   }
-
+  console.log(req.body)
   let {
     name,
     type,
-    street,
-    streetNumber,
-    city,
-    province,
+    coordinates,
     description,
     forMaxNumOfUsers,
     notAvailableDates,
     brand //things from the form
   } = req.body; //deconstructing the object right away  
+  console.log("coordinates from body ", coordinates, "<<")
   Listing.create({
       name,
       type,
-      locationAddress: {
-        street,
-        streetNumber,
-        city,
-        province,
+      locationGeoCoord: {
+        type: "Point",
+        coordinates: coordinates,
       },
       imageURL,
       description,
