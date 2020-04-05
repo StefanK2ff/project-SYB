@@ -1,0 +1,28 @@
+<script>
+    var currentLoc = [{{this}}]
+    var locationGeoCoordField = document.getElementById("locationGeoCoordField")
+    var locationGeoCoordLabel = document.getElementById("locationGeoCoordLabel")
+    locationGeoCoordLabel.innerHTML = `Coordinates: ${currentLoc}`;
+
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic3RmbmsyZmYiLCJhIjoiY2s2a2gxZjh2MDN2NzNvcGFxaGlpaW1ieSJ9.RSzVuCNsjuaSIP--0DOl4g';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v10',
+        center: currentLoc,
+        zoom: 11
+    });
+
+    var marker = new mapboxgl.Marker({
+        draggable: true
+    })
+        .setLngLat(currentLoc)
+        .addTo(map);
+
+    function onDragEnd() {
+        var lngLat = marker.getLngLat();
+        locationGeoCoordField.value = `${lngLat.lng}, ${lngLat.lat}`;
+        locationGeoCoordLabel.innerHTML = `Coordinates: ${lngLat.lng}, ${lngLat.lat}`;
+        console.log(locationGeoCoordField.value)
+    }
+    marker.on('dragend', onDragEnd);
+</script>

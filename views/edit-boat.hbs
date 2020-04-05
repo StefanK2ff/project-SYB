@@ -1,119 +1,108 @@
-
 {{>navigation}}
 
 <div class="container">
 
-<h1>Edit boat</h1>
-<div class="alert alert-light text-justify" role="alert">
-  Below you can edit your boat description.
-</div>
-<form action="/myboats/edit/{{listing._id}}" method="POST" enctype="multipart/form-data">
+  <h1>Edit boat</h1>
+  <div class="alert alert-light text-justify" role="alert">
+    Below you can edit your boat description.
+  </div>
+  <form action="/myboats/edit/{{listing._id}}" method="POST" enctype="multipart/form-data">
+
+    <div class="row">
+      <div class="col-8">
+        <div class="form-group">
+          <label for="">Boat name:</label>
+          <input type="text" name="name" required value="{{listing.name}}" class="form-control">
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-group">
+          <label for="">Type:</label>
+          <input list="type_options" name="type" required value="{{listing.type}}" class="form-control"
+            placeholder="select">
+          <datalist id="type_options">
+            <option value="canoe">Canoe</option>
+            <option value="kayak">Kayak</option>
+            <option value="rowing">Rowing</option>
+            <option value="inflatable">Inflatable</option>
+            <option value="paddle">Paddle</option>
+            <option value="boat">Boat</option>
+          </datalist>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-12">
+        <label for="map">Pick-up position</label>
+      </div>
+      <div id="map" class="col-s-12"></div>
+      <pre id="coordinates" class="coordinates"></pre>
+    </div>
+
+    <div class="form-group row">
+      <div class="col">
+        <label id="locationGeoCoordLabel" for="">Coordinates:</label>
+        <input type="hidden" id="locationGeoCoordField" name="coordinates" required class="form-control"
+          autocomplete="off">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col">
+        <label for="">Listing description:</label>
+        <input type="textarea" name="description" value="{{listing.description}}" class="form-control">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <label for="">Max users:</label>
+          <input type="number" name="forMaxNumOfUsers" min="1" required value="{{listing.forMaxNumOfUsers}}"
+            class="form-control">
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="form-group">
+          <label for="">Brand:</label>
+          <input type="text" name="brand" value="{{listing.brand}}" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col">
+        <label for="">Not available at:</label>
+        <input type="text" id="notAvailableDatesPicker" name="notAvailableDates" placeholder="DD/MM/YYYY,DD/MM/YYYY"
+          value="{{listing.notAvailableDates}}" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col">
+        <label for="photo">Upload Photo (.jpg or .png only)</label>
+        <input type="file" name="photo" value="{{listing.imageURL}}" class="form-control-file">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save changes</button>
+  </form>
+  <br>
 
   <div class="row">
-    <div class="col-8">
-      <div class="form-group">
-        <label for="">Boat name:</label>
-        <input type="text" name="name" required value="{{listing.name}}" class="form-control">
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="form-group">
-        <label for="">Type:</label>
-        <input list="type_options" name="type" required value="{{listing.type}}" class="form-control"
-          placeholder="select">
-        <datalist id="type_options">
-          <option value="canoe">Canoe</option>
-          <option value="kayak">Kayak</option>
-          <option value="rowing">Rowing</option>
-          <option value="inflatable">Inflatable</option>
-          <option value="paddle">Paddle</option>
-          <option value="boat">Boat</option>
-        </datalist>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-8">
-      <div class="form-group">
-        <label for="">Street:</label>
-        <input type="text" name="street" required value="{{listing.locationAddress.street}}" class="form-control">
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="form-group">
-        <label for="">Street #:</label>
-        <input type="text" name="streetNumber" required value="{{listing.locationAddress.streetNumber}}"
-          class="form-control">
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-6">
-      <div class="form-group">
-        <label for="">City:</label>
-        <input type="text" name="city" required value="{{listing.locationAddress.city}}" class="form-control">
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="form-group">
-        <label for="">Province:</label>
-        <input type="text" name="province" value="{{listing.locationAddress.province}}" class="form-control">
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group row">
     <div class="col">
-      <label for="">Listing description:</label>
-      <input type="textarea" name="description" value="{{listing.description}}" class="form-control">
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-4">
       <div class="form-group">
-        <label for="">Max users:</label>
-        <input type="number" name="forMaxNumOfUsers" min="1" required value="{{listing.forMaxNumOfUsers}}"
-          class="form-control">
-      </div>
-    </div>
-    <div class="col-8">
-      <div class="form-group">
-        <label for="">Brand:</label>
-        <input type="text" name="brand" value="{{listing.brand}}" class="form-control">
+        <form action="/myboats/delete/{{listing._id}}" method="POST">
+          <button type="submit" class="btn btn-danger">Delete the boat</button>
+        </form>
       </div>
     </div>
   </div>
 
-  <div class="form-group row">
-    <div class="col">
-      <label for="">Not available at:</label>
-      <input type="text"  id="notAvailableDatesPicker" name="notAvailableDates" placeholder="DD/MM/YYYY,DD/MM/YYYY"
-        value="{{listing.notAvailableDates}}" class="form-control">
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <div class="col">
-      <label for="photo">Upload Photo (.jpg or .png  only)</label>
-      <input type="file" name="photo" value="{{listing.imageURL}}" class="form-control-file">
-    </div>
-  </div>
-
-  <button type="submit" class="btn btn-primary">Save changes</button>
-</form>
-<br>
-
-<div class="row">
-  <div class="col">
-    <div class="form-group">
-      <form action="/myboats/delete/{{listing._id}}" method="POST">
-        <button type="submit" class="btn btn-danger">Delete the boat</button>
-      </form>
-    </div>
-  </div>
 </div>
 
-</div>
+{{#if errorMessage}}
+<p>{{errorMessage}}</p>
+{{/if}}
+{{> editPosMap listing.locationGeoCoord.coordinates}}

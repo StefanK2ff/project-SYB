@@ -31,6 +31,7 @@ router.post('/edit/:listingId', parser.single('photo'), (req, res, next) => {
   let updatedListing = {
     ...req.body,
   }
+  console.log(updatedListing)
 
   if (updatedListing.notAvailableDates.length > 0) {
     updatedListing.notAvailableDates = updatedListing.notAvailableDates.split(",")
